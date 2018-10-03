@@ -2,7 +2,7 @@ const router = require('express').Router();
 const paintingsController = require('../controllers/paintings');
 const authController = require('../controllers/auth');
 const artistsController = require('../controllers/artists');
-//const artistController = require('../controllers/artist');
+const usersController = require('../controllers/users');
 const secureRoute = require('../lib/secureRoute');
 
 router.route('/paintings')
@@ -19,6 +19,10 @@ router.delete('/paintings/:id/comments/:commentId', secureRoute, paintingsContro
 
 router.post('/register', authController.register);
 router.post('/login', authController.login);
+
+router.route('/user/:id')
+  .get(secureRoute, usersController.show)
+  .put(secureRoute, usersController.update);
 
 router.route('/artists')
   .get(artistsController.index)
