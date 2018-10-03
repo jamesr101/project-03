@@ -8,7 +8,7 @@ const { dbURI } = require('../config/environment');
 const User = require('../models/user');
 const Artist = require('../models/artist');
 const Trophy = require('../models/trophy');
-const Painting = require('../models/trophy');
+const Painting = require('../models/painting');
 
 let seededUsers, seededArtist = [];
 
