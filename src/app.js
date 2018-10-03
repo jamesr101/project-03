@@ -5,6 +5,8 @@ import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom';
 import 'bulma';
 
 import Register from './components/Register';
+import ArtistIndex from './components/Artist/ArtistIndex';
+import ArtistNew from './components/Artist/ArtistNew';
 
 class App extends React.Component {
   render() {
@@ -17,6 +19,8 @@ class App extends React.Component {
             <div className="container">
               <Switch>
                 <Route path="/register" component={Register} />
+                <Route path="/artists/new" component={ArtistNew} />
+                <Route path="/artists" component={ArtistIndex} />
               </Switch>
             </div>
           </main>
