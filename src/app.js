@@ -7,6 +7,10 @@ import 'bulma';
 import Register from './components/Register';
 import ArtistIndex from './components/Artist/ArtistIndex';
 import ArtistNew from './components/Artist/ArtistNew';
+import ArtistShow from './components/Artist/ArtistShow';
+import Login from './components/Login';
+import UserShow from './components/users/UserShow';
+import PaintingsShow from './components/PaintingsShow';
 
 class App extends React.Component {
   render() {
@@ -19,8 +23,16 @@ class App extends React.Component {
             <div className="container">
               <Switch>
                 <Route path="/register" component={Register} />
+
                 <Route path="/artists/new" component={ArtistNew} />
+                <Route path="/artists/:id" component={ArtistShow} />
+
                 <Route path="/artists" component={ArtistIndex} />
+
+                <Route path="/login" component={Login} />
+                <Route path="/user/:id" component={UserShow} />
+                <Route path="/paintings/:id" component={PaintingsShow} />
+
               </Switch>
             </div>
           </main>

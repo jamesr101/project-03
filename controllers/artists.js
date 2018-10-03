@@ -12,6 +12,7 @@ function indexRoute(req, res, next) {
 function showRoute(req, res, next) {
   Artist
     .findById(req.params.id)
+    .populate('paintings followers')
     .exec()
     .then(artist => {
       if(!artist) throw new Error('Not Found'); // create a custom error

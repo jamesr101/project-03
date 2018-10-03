@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ArtistCard = ({name, image, prepTime, cookTime, difficulty}) => {
+const ArtistCard = ({name, image}) => {
   return (
     <div className="card">
       <header className="card-header">
@@ -12,9 +12,7 @@ const ArtistCard = ({name, image, prepTime, cookTime, difficulty}) => {
         </figure>
       </div>
       <div className="card-content">
-        <p><strong>Prep time:</strong>{prepTime} mins</p>
-        <p><strong>Cooking Time:</strong>{cookTime} mins</p>
-        <p><strong>Serves: </strong>{'*'.repeat(difficulty)}</p>
+        <p>Data</p>
       </div>
     </div>
 

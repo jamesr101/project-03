@@ -13,14 +13,12 @@ class ArtistsNew extends React.Component {
   }
 
   handleChange(e) {
-    console.log(e.target.name);
     const artist = { ...this.state.artist, [e.target.name]: e.target.value };
     const errors = { ...this.state.errors, [e.target.name]: '' };
     this.setState({ artist, errors });
   }
 
   handleSubmit(e) {
-    console.log(this.state.artist);
     e.preventDefault();
     const token = Auth.getToken();
 

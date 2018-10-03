@@ -9,13 +9,15 @@ const artistSchema = new mongoose.Schema({
   image: {
     type: String,
     required: [true, 'This field is required'],
-    match: [/^https?:\/\/.+/, 'Image link must start with \'http\'']},
+    match: [/^https?:\/\/.+/, 'Image link must start with \'http\'']
+  },
   dateBorn: Date,
   dateDeath: Date,
   info: String,
   wikiLink: {
     type: String,
-    match: [/^https?:\/\/.+/, 'Imaage link must start with \'http\'']}
+    match: [/^https?:\/\/.+/, 'Imaage link must start with \'http\'']
+  }
 
 });
 
@@ -30,6 +32,8 @@ artistSchema.virtual('followers', {
   localField: '_id',
   foreignField: 'artistFollowed'
 });
+
+artistSchema.set('toJSON', { virtuals: true });
 
 
 module.exports = mongoose.model('Artist', artistSchema);

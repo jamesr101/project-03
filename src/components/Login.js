@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import Auth from '../lib/Auth';
 
-class Register extends React.Component {
+class Login extends React.Component {
   constructor() {
     super();
     this.state = { credentials: null };
@@ -19,7 +19,7 @@ class Register extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     axios
-      .post('/api/register', this.state.credentials)
+      .post('/api/login', this.state.credentials)
       .then( res => {
         Auth.setToken(res.data.token);
 
@@ -32,13 +32,7 @@ class Register extends React.Component {
     return (
 
       <form onSubmit={this.handleSubmit}>
-        <p>Register page</p>
-        <div className="field">
-          <label className="label">User Name</label>
-          <div className="control">
-            <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="username" placeholder="User Name" onChange={this.handleChange} />
-          </div>
-        </div>
+        <p>Login page</p>
         <div className="field">
           <label className="label">Email</label>
           <div className="control">
@@ -51,12 +45,6 @@ class Register extends React.Component {
             <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="password" type="password" placeholder="Password" onChange={this.handleChange} />
           </div>
         </div>
-        <div className="field">
-          <label className="label">Password Confirmation</label>
-          <div className="control">
-            <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="passwordConfirmation" type="password" placeholder="Password" onChange={this.handleChange} />
-          </div>
-        </div>
         {this.state.error && <small className="help is-danger">{this.state.error}</small>}
 
         <button className="button is-primary">Submit</button>
@@ -65,4 +53,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default Login;
