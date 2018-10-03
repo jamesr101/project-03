@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-// import Auth from '../lib/Auth';
+import Auth from '../lib/Auth';
 
 class Register extends React.Component {
   constructor() {
@@ -19,9 +19,9 @@ class Register extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     axios
-      .post('/api/login', this.state.credentials)
+      .post('/api/register', this.state.credentials)
       .then( res => {
-        // Auth.setToken(res.data.token);
+        Auth.setToken(res.data.token);
 
         this.props.history.push('/');
       })
@@ -52,7 +52,7 @@ class Register extends React.Component {
         <div className="field">
           <label className="label">Password Confirmation</label>
           <div className="control">
-            <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="passwordConfirm" type="password" placeholder="Password" onChange={this.handleChange} />
+            <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="passwordConfirmation" type="password" placeholder="Password" onChange={this.handleChange} />
           </div>
         </div>
         {this.state.error && <small className="help is-danger">{this.state.error}</small>}

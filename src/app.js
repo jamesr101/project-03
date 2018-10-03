@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom';
 
+import 'bulma';
+
 import Register from './components/Register';
+
 class App extends React.Component {
   render() {
     return (
