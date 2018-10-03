@@ -10,7 +10,7 @@ const Artist = require('../models/artist');
 const Trophy = require('../models/trophy');
 const Painting = require('../models/painting');
 
-let seededUsers, seededArtist = [];
+let seededUsers, seededArtist, seededPaintings = [];
 
 mongoose.connectAsync(dbURI)
   .then(db => db.dropDatabase())
@@ -63,7 +63,8 @@ mongoose.connectAsync(dbURI)
     user: seededUsers[0],
     artist: seededArtist
   }))
-  .then(() => console.log(seededUsers, seededArtist))
+  .then((paintings) => seededPaintings = paintings)
+  .then(() => console.log(seededUsers, seededArtist, seededPaintings))
 
   .then(() => console.log('***** Database seeded! *****'))
   .catch(err => console.log(err))
