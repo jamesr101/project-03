@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Map from '../Map';
 
 // import { Link } from 'react-router-dom';
 // import Auth from '../../lib/Auth';
@@ -9,9 +10,9 @@ class ArtistsShow extends React.Component {
     super();
     this.state = { artist: null};
 
+    this.mapCenter = { lat: 30, lng: 0 };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
   }
 
   componentDidMount() {
@@ -19,6 +20,8 @@ class ArtistsShow extends React.Component {
 
     axios.get(`/api/artists/${this.props.match.params.id}`)
       .then(res => this.setState({ artist: res.data }));
+
+
   }
 
   handleDelete() {
@@ -64,6 +67,20 @@ class ArtistsShow extends React.Component {
           </div>
         </div>
 
+        <ul>
+          {this.state.artist.paintings.map(painting =>
+            <li key={painting._id}>
+              {console.log(painting.location.latitude)}
+              <p> latitude -{ painting.title } </p>
+              <p>location:</p>
+              <p> latitude -{ painting.location.latitude } </p>
+              <p>latitude - {painting.location.longitude}</p>
+
+            </li>
+          )}
+        </ul>
+
+        <Map center={this.mapCenter} zoom={1.5} paintings={this.state.artist.paintings} />
       </section>
 
     );

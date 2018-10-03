@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom';
 
 import 'bulma';
+import './scss/style.scss';
 
 import Register from './components/Register';
 import ArtistIndex from './components/Artist/ArtistIndex';
