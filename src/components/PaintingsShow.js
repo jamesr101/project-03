@@ -10,15 +10,29 @@ class PaintingsShow extends React.Component {
     this.state = {
       painting: null,
       artist: null,
-      limit: 0
+      limit: 0,
+      wikil: null
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.addMore = this.addMore.bind(this);
   }
 
   componentDidMount() {
+    const part = 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=';
     axios.get(`/api/paintings/${this.props.match.params.id}`)
-      .then(res => this.setState({ painting: res.data }));
+      .then(res => this.setState({ painting: res.data }))
+      .then(() => {
+        console.log(this.state.painting);
+        if(this.state.painting){
+          axios
+            .get(part + this.state.painting.artist.wikiLink.slice(30))
+            .then(res => this.setState({ wikil: res.data})).then(() =>
+              console.log(this.state.wikil));
+
+        }
+      });
+
+
   }
 
   handleDelete(e) {
@@ -33,11 +47,20 @@ class PaintingsShow extends React.Component {
 
   addMore(e){
     e.preventDefault();
-    const c = this.state.limit + 3;
+    let c;
+    if(e.target.textContent === 'Show more'){
+      c = this.state.limit + 3;
+    } else if(this.state.limit < 3){
+      c = 0;
+    } else {
+      c = this.state.limit - 3;
+    }
     axios.get(`/api/artists/${this.state.painting.artist._id}`)
       .then(res => this.setState({ artist: res.data, limit: c }));
     console.log(this.state.artist);
-
+    if(this.state.artist){
+      console.log(this.state.artist.wikiLink.slice(30));
+    }
   }
 
 
@@ -76,13 +99,20 @@ class PaintingsShow extends React.Component {
           </div>
           <div className="columns">
             <button
-              className="button is-danger"
+              className="column button is-danger"
               onClick={this.addMore}
-            >More</button>
+            >Show more</button>
+            {this.state.limit > 0 &&
+            <button
+              className="column button is-danger"
+              onClick={this.addMore}
+            >Show less</button>
+            }
           </div>
-          <div className="container">
+          <div className="columns is-multiline">
             {this.state.artist && this.state.artist.paintings.slice(0,this.state.limit).map(painting =>
               <li
+                className="column is-one-third"
                 key={painting._id}
               >
                 <img src={ painting.image } alt={ painting.title } height="200" />
