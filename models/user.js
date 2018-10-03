@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
   },
   email: { type: String, required: [true, 'Email is required'], unique: true },
   password: { type: String, required: true },
-  artistFollowed: [{type: mongoose.Schema.ObjectId, ref: 'Artist'}]
+  artistFollowed: [{type: mongoose.Schema.ObjectId, ref: 'Artist'}],
+  trophies: [{type: mongoose.Schema.ObjectId, ref: 'Trophy'}]
 });
 
 userSchema.set('toJSON',{
@@ -17,23 +18,20 @@ userSchema.set('toJSON',{
   }
 });
 
-
 userSchema.plugin(require('mongoose-unique-validator'),{
   message: 'Error, expected {PATH} to be unique'
 });
 
-// this virtual will aggregate all the recipes of this user
-userSchema.virtual('recipes', {
+// this virtual will aggregate all the uploaded paintings of this user
+userSchema.virtual('paintingsUploaded', {
   localField: '_id',
   foreignField: 'user',
-  ref: 'Recipe'
+  ref: 'Painting'
 });
 
-// set up a passwordConfirmation virtual, because we DO want the data
-// but we DON'T want to store it in the database
+
 userSchema.virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
-    // store the passwordConfirmation on `this` for use later...
     this._passwordConfirmation = passwordConfirmation;
   });
 
@@ -51,22 +49,16 @@ userSchema.pre('validate', function checkPasswordsMatch(next) {
   next();
 });
 
-// PRE-SAVE LIFECYCLE HOOK - runs before record is saved to the database
+
 userSchema.pre('save', function hashPassword(next) {
-  // if the user's password is modified, hash the password using bcrypt
-  // and 8 rounds of salt and set to the password field
   if(this.isModified('password')) {
     this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8));
   }
-
   // move on to the next step which is the SAVE stage
   next();
 });
 
-// custom method to validate a password against a user's hashed password
 userSchema.methods.validatePassword = function validatePassword(password) {
-  // `password` is the plain text password
-  // `this.password` is the hashed password stored on the user record
   return bcrypt.compareSync(password, this.password);
 };
 

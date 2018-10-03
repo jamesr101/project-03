@@ -1,25 +1,35 @@
 const mongoose = require('mongoose');
 
-const paintingSchema = new mongoose.Schema({
+const artistSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'This field is required'],
-    minlength: [2, 'Name must have at least 2 characters']
+    minlength: [1, 'Name must have at least 2 characters']
   },
   image: {
     type: String,
     required: [true, 'This field is required'],
     match: [/^https?:\/\/.+/, 'Image link must start with \'http\'']},
   dateBorn: Date,
-  dateDied: Date,
+  dateDeath: Date,
   info: String,
   wikiLink: {
     type: String,
-    match: [/^https?:\/\/.+/, 'Imaage link must start with \'http\'']
-  },
-  tags: [ String ],
-  user: { type: mongoose.Schema.ObjectId, ref: 'User' }
+    match: [/^https?:\/\/.+/, 'Imaage link must start with \'http\'']}
+
+});
+
+artistSchema.virtual('paintings', {
+  ref: 'Painting',
+  localField: '_id',
+  foreignField: 'artist'
+});
+
+artistSchema.virtual('followers', {
+  ref: 'User',
+  localField: '_id',
+  foreignField: 'artistFollowed'
 });
 
 
-module.exports = mongoose.model('Recipe', paintingSchema);
+module.exports = mongoose.model('Artist', artistSchema);
