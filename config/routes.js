@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const paintingsController = require('../controllers/paintings');
 const authController = require('../controllers/auth');
+const artistsController = require('../controllers/artists');
 //const artistController = require('../controllers/artist');
 const secureRoute = require('../lib/secureRoute');
 
@@ -18,6 +19,16 @@ router.delete('/paintings/:id/comments/:commentId', secureRoute, paintingsContro
 
 router.post('/register', authController.register);
 router.post('/login', authController.login);
+
+router.route('/artists')
+  .get(artistsController.index)
+  .post(secureRoute, artistsController.create);
+
+router.route('/artists/:id')
+  .get(artistsController.show)
+  .put(secureRoute, artistsController.update)
+  .delete(secureRoute, artistsController.delete);
+
 
 router.route('/*')
   .all((req, res) => res.sendStatus(404));
