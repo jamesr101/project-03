@@ -27,8 +27,13 @@ const paintingSchema = new mongoose.Schema({
   },
   user: { type: mongoose.Schema.ObjectId, ref: 'User' }, // store the user by reference
   comments: [ commentSchema ],
-  likes: [ { type: mongoose.Schema.ObjectId, ref: 'User'} ]
+  likes: [ { type: mongoose.Schema.ObjectId, ref: 'User'} ],
+  artist: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Artist',
+    required: [true, 'This field is required']
+  }
 });
 
 
-module.exports = mongoose.model('Recipe', paintingSchema);
+module.exports = mongoose.model('Painting', paintingSchema);
