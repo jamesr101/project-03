@@ -12,7 +12,7 @@ function indexRoute(req, res, next) {
 function showRoute(req, res, next) {
   Painting
     .findById(req.params.id)
-    .populate('user comment.user')
+    .populate('user comment.user artist')
     .exec()
     .then(painting => {
       if(!painting) throw new Error('Not Found'); // create a custom error
