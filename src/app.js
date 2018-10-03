@@ -5,6 +5,7 @@ import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom';
 import 'bulma';
 
 import Register from './components/Register';
+import login from './components/login';
 
 class App extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class App extends React.Component {
             <div className="container">
               <Switch>
                 <Route path="/register" component={Register} />
+                <Route path="/login" component={login} />
               </Switch>
             </div>
           </main>
