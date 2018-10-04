@@ -30,3 +30,5 @@ app.use(errorHandler);
 
 // listen for incoming traffic -- app.listen()
 app.listen(port, () => console.log(`Express is listening on port ${port}`));
+
+module.exports = app;
