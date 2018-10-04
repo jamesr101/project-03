@@ -14,7 +14,7 @@ function login(req, res, next) {
     .findOne({ email: req.body.email })
     .exec()
     .then(user => {
-      if(!user || !user.validatePassword(req.body.password)) throw new Error('Unauthorized, please login');
+      if(!user || !user.validatePassword(req.body.password)) throw new Error('Unauthorized');
       // make a token
       const token = jwt.sign({ sub: user._id }, secret, { expiresIn: '6h' });
       return res.json({ message: `Welcome back ${user.username}!`, token });

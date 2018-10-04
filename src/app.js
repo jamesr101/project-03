@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import 'bulma';
+import './scss/style.scss';
 
+import Navbar from './components/Navbar';
+import SecureRoute from './components/SecureRoute';
+import FlashMessages from './components/FlashMessages';
 import Register from './components/Register';
 import ArtistIndex from './components/Artist/ArtistIndex';
 import ArtistNew from './components/Artist/ArtistNew';
@@ -16,31 +20,28 @@ import PaintingsNew from './components/PaintingsNew';
 class App extends React.Component {
   render() {
     return (
-      <Browser>
-
+      <BrowserRouter>
         <div>
-          <h1>Art Mapper</h1>
+          <Navbar />
+          <FlashMessages />
+
+
           <main className="section">
             <div className="container">
               <Switch>
                 <Route path="/register" component={Register} />
-
-                <Route path="/artists/new" component={ArtistNew} />
+                <SecureRoute path="/artists/new" component={ArtistNew} />
                 <Route path="/artists/:id" component={ArtistShow} />
-
                 <Route path="/artists" component={ArtistIndex} />
-
                 <Route path="/login" component={Login} />
                 <Route path="/user/:id" component={UserShow} />
                 <Route path="/paintings/new" component={PaintingsNew} />
                 <Route path="/paintings/:id" component={PaintingsShow} />
-
-
               </Switch>
             </div>
           </main>
         </div>
-      </Browser>
+      </BrowserRouter>
 
     );
   }

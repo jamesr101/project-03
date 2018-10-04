@@ -1,8 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+
+// import ReactFilestack, { client } from 'filestack-react';
 import ArtistsForm from './ArtistsForm';
 
 import Auth from '../../lib/Auth';
+
 
 class ArtistsNew extends React.Component {
   constructor() {
@@ -13,10 +16,15 @@ class ArtistsNew extends React.Component {
   }
 
   handleChange(e) {
+    console.log(e);
+    console.log(e.target.name);
+    console.log(e.target.value);
     const artist = { ...this.state.artist, [e.target.name]: e.target.value };
     const errors = { ...this.state.errors, [e.target.name]: '' };
     this.setState({ artist, errors });
   }
+
+
 
   handleSubmit(e) {
     e.preventDefault();
@@ -35,6 +43,8 @@ class ArtistsNew extends React.Component {
     return (
       <div>
         <h1>New Artist</h1>
+
+
         <ArtistsForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}

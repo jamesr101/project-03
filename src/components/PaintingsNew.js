@@ -18,16 +18,11 @@ class PaintingsNew extends React.Component {
       .then(res => this.setState({ artists: res.data }));
   }
   handleChange(e) {
-    console.log(e);
-    console.log(e.target.name);
-    console.log(e.target.value);
     let painting;
     if(['latitude', 'longitude'].includes(e.target.name)) {
       const location = { ...this.state.painting.location, [e.target.name]: e.target.value };
-      console.log(location);
       painting = { ...this.state.painting, location };
     } else {
-      console.log('not location');
       painting = { ...this.state.painting, [e.target.name]: e.target.value };
     }
 
@@ -45,7 +40,6 @@ class PaintingsNew extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('================', this.state.painting);
     const token = Auth.getToken();
     axios
       .post('/api/paintings', this.state.painting, {
