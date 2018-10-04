@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Map from '../Map';
+import FilterBar from '../FilterBar';
 
 // import { Link } from 'react-router-dom';
 // import Auth from '../../lib/Auth';
@@ -54,24 +55,49 @@ class ArtistsShow extends React.Component {
         <div className="container">
           <div className="level">
             <h1 className="title">{ this.state.artist.name }</h1>
-            {/* {Auth.isAuthenticated() && Auth.getPayload().sub === this.state.artist.user._id &&<div>
-              <Link className="button" to={`/artists/${this.state.artist._id}/edit`}>Edit</Link>
-              <button className="button is-danger" onClick={this.handleDelete}> Delete </button>
-            </div>} */}
           </div>
 
           <hr />
+          <div className="columns">
 
-          <div className="column is-half">
-            <img src={ this.state.artist.image } alt={ this.state.artist.name } height="200" />
+            <div className="column is-one-quarter">
+              <img src={ this.state.artist.image } alt={ this.state.artist.name } height="200" />
+            </div>
+
+            <div className="column is-three-quarters">
+              <p>
+                { this.state.artist.info }
+              </p>
+              <br />
+              <div className="columns">
+                <div className="column is-half">
+                  <strong> Born </strong><br />
+                  { this.state.artist.dateBorn.toString() }
+                </div>
+                <div className="column is-half">
+                  <strong> Death </strong><br />
+                  { this.state.artist.dateDeath.toString() }
+                </div>
+
+              </div>
+            </div>
+
+
           </div>
         </div>
+
+        <div className="section">
+          <FilterBar handleChange={this.handleChange} />
+        </div>
+
+        <Map center={this.mapCenter} zoom={1.5} paintings={this.state.artist.paintings} />
 
         <ul>
           {this.state.artist.paintings.map(painting =>
             <li key={painting._id}>
               {console.log(painting.location.latitude)}
-              <p> latitude -{ painting.title } </p>
+              <p> { painting.title } </p>
+              <figure> <img src={ painting.image }/> </figure>
               <p>location:</p>
               <p> latitude -{ painting.location.latitude } </p>
               <p>latitude - {painting.location.longitude}</p>
@@ -80,7 +106,6 @@ class ArtistsShow extends React.Component {
           )}
         </ul>
 
-        <Map center={this.mapCenter} zoom={1.5} paintings={this.state.artist.paintings} />
       </section>
 
     );

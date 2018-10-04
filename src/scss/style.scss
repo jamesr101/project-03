@@ -6,7 +6,7 @@
 }
 
 .map {
-  height: 100vh;
+  height: 70vh;
   width: 100%;
 }
 
@@ -17,8 +17,8 @@
 .marker {
   width: 40px;
   height: 40px;
-  background-color: white;
-  border-radius: 50%;
-  background-image: url(/assets/images/ga-logo.jpg);
+  background-color: gray;
+  //border-radius: 50%;
+  //background-image: url(/assets/images/ga-logo.jpg);
   background-size: cover;
 }

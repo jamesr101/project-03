@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+// import ReactFilestack, { client } from 'filestack-react';
 import ArtistsForm from './ArtistsForm';
 
 import Auth from '../../lib/Auth';

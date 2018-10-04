@@ -1,7 +1,7 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibWlrZWhheWRlbiIsImEiOiJjamtudXU3dTMyaXI4M2twamR6OHI0dGJyIn0.y9FKmB9XVwKGDFH8j1fcsQ';
+mapboxgl.accessToken = 'pk.eyJ1IjoiYXJ0bWFwcGVyIiwiYSI6ImNqbXVnMDhvOTJ3b2YzdmpwZjZmbTBjcnUifQ.AioO-9ZHdyYXk_ssF13CLQ';
 
 class Map extends React.Component {
 
