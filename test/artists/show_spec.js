@@ -4,7 +4,6 @@ const Artist = require('../../models/artist');
 const User = require('../../models/user');
 
 
-
 const artistData = [{
   name: 'first artist',
   image: 'https://test.image',
@@ -21,62 +20,58 @@ const artistData = [{
   wikiLink: 'https://wikisecond.link'
 }];
 
+let artist;
 
-
-
-describe('GET /artists', () => {
+describe('GET /artists/:id', () => {
   beforeEach(done => {
     Promise.all([
       User.remove({}),
       Artist.remove({})
     ])
       .then(() => Artist.create(artistData))
+      .then(artists => artist = artists[0])
       .then(() => done());
   });
 
   it('should return a 200 response', done => {
     api
-      .get('/api/artists')
+      .get(`/api/artists/${artist._id}`)
       .end((err, res) => {
         expect(res.status).to.eq(200);
         done();
       });
   });
 
-  it('should return an array of artists', done => {
+  it('should return an artist object', done => {
     api
-      .get('/api/artists')
+      .get(`/api/artists/${artist._id}`)
       .end((err, res) => {
-        expect(res.body).to.be.an('array');
-        res.body.forEach(artist => {
-          expect(artist).to.include.keys([
-            '_id',
-            'name',
-            'image',
-            'dateBorn',
-            'dateDeath',
-            'info',
-            'wikiLink'
-          ]);
-        });
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.include.keys([
+          '_id',
+          'name',
+          'image',
+          'dateBorn',
+          'dateDeath',
+          'info',
+          'wikiLink'
+        ]);
+
         done();
       });
   });
 
   it('should return the correct data', done => {
     api
-      .get('/api/artists')
+      .get(`/api/artists/${artist._id}`)
       .end((err, res) => {
-        res.body = res.body.sort((a, b) => a.dateBorn > b.dateBorn);
-        res.body.forEach((artist, i) => {
-          expect(artist.name).to.eq(artistData[i].name);
-          expect(artist.image).to.eq(artistData[i].image);
-          expect(artist.dateBorn).to.eq(artistData[i].dateBorn);
-          expect(artist.dateDeath).to.eq(artistData[i].dateDeath);
-          expect(artist.info).to.eq(artistData[i].info);
-          expect(artist.wikiLink).to.eq(artistData[i].wikiLink);
+        expect(res.body.name).to.eq(artistData[0].name);
+        expect(res.body.image).to.eq(artistData[0].image);
+        expect(res.body.dateBorn).to.eq(artistData[0].dateBorn);
+        expect(res.body.dateDeath).to.eq(artistData[0].dateDeath);
+        expect(res.body.info).to.eq(artistData[0].info);
+        expect(res.body.wikiLink).to.eq(artistData[0].wikiLink);
 
-        });
         done();
       });
   });
