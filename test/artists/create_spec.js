@@ -9,8 +9,8 @@ const User = require('../../models/user');
 const artistData = {
   name: 'test artist',
   image: 'https://test.image',
-  dateBorn: 'January 1, 1881',
-  dateDeath: 'January 1, 1981',
+  dateBorn: new Date(1881, 1, 1).toISOString(),
+  dateDeath: new Date(1981, 1, 1).toISOString(),
   info: 'test info',
   wikiLink: 'https://wiki.link'
 };

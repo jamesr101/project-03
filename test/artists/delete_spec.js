@@ -9,25 +9,29 @@ const User = require('../../models/user');
 const artistData = {
   name: 'test artist',
   image: 'https://test.image',
-  dateBorn: 'January 1, 1881',
-  dateDeath: 'January 1, 1981',
+  dateBorn: new Date(1881, 1, 1),
+  dateDeath: new Date(1981, 1, 1),
   info: 'test info',
   wikiLink: 'https://wiki.link'
 };
 
 const userData = { username: 'test', email: 'test@test.com', password: 'test', passwordConfirmation: 'test' };
 let token;
+let artist;
 
 describe('DELETE /artists', () => {
   beforeEach(done => {
     Promise.all([
-      Artist.remove({}),
-      User.remove({})
+      User.remove({}),
+      Artist.remove({})
     ])
-      .then(() => Artist.create(artistData))
-      .then(() => User.create(userData))
-      .then(user => {
-        token = jwt.sign({ sub: user._id }, secret, { expiresIn: '6h' });
+      .then(() => Promise.props({
+        artist: Artist.create(artistData),
+        user: User.create(userData)
+      }))
+      .then(data => {
+        artist = data.artist;
+        token = jwt.sign({ sub: data.user._id }, secret, { expiresIn: '5m' });
       })
       .then(done);
   });
@@ -35,7 +39,7 @@ describe('DELETE /artists', () => {
 
   it('should return a 401 response without token', done => {
     api
-      .post('/api/artists')
+      .delete(`/api/artists/${artist._id}`)
       .send(artistData)
       .end((err, res) => {
         expect(res.status).to.eq(401);
@@ -43,50 +47,24 @@ describe('DELETE /artists', () => {
       });
   });
 
-  it('should return a 201 response with a token', done => {
+  it('should return a 204 response with a token', done => {
     api
-      .post('/api/artists')
+      .delete(`/api/artists/${artist._id}`)
       .set('Authorization', `Bearer ${token}`)
       .send(artistData)
       .end((err, res) => {
-        expect(res.status).to.eq(201);
+        expect(res.status).to.eq(204);
         done();
       });
   });
 
-  it('should return the created artist', done => {
+  it('should return empty body', done => {
     api
-      .post('/api/artists')
+      .delete(`/api/artists/${artist._id}`)
       .set('Authorization', `Bearer ${token}`)
       .send(artistData)
       .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body).to.include.keys([
-          '_id',
-          'name',
-          'image',
-          'dateBorn',
-          'dateDeath',
-          'info',
-          'wikiLink'
-        ]);
-        done();
-      });
-  });
-
-  it('should return the correct data', done => {
-    api
-      .post('/api/artists')
-      .set('Authorization', `Bearer ${token}`)
-      .send(artistData)
-      .end((err, res) => {
-        expect(res.body.name).to.eq(artistData.name);
-        expect(res.body.image).to.eq(artistData.image);
-        expect(res.body.dateBorn).to.eq(artistData.dateBorn);
-        expect(res.body.dateDeath).to.eq(artistData.dateDeath);
-        expect(res.body.info).to.eq(artistData.info);
-        expect(res.body.wikiLink).to.eq(artistData.wikiLink);
-
+        expect(res.body).to.be.empty;
         done();
       });
   });
