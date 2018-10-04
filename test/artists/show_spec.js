@@ -3,7 +3,6 @@
 const Artist = require('../../models/artist');
 const User = require('../../models/user');
 
-
 const artistData = [{
   name: 'first artist',
   image: 'https://test.image',
