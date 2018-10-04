@@ -18,21 +18,8 @@ class PaintingsShow extends React.Component {
   }
 
   componentDidMount() {
-    const part = 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=';
     axios.get(`/api/paintings/${this.props.match.params.id}`)
-      .then(res => this.setState({ painting: res.data }))
-      .then(() => {
-        console.log(this.state.painting);
-        if(this.state.painting){
-          axios
-            .get(part + this.state.painting.artist.wikiLink.slice(30))
-            .then(res => this.setState({ wikil: res.data})).then(() =>
-              console.log(this.state.wikil));
-
-        }
-      });
-
-
+      .then(res => this.setState({ painting: res.data }));
   }
 
   handleDelete(e) {
@@ -57,10 +44,6 @@ class PaintingsShow extends React.Component {
     }
     axios.get(`/api/artists/${this.state.painting.artist._id}`)
       .then(res => this.setState({ artist: res.data, limit: c }));
-    console.log(this.state.artist);
-    if(this.state.artist){
-      console.log(this.state.artist.wikiLink.slice(30));
-    }
   }
 
 

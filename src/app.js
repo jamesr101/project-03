@@ -11,6 +11,7 @@ import ArtistShow from './components/Artist/ArtistShow';
 import Login from './components/Login';
 import UserShow from './components/users/UserShow';
 import PaintingsShow from './components/PaintingsShow';
+import PaintingsNew from './components/PaintingsNew';
 
 class App extends React.Component {
   render() {
@@ -31,7 +32,9 @@ class App extends React.Component {
 
                 <Route path="/login" component={Login} />
                 <Route path="/user/:id" component={UserShow} />
+                <Route path="/paintings/new" component={PaintingsNew} />
                 <Route path="/paintings/:id" component={PaintingsShow} />
+
 
               </Switch>
             </div>
