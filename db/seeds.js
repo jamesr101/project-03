@@ -87,7 +87,7 @@ mongoose.connectAsync(dbURI)
     artist: seededArtist
   },{
     title: 'Bowl of Fruit, Violin and Bottle',
-    image: 'https://www.tate.org.uk/art/images/work/T/T05/T05010_10.jpg',
+    image: 'https://www.tate.org.uk/art/images/work/L/L01/L01895_10.jpg',
     date: '1914',
     info: 'This table-top scene, with its fruit-bowl, violin, bottle and (painted) newspaper, is constructed from areas of colour that resemble cut-out pieces of paper. The background has been left white. Picasso and Braque had been making collages that experimented with representation and reality since 1912. They soon began to simulate the appearance of collage materials in their oil paintings, sometimes adding sand to the paint to give a heightened reality to the picture surface.',
     wikiLink: 'https://en.wikipedia.org/wiki/The_Weeping_Woman',
