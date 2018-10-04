@@ -42,7 +42,8 @@
     "mongoose": "^5.2.14",
     "mongoose-unique-validator": "^2.0.2",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.5.2",
+    "react-filestack": "^0.9.7",
     "react-router-dom": "^4.3.1"
   }
 }

@@ -22,7 +22,6 @@ class Register extends React.Component {
       .post('/api/register', this.state.credentials)
       .then( res => {
         Auth.setToken(res.data.token);
-
         this.props.history.push('/');
       })
       .catch(() => this.setState({error: 'Invalid credentials'}));
