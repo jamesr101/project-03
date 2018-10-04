@@ -3,6 +3,7 @@ const Artist = require('../models/artist');
 function indexRoute(req, res, next) {
   Artist
     .find()
+    .populate('paintings followers')
     .sort({ name: 1 })
     .exec()
     .then(artists => res.json(artists))
