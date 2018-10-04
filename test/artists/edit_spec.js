@@ -15,8 +15,8 @@ const artistData = [{
 },{
   name: 'second artist',
   image: 'https://testsecond.image',
-  // dateBorn: new Date(1883, 1, 1).toISOString(),
-  // dateDeath: new Date(1983, 1, 1).toISOString(),
+  dateBorn: new Date(1883, 1, 1).toISOString(),
+  dateDeath: new Date(1983, 1, 1).toISOString(),
   info: 'second test info',
   wikiLink: 'https://wikisecond.link'
 }];
@@ -92,8 +92,8 @@ describe('PUT /artists/:id', () => {
       .end((err, res) => {
         expect(res.body.name).to.eq(artistData[1].name);
         expect(res.body.image).to.eq(artistData[1].image);
-        // expect(res.body.dateBorn).to.eq(artistData[1].dateBorn);
-        // expect(res.body.dateDeath).to.eq(artistData[1].dateDeath);
+        expect(res.body.dateBorn).to.eq(artistData[1].dateBorn);
+        expect(res.body.dateDeath).to.eq(artistData[1].dateDeath);
         expect(res.body.info).to.eq(artistData[1].info);
         expect(res.body.wikiLink).to.eq(artistData[1].wikiLink);
 
