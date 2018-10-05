@@ -1,24 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ReactFilestack from 'react-filestack';
 
-const PaintingForm = ({ handleSubmit, handleChange, handleImage, painting, errors, photo, artists}) => {
+const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
+
+const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists}) => {
+// const PaintingForm = ({ handleSubmit, handleChange, handleImage, painting, errors, photo, artists}) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="field">
         <label className="label">Image</label>
         <div className="control">
+
+          <ReactFilestack
+            apikey={ FILESTACK_API_KEY }
+            mode={'pick'}
+            onSuccess={(response) => handleChange({
+              target: {
+                name: 'image',
+                value: response.filesUploaded[0].url
+              }})}
+            onError={(e) => console.log(e)}
+            buttonText={'Add Picture'}
+          />
+
           <input
             className={`input ${errors.image ? 'is-danger' : ''}`}
             name="image"
             placeholder="Image"
-            onChange={ handleImage }
+            //onChange={ handleImage } //aviv
+            onChange={ handleChange }
             value={painting.image || ''}
           />
           {errors.image && <small className="help is-danger">{errors.image}</small>}
         </div>
       </div>
       <div className="section">
-        <img src={ photo } alt='upload a photo' height="200" />
+        <img src={ painting.image } alt='upload a photo' height="200" />
       </div>
       <div className="field">
         <label className="label">Artist</label>
@@ -27,18 +45,16 @@ const PaintingForm = ({ handleSubmit, handleChange, handleImage, painting, error
             <select onChange={handleChange} name="artist">
 
               {artists && artists.map(artist =>
-
                 <option
                   key={artist._id}
                   value={artist._id}
-
                 >
                   {artist.name}
                 </option>
               )}
             </select>
             <div>
-              <Link className="navbar-item" to="/register">add a new artist</Link>
+              <Link className="navbar-item" to="/artists/new">add a new artist</Link>
             </div>
 
           </div>
@@ -59,7 +75,7 @@ const PaintingForm = ({ handleSubmit, handleChange, handleImage, painting, error
       </div>
 
       <div className="field">
-        <label className="label">Title</label>
+        <label className="label">Latitude</label>
         <div className="control">
           <input
             className={`input ${errors.name ? 'is-danger' : ''}`}
@@ -73,7 +89,7 @@ const PaintingForm = ({ handleSubmit, handleChange, handleImage, painting, error
       </div>
 
       <div className="field">
-        <label className="label">Title</label>
+        <label className="label">Longitude</label>
         <div className="control">
           <input
             className={`input ${errors.name ? 'is-danger' : ''}`}

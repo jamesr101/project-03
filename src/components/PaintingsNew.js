@@ -10,7 +10,6 @@ class PaintingsNew extends React.Component {
     this.state = { painting: {}, errors: {}, photo: '', artists: [] };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleImage = this.handleImage.bind(this);
 
   }
   componentDidMount() {
@@ -18,6 +17,7 @@ class PaintingsNew extends React.Component {
       .then(res => this.setState({ artists: res.data }));
   }
   handleChange(e) {
+    console.log(e);
     let painting;
     if(['latitude', 'longitude'].includes(e.target.name)) {
       const location = { ...this.state.painting.location, [e.target.name]: e.target.value };
@@ -30,15 +30,16 @@ class PaintingsNew extends React.Component {
     this.setState({ painting, errors });
 
   }
-  handleImage(e){
-    const text = e.target.value;
-    const painting = { ...this.state.painting, [e.target.name]: e.target.value };
-    const errors = { ...this.state.errors, [e.target.name]: null};
-    this.setState({ painting, errors, photo: text });
-  }
+  // handleImage(e){
+  //   const text = e.target.value;
+  //   const painting = { ...this.state.painting, [e.target.name]: e.target.value };
+  //   const errors = { ...this.state.errors, [e.target.name]: null};
+  //   this.setState({ painting, errors, photo: text });
+  // }
 
 
   handleSubmit(e) {
+    console.log(this.state.painting);
     e.preventDefault();
     const token = Auth.getToken();
     axios
@@ -56,8 +57,8 @@ class PaintingsNew extends React.Component {
         handleChange={this.handleChange}
         painting={this.state.painting}
         errors={this.state.errors}
-        photo={this.state.photo}
-        handleImage={this.handleImage}
+        //photo={this.state.photo}
+        //handleImage={this.handleImage}
         artists={this.state.artists}
       />
     );

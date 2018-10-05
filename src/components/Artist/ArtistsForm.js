@@ -32,7 +32,7 @@ const ArtistsForm = ({ handleSubmit, handleChange, artist, errors }) => {
               target: {
                 name: 'image',
                 value: response.filesUploaded[0].url
-              }})}//(response) => console.log(response)}
+              }})}
             onError={(e) => console.log(e)}
             buttonText={'Add Picture'}
           />
@@ -46,6 +46,9 @@ const ArtistsForm = ({ handleSubmit, handleChange, artist, errors }) => {
           /> */}
           {errors.image && <small className="help is-danger"> {errors.image} </small>}
         </div>
+      </div>
+      <div className="section">
+        <img src={ artist.image } alt='upload a photo' height="200" />
       </div>
 
       <div className="field">
