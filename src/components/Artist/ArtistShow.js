@@ -14,14 +14,19 @@ class ArtistsShow extends React.Component {
     this.mapCenter = { lat: 30, lng: 0 };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleTime = this.handleTime.bind(this);
   }
 
   componentDidMount() {
     console.log('componentDidMount');
 
     axios.get(`/api/artists/${this.props.match.params.id}`)
-      .then(res => this.setState({ artist: res.data }));
-
+      .then(res => this.setState({ artist: res.data }))
+      .then(() => {
+        const born = parseFloat(this.state.artist.dateBorn.toString().split('').slice(0,4).join(''));
+        const dead = parseFloat(this.state.artist.dateDeath.toString().split('').slice(0,4).join(''));
+        this.setState({born: born, dead: dead});
+      });
 
   }
 
@@ -32,6 +37,11 @@ class ArtistsShow extends React.Component {
         headers: {Authorization: `Bearer ${token}`}
       })
       .then(() => this.props.history.push('/artists'));
+  }
+
+  handleTime(e) {
+    const actual = e.target.value;
+    this.setState({ actual: actual});
   }
 
   handleChange() {
@@ -91,6 +101,19 @@ class ArtistsShow extends React.Component {
         </div>
 
         <Map center={this.mapCenter} zoom={1.5} paintings={this.state.artist.paintings} />
+
+
+        <form action="/action_page.php" method="get">
+          From
+          <br></br>
+          {this.state.actual}
+          <input type="range" step="1" min={this.state.born} max={this.state.dead} onChange={this.handleTime} ></input>
+          <br></br>
+           To
+          <br></br>
+          <input type="range" step="1" min={this.state.born} max={this.state.dead} onChange={this.handleTime} ></input>
+          <input type="submit"></input>
+        </form>
 
         <ul>
           {this.state.artist.paintings.map(painting =>
