@@ -32,6 +32,13 @@ class Map extends React.Component {
       const layers = this.map.getStyle().layers;
       const labelLayerId = layers.find(layer => layer.type === 'symbol' && layer.layout['text-field']).id;
 
+      // this.map.addControl(new mapboxgl.GeolocateControl({
+      //   positionOptions: {
+      //     enableHighAccuracy: true
+      //   },
+      //   trackUserLocation: true
+      // }));
+
       this.map.addLayer({
         'id': '3d-buildings',
         'source': 'composite',
