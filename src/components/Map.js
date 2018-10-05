@@ -11,19 +11,8 @@ class Map extends React.Component {
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v10',
       center: [this.props.center.lng, this.props.center.lat],
-      zoom: this.props.zoom
-    });
-
-    // when we stop moving the map set `isFlaying` to false
-    this.map.on('moveend', () => this.map.isFlying = false);
-
-    this.map.on('zoom', () => {
-      if(this.map.isFlying) return false; // if `isFlying` is true do nothing
-      const zoom = this.map.getZoom();
-      const pitch = zoom * 4;
-
-      // otherwise set pitch when zooming, so that as you zoom out the pitch reduces
-      this.map.setPitch(pitch);
+      zoom: this.props.zoom,
+      pitch: 30
     });
 
     this.map.on('load', () => {
@@ -32,12 +21,12 @@ class Map extends React.Component {
       const layers = this.map.getStyle().layers;
       const labelLayerId = layers.find(layer => layer.type === 'symbol' && layer.layout['text-field']).id;
 
-      // this.map.addControl(new mapboxgl.GeolocateControl({
-      //   positionOptions: {
-      //     enableHighAccuracy: true
-      //   },
-      //   trackUserLocation: true
-      // }));
+      this.map.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true
+      }));
 
       this.map.addLayer({
         'id': '3d-buildings',
