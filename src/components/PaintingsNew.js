@@ -10,6 +10,7 @@ class PaintingsNew extends React.Component {
     this.state = { painting: {}, errors: {}, photo: '', artists: [] };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getLocation = this.getLocation.bind(this);
 
   }
   componentDidMount() {
@@ -38,6 +39,20 @@ class PaintingsNew extends React.Component {
   // }
 
 
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const location = { latitude: position.coords.latitude, longitude: position.coords.longitude };
+        const painting = { ...this.state.painting, location };
+        this.setState({ painting }, () => console.log(this.state.painting));
+      });
+    } else {
+      this.setState({ message: 'Cannot esablish your location' });
+    }
+  }
+
+
   handleSubmit(e) {
     console.log(this.state.painting);
     e.preventDefault();
@@ -60,6 +75,7 @@ class PaintingsNew extends React.Component {
         //photo={this.state.photo}
         //handleImage={this.handleImage}
         artists={this.state.artists}
+        getLocation={this.getLocation}
       />
     );
   }

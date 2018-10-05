@@ -4,7 +4,9 @@ import ReactFilestack from 'react-filestack';
 
 const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
 
-const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists}) => {
+
+
+const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, getLocation}) => {
 // const PaintingForm = ({ handleSubmit, handleChange, handleImage, painting, errors, photo, artists}) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -43,7 +45,9 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists}) 
         <div className="control">
           <div className="select">
             <select onChange={handleChange} name="artist">
-
+              <option>
+                Please select artist
+              </option>
               {artists && artists.map(artist =>
                 <option
                   key={artist._id}
@@ -101,6 +105,22 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists}) 
           {errors.name && <small className="help is-danger">{errors.name}</small>}
         </div>
       </div>
+
+      {/* <div className="field">
+        <label className="label">My location</label>
+        <div className="control">
+          <input
+            className={`button ${errors.name ? 'is-danger' : ''}`}
+            name="longitude"
+            placeholder="Longitude"
+            onClick={getLocation}
+            value={painting.position}
+          />
+          {errors.name && <small className="help is-danger">{errors.name}</small>}
+        </div>
+      </div> */}
+
+      <div className="button is-primary" onClick={getLocation}>My Location</div>
 
       <button className="button is-primary">Submit</button>
 
