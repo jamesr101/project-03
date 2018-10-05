@@ -106,21 +106,9 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         </div>
       </div>
 
-      {/* <div className="field">
-        <label className="label">My location</label>
-        <div className="control">
-          <input
-            className={`button ${errors.name ? 'is-danger' : ''}`}
-            name="longitude"
-            placeholder="Longitude"
-            onClick={getLocation}
-            value={painting.position}
-          />
-          {errors.name && <small className="help is-danger">{errors.name}</small>}
-        </div>
-      </div> */}
-
-      <div className="button is-primary" onClick={getLocation}>My Location</div>
+      <div className="field">
+        <div className="button is-primary" onClick={getLocation}>My Location</div>
+      </div>
 
       <button className="button is-primary">Submit</button>
 
