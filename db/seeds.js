@@ -9,8 +9,9 @@ const User = require('../models/user');
 const Artist = require('../models/artist');
 const Trophy = require('../models/trophy');
 const Painting = require('../models/painting');
+const Journey = require('../models/journey');
 
-let seededUsers, seededArtist, seededPaintings = [];
+let seededUsers, seededArtist, seededPaintings, seededJourneys = [];
 
 mongoose.connectAsync(dbURI)
   .then(db => db.dropDatabase())
@@ -111,7 +112,28 @@ mongoose.connectAsync(dbURI)
     artist: seededArtist
   }))
   .then((paintings) => seededPaintings = paintings)
-  .then(() => console.log(seededUsers, seededArtist, seededPaintings))
+  .then(() => Journey.create({
+    title: 'Following Picasso in London',
+    image: 'https://www.tate.org.uk/art/images/work/T/T05/T05010_10.jpg',
+    info: 'Let\'s explore the paintings of picaso in London, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    user: seededUsers[1],
+    tasks: [
+      {
+        type: 'Info',
+        title: 'National Gallery',
+        content: 'Our journey begin in National Gallery, firstly arrive to National Gallery',
+        order: 0
+      },{
+        type: 'FindPainting',
+        title: 'Find the Weeping Woman',
+        content: 'Weeping Woman is ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+        painting: seededPaintings[0],
+        order: 1
+      }
+    ]
+  }))
+  .then((journeys) => seededJourneys = journeys)
+  .then(() => console.log(seededUsers, seededArtist, seededPaintings, seededJourneys))
 
   .then(() => console.log('***** Database seeded! *****'))
   .catch(err => console.log(err))

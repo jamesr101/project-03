@@ -16,6 +16,8 @@ import Login from './components/Login';
 import UserShow from './components/users/UserShow';
 import PaintingsShow from './components/PaintingsShow';
 import PaintingsNew from './components/PaintingsNew';
+import JourneysIndex from './components/Journey/JourneyIndex';
+import JourneyShow from './components/Journey/JourneyShow';
 
 class App extends React.Component {
   render() {
@@ -24,8 +26,6 @@ class App extends React.Component {
         <div>
           <Navbar />
           <FlashMessages />
-
-
           <main className="section">
             <div className="container">
               <Switch>
@@ -33,6 +33,8 @@ class App extends React.Component {
                 <SecureRoute path="/artists/new" component={ArtistNew} />
                 <Route path="/artists/:id" component={ArtistShow} />
                 <Route path="/artists" component={ArtistIndex} />
+                <Route path="/journeys/:id" component={JourneyShow} />
+                <Route path="/journeys" component={JourneysIndex} />
                 <Route path="/login" component={Login} />
                 <Route path="/user/:id" component={UserShow} />
                 <Route path="/paintings/new" component={PaintingsNew} />
