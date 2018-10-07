@@ -45,24 +45,28 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
       <div className="field">
         <label className="label">Artist</label>
         <div className="control">
-          <div className="select">
-            <select onChange={handleChange} name="artist">
-              <option>
-                Please select artist
-              </option>
-              {artists && artists.map(artist =>
-                <option
-                  key={artist._id}
-                  value={artist._id}
-                >
-                  {artist.name}
-                </option>
-              )}
-            </select>
+          <div className="level">
+            <div className="level-left">
+              <div className="select level-item">
+                <select onChange={handleChange} name="artist">
+                  <option>
+                    Please select artist
+                  </option>
+                  {artists && artists.map(artist =>
+                    <option
+                      key={artist._id}
+                      value={artist._id}
+                    >
+                      {artist.name}
+                    </option>
+                  )}
+                </select>
+
+              </div>
+              <p className="or">or</p>
+              <Link className="button level-item is-rounded" to="/artists/new">Add new artist</Link>
+            </div>
           </div>
-        </div>
-        <div>
-          <Link className="button" to="/artists/new">add a new artist</Link>
         </div>
       </div>
 
