@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+// import Map from './Map';
 
 import Auth from '../lib/Auth';
 
 class PaintingsShow extends React.Component {
   constructor() {
     super();
+    this.mapCenter = { lat: 55, lng: -5 };
     this.state = {
       painting: null,
       artist: null,
@@ -48,6 +50,7 @@ class PaintingsShow extends React.Component {
   }
 
 
+
   render() {
     if(!this.state.painting) return null;
     return (
@@ -79,15 +82,25 @@ class PaintingsShow extends React.Component {
             <div className="section">
               <img src={ this.state.painting.image } alt={ this.state.painting.title } height="200" />
 
-              <h1 className="title is-4">{ this.state.painting.title}</h1>
+              <h1 className="title is-4">{ this.state.painting.title}, {this.state.painting.date}</h1>
 
               <Link to={`/artists/${this.state.painting.artist.id}`} className="subtitle is-4">{ this.state.painting.artist.name}</Link>
 
               <br/>
               {this.state.painting.wikiLink && <a href={this.state.painting.wikiLink}>Wikipedia</a>}
 
+
+
             </div>
           </div>
+
+          {/* <Map
+            center={this.mapCenter}
+            zoom={5}
+            paintings={this.state.painting}
+          /> */}
+
+
 
           <div className="level">
             <button className="button" id="more" onClick={this.showMore}>
@@ -104,11 +117,12 @@ class PaintingsShow extends React.Component {
 
           <div className="columns is-multiline">
             {this.state.artist && this.state.artist.paintings.slice(0,this.state.limit).map(painting =>
-              <li
-                className="column is-one-third"
-                key={painting._id}
-              >
-                <img src={ painting.image } alt={ painting.title } height="200" />
+              <li className="column is-one-third" key={painting._id} >
+
+                <Link to={`/paintings/${painting._id}`}>
+                  <img src={ painting.image } alt={ painting.title } height="200" />
+                </Link>
+
               </li>
             )}
           </div>
