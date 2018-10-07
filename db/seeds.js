@@ -114,7 +114,7 @@ mongoose.connectAsync(dbURI)
   .then((paintings) => seededPaintings = paintings)
   .then(() => Journey.create({
     title: 'Following Picasso in London',
-    image: 'https://www.tate.org.uk/art/images/work/T/T05/T05010_10.jpg',
+    image: 'http://www.hoyesarte.com/wp-content/uploads/2017/04/mpm_exposicion_bacon_fred_y_la_escuela_de_londres_01.jpg',
     info: 'Let\'s explore the paintings of picaso in London, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     user: seededUsers[1],
     tasks: [

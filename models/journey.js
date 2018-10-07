@@ -6,7 +6,7 @@ const tasksSchema = new mongoose.Schema({
     enum: ['FindPainting', 'Info']
   },
   title: String,
-  content: String,
+  info: String,
   painting: { type: mongoose.Schema.ObjectId, ref: 'Painting' },
   order: {
     type: Number,

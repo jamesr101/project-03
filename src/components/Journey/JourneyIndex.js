@@ -19,19 +19,19 @@ class JourneyIndex extends React.Component {
   render() {
     return (
       <div>
-        <h1> Journey </h1>
-        <ul className="columns is-multiline">
+        <h1 className="title"> Journey </h1>
+        <div className="container">
           {this.state.journeys.map(journey =>
-            <li
-              className="column is-one-quarter-desktop is-one-third-tablet"
-              key={journey._id}
-            >
-              <Link to={`/journeys/${journey._id}`}>
-                <JourneyCard {...journey} />
-              </Link>
-            </li>
+            // <li
+            //   className="column is-one-quarter-desktop is-one-third-tablet"
+            //   key={journey._id}
+            // >
+            <Link key={journey._id} to={`/journeys/${journey._id}`}>
+              <JourneyCard {...journey} />
+            </Link>
+            // </li>
           )}
-        </ul>
+        </div>
       </div>
     );
   }

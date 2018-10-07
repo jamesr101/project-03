@@ -8,15 +8,22 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: [true, 'Email is required'], unique: true },
   password: { type: String, required: true },
   artistFollowed: [{type: mongoose.Schema.ObjectId, ref: 'Artist'}],
-  trophies: [{type: mongoose.Schema.ObjectId, ref: 'Trophy'}]
+  trophies: [{type: mongoose.Schema.ObjectId, ref: 'Trophy'}],
+  image: {
+    type: String,
+    default: 'https://image.flaticon.com/icons/svg/149/149071.svg', // FIXME: change to url of the our server
+    match: [/^https?:\/\/.+/, 'Image link must start with \'http\'']
+  }
 });
 
 userSchema.set('toJSON',{
   transform(doc, json) {
     delete json.password;
     return json;
-  }
+  },
+  virtuals: true
 });
+
 
 userSchema.plugin(require('mongoose-unique-validator'),{
   message: 'Error, expected {PATH} to be unique'

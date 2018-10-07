@@ -1,18 +1,21 @@
 import React from 'react';
 
-const JourneyCard = ({title, image}) => {
+const JourneyCard = ({title, image, info}) => {
   return (
+
     <div className="card">
-      <header className="card-header">
-        <h2 className="card-header-title">{title}</h2>
-      </header>
-      <div className="card-image">
-        <figure className="image">
-          <img src={image} alt={name} />
-        </figure>
-      </div>
       <div className="card-content">
-        <p>Data</p>
+        <div className="media">
+          <div className="media-left">
+            <figure className="image is-128x128">
+              <img src={ image } alt={ title } />
+            </figure>
+          </div>
+          <div className="media-content">
+            <p className="title is-3">{ title }</p>
+            <p className="subtitle is-6">{ info }</p>
+          </div>
+        </div>
       </div>
     </div>
 
