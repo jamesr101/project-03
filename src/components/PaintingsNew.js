@@ -74,7 +74,7 @@ class PaintingsNew extends React.Component {
       .post('/api/paintings', this.state.painting, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      .then(() => this.props.history.push('/paintings'))
+      .then((res) => this.props.history.push(`/paintings/${res.data._id}`))
       .catch((err) => this.setState({ errors: err.response.data.errors }));
   }
 

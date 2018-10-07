@@ -7,7 +7,7 @@ const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
 
 
 const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, getLocation, findAddress}) => {
-// const PaintingForm = ({ handleSubmit, handleChange, handleImage, painting, errors, photo, artists}) => {
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="field">
