@@ -22,7 +22,7 @@ class ArtistsShow extends React.Component {
 
 
     axios.get(`/api/artists/${this.props.match.params.id}`)
-      .then(res => this.setState({ artist: res.data }))
+      .then(res => this.setState({ artist: res.data, search: '' }))
       .then(() => {
         const born = parseFloat(this.state.artist.dateBorn.toString().split('').slice(0,4).join(''));
         const dead = parseFloat(this.state.artist.dateDeath.toString().split('').slice(0,4).join(''));
@@ -44,22 +44,24 @@ class ArtistsShow extends React.Component {
   }
 
   handleTime(e) {
-    const actual = e.target.value;
-    this.setState({ actual: actual});
+    const actualDate = parseFloat(e.target.value);
+    this.setState({ actualDate });
+
   }
 
-  handleChange() {
+  handleChange(e) {
     console.log('handleChange');
-    // const comment = { ...this.state.comment, [e.target.name]: e.target.value };
-    // this.setState({ comment });
-    // console.log(this.state);
+    this.setState({ [e.target.name]: e.target.value });
   }
 
+  filterArtistsPaintings() {
+    const re = new RegExp(this.state.search, 'i');
 
-  componentDidUpdate() {
-    console.log('componentDidUpdate');
-    // axios.get(`/api/artists/${this.props.match.params.id}`)
-    //   .then(res => this.setState({ artist: res.data }));
+    return this.state.artist.paintings.filter(painting => {
+      const date = parseFloat(painting.date);
+      return (date > this.state.actualDate - 10 && date < this.state.actualDate + 10) && re.test(painting.title);
+    });
+
   }
 
   render() {
@@ -110,19 +112,25 @@ class ArtistsShow extends React.Component {
         <form action="/action_page.php" method="get">
           From
           <br></br>
-          {this.state.actual}
-          <input type="range" step="1" min={this.state.born} max={this.state.dead} onChange={this.handleTime} ></input>
-          <br></br>
-           To
-          <br></br>
+          {!this.state.actualDate && <p>Select time range</p>}
+          {this.state.actualDate && <p>{this.state.actualDate}</p>}
           <input type="range" step="1" min={this.state.born} max={this.state.dead} onChange={this.handleTime} ></input>
           <input type="submit"></input>
         </form>
 
         <ul>
-          {this.state.artist.paintings.map(painting =>
+          {!this.state.actualDate && !this.state.search && this.state.artist.paintings.map(painting =>
             <li key={painting._id}>
-              {console.log(painting.location.latitude)}
+              <p> { painting.title } </p>
+              <figure> <img src={ painting.image }/> </figure>
+              <p>location:</p>
+              <p> latitude -{ painting.location.latitude } </p>
+              <p>latitude - {painting.location.longitude}</p>
+
+            </li>
+          )}
+          {this.filterArtistsPaintings().map(painting =>
+            <li key={painting._id}>
               <p> { painting.title } </p>
               <figure> <img src={ painting.image }/> </figure>
               <p>location:</p>

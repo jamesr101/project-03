@@ -7,10 +7,11 @@ import Auth from '../lib/Auth';
 class PaintingsNew extends React.Component {
   constructor() {
     super();
-    this.state = { painting: {}, errors: {}, photo: '', artists: [] };
+    this.state = { painting: {}, errors: {}, photo: '', artists: [], address: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getLocation = this.getLocation.bind(this);
+    this.findAddress = this.findAddress.bind(this);
 
   }
   componentDidMount() {
@@ -52,6 +53,18 @@ class PaintingsNew extends React.Component {
     }
   }
 
+  findAddress() {
+    const KEY = 'UylkKlLKXG8WP4fG0IlsUewrzpdpkfPp';
+
+    axios
+      .get(`http://open.mapquestapi.com/geocoding/v1/address?key=${KEY}&location=${this.state.painting.address}`)
+      .then(res => console.log( res.data.results[0].locations[0].latLng));
+
+    console.log('request made to open map');
+
+
+  }
+
 
   handleSubmit(e) {
     console.log(this.state.painting);
@@ -61,7 +74,7 @@ class PaintingsNew extends React.Component {
       .post('/api/paintings', this.state.painting, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      .then(() => this.props.history.push('/paintings'))
+      .then((res) => this.props.history.push(`/paintings/${res.data._id}`))
       .catch((err) => this.setState({ errors: err.response.data.errors }));
   }
 
@@ -76,6 +89,7 @@ class PaintingsNew extends React.Component {
         //handleImage={this.handleImage}
         artists={this.state.artists}
         getLocation={this.getLocation}
+        findAddress={this.findAddress}
       />
     );
   }

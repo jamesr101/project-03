@@ -4,6 +4,7 @@ const authController = require('../controllers/auth');
 const artistsController = require('../controllers/artists');
 const usersController = require('../controllers/users');
 const journeysController = require('../controllers/journeys');
+const artsyController = require('../controllers/artsy');
 const secureRoute = require('../lib/secureRoute');
 
 router.route('/paintings')
@@ -39,14 +40,15 @@ router.route('/artists/:id')
   .put(secureRoute, artistsController.update)
   .delete(secureRoute, artistsController.delete);
 
+
 router.route('/journeys')
   .get(journeysController.index);
 
-// router.route('/journeys/checkphoto')
-//   .post(journeysController.checkPhotoTask);  // TODO: add secure route
-
 router.route('/journeys/:id')
   .get(journeysController.show);
+
+router.get('/artsy/artists', artsyController.artistsIndex);
+
 
 router.route('/*')
   .all((req, res) => res.sendStatus(404));
