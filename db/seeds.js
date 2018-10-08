@@ -11,7 +11,7 @@ const Trophy = require('../models/trophy');
 const Painting = require('../models/painting');
 const Journey = require('../models/journey');
 
-let seededUsers, seededArtist, seededPaintings, seededJourneys = [];
+let seededUsers, seededArtist, seededPaintings, seededJourneys, seededTrophy = [];
 
 mongoose.connectAsync(dbURI)
   .then(db => db.dropDatabase())
@@ -50,7 +50,11 @@ mongoose.connectAsync(dbURI)
   },{
     name: 'Master',
     image: 'https://www.partyrama.co.uk/wp-content/uploads/2016/06/champions-trophy-cardboard-cutout-167cms-product-image.jpg'
+  },{
+    name: 'Picaso Pablo Master',
+    image: 'https://farm8.staticflickr.com/7559/16070115321_8b229f759f_m.jpg'
   }))
+  .then((trophy) => seededTrophy = trophy)
   .then(() => Painting.create({
     title: 'Weeping Woman',
     image: 'https://www.tate.org.uk/art/images/work/T/T05/T05010_10.jpg',
@@ -114,13 +118,14 @@ mongoose.connectAsync(dbURI)
   .then((paintings) => seededPaintings = paintings)
   .then(() => Journey.create({
     title: 'Following Picasso in London',
-    image: 'http://www.hoyesarte.com/wp-content/uploads/2017/04/mpm_exposicion_bacon_fred_y_la_escuela_de_londres_01.jpg',
+    image: 'https://pmcvariety.files.wordpress.com/2017/06/gettyimages-98613949.jpg?w=1000&h=563&crop=1',
     info: 'Let\'s explore the paintings of picaso in London, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     user: seededUsers[1],
+    trophyWin: seededTrophy[3],
     tasks: [
       {
         type: 'Info',
-        title: 'National Gallery',
+        title: 'Go to National Gallery',
         content: 'Our journey begin in National Gallery, firstly arrive to National Gallery',
         order: 0
       },{
@@ -129,6 +134,23 @@ mongoose.connectAsync(dbURI)
         content: 'Weeping Woman is ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
         painting: seededPaintings[0],
         order: 1
+      },{
+        type: 'FindPainting',
+        title: 'Find The Studio Painting',
+        content: 'The Studio Painting sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+        painting: seededPaintings[1],
+        order: 2
+      },{
+        type: 'Info',
+        title: 'Go to Pdrdjgfdj de akdk',
+        content: 'Pdrdjgfdj de akdkis Lorem ipsum dolor sit amet, nim id est laborum. firstly arrive to National Gallery',
+        order: 3
+      },{
+        type: 'FindPainting',
+        title: 'Find Bust of a Woman',
+        content: 'The Bust of a Woman Painting sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
+        painting: seededPaintings[2],
+        order: 4
       }
     ]
   }))

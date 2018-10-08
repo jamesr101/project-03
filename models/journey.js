@@ -6,7 +6,7 @@ const tasksSchema = new mongoose.Schema({
     enum: ['FindPainting', 'Info']
   },
   title: String,
-  info: String,
+  content: String,
   painting: { type: mongoose.Schema.ObjectId, ref: 'Painting' },
   order: {
     type: Number,
@@ -28,11 +28,11 @@ const journeySchema = new mongoose.Schema({
   info: String,
   user: { type: mongoose.Schema.ObjectId, ref: 'User' }, // store the user by reference
   // likes: [ { type: mongoose.Schema.ObjectId, ref: 'User'} ],
-  tasks: [ tasksSchema ]
-  // trophyWin: {
-  //   type: mongoose.Schema.ObjectId,
-  //   ref: 'Trophy'
-  // }
+  tasks: [ tasksSchema ],
+  trophyWin: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Trophy'
+  }
 });
 
 

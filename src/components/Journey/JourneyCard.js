@@ -2,7 +2,6 @@ import React from 'react';
 
 const JourneyCard = ({title, image, info}) => {
   return (
-
     <div className="card">
       <div className="card-content">
         <div className="media">
@@ -18,7 +17,6 @@ const JourneyCard = ({title, image, info}) => {
         </div>
       </div>
     </div>
-
   );
 };
 

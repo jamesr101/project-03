@@ -1,49 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import ReactFilestack from 'react-filestack';
-import Auth from '../../lib/Auth';
-
-const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
-
-
-// import { Link } from 'react-router-dom';
-// import Auth from '../../lib/Auth';
+import JourneyTaskCard from './JourneyTaskCard';
 
 class JourneysShow extends React.Component {
   constructor() {
     super();
     this.state = { journey: null};
-    this.handleChange = this.handleChange.bind(this);
-
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
-
     axios.get(`/api/journeys/${this.props.match.params.id}`)
       .then(res => this.setState({ journey: res.data }));
   }
-
-  handleChange(e) {
-    console.log(e);
-    console.log(e.target.name);
-    console.log(e.target.value);
-    // const state = { ...this.state, [e.target.name]: e.target.value };
-    const token = Auth.getToken();
-
-    axios
-      .post('/api/journeys/checkphoto', {photoUrl: e.target.value},{
-        headers: {Authorization: `Bearer ${token}`}
-      })
-      .then(el => console.dir(el.data))
-
-      // .then(() => this.props.history.push('/artists'))
-      //.then((err) => console.log(err))
-      .catch((err) => this.setState({ errors: err.response.data.errors }));
-  }
-
-
-
 
   componentDidUpdate() {
     console.log('componentDidUpdate');
@@ -53,55 +21,36 @@ class JourneysShow extends React.Component {
   render() {
     if(!this.state.journey) return null;
     return (
-      <section className="section">
-        <div className="container">
-          <div className="level">
+      <div>
+        <header className="hero is-medium">
+          <div className="hero-body">
+            <figure>
+              <img className="cover-image" src={ this.state.journey.image } alt={ this.state.journey.title } height="200" />
+            </figure>
             <h1 className="title">{ this.state.journey.title }</h1>
+
+            <p>
+              { this.state.journey.info }
+            </p>
           </div>
+        </header>
 
-          <hr />
-          <div className="columns">
-
-            <div className="column is-one-quarter">
-              <img src={ this.state.journey.image } alt={ this.state.journey.name } height="200" />
-            </div>
-
-            <div className="column is-three-quarters">
-              <p>
-                { this.state.journey.info }
-              </p>
-              <br />
-            </div>
-          </div>
-        </div>
-
-        <ul>
+        <section className="section">
           {this.state.journey.tasks.map(task =>
-            <li key={task._id}>
-
-              <p> { task.title } </p>
-              <p> { task.content } </p>
-              {(task.type === 'FindPainting') &&
-                <ReactFilestack
-                  apikey={ FILESTACK_API_KEY }
-                  mode={'pick'}
-                  onSuccess={(response) => this.handleChange({
-                    target: {
-                      name: task._id,
-                      value: response.filesUploaded[0].url
-                    }})}
-                  onError={(e) => console.log(e)}
-                  buttonText={'Add Picture'}
-                />
-              }
-
-              {/* <figure> <img src={ task.image }/> </figure> */}
-
-
-            </li>
+            <JourneyTaskCard key={task._id} {...task} />
           )}
-        </ul>
-      </section>
+        </section>
+
+        { this.state.journey.trophyWin &&
+        <section className="section has-text-centered	">
+          <figure>
+            <img className="cover-image" src={ this.state.journey.trophyWin.image } alt={ this.state.journey.trophyWin.name } height="200" />
+          </figure>
+          <p> <strong> { this.state.journey.trophyWin.name } </strong> </p>
+        </section>
+        }
+
+      </div>
     );
   }
 }

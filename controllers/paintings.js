@@ -1,4 +1,7 @@
 const Painting = require('../models/painting');
+const vision = require('@google-cloud/vision');
+
+const client = new vision.ImageAnnotatorClient();
 
 function indexRoute(req, res, next) {
   Painting
@@ -76,6 +79,27 @@ function commentDeleteRoute(req, res, next) {
     .catch(next);
 }
 
+//  this function get object with paintingId and url of photo,
+// and return if the photo include the painting.
+// req: { paintingId: '<the id of object painting>',
+//        photoUrl: '<the url of photo>' }
+function checkMatchingRoute(req, res, next) {
+  console.log(req.body);
+  client
+    .logoDetection(req.body.photoUrl)
+    .then(results => {
+      const tags = results[0].logoAnnotations.map(e => e.description);
+      return Painting
+        .findById(req.body.paintingId)
+        .then(painting => {
+          const isMatch = tags.indexOf(painting.title) > -1;
+          return { isMatch, tags };
+        });
+    })
+    .then((labels) => res.status(201).json(labels))
+    .catch(next);
+}
+
 module.exports = {
   index: indexRoute,
   show: showRoute,
@@ -83,5 +107,6 @@ module.exports = {
   update: updateRoute,
   delete: deleteRoute,
   createComment: commentCreateRoute,
-  deleteComment: commentDeleteRoute
+  deleteComment: commentDeleteRoute,
+  checkMatching: checkMatchingRoute
 };

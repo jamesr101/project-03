@@ -10,6 +10,11 @@ router.route('/paintings')
   .get(paintingsController.index)
   .post(secureRoute, paintingsController.create);
 
+
+router.route('/paintings/checkmatching')
+  // .post(secureRoute, paintingsController.create);
+  .post(paintingsController.checkMatching);
+
 router.route('/paintings/:id')
   .get(paintingsController.show)
   .put(secureRoute, paintingsController.update)
@@ -37,8 +42,8 @@ router.route('/artists/:id')
 router.route('/journeys')
   .get(journeysController.index);
 
-router.route('/journeys/checkphoto')
-  .post(journeysController.checkPhotoTask);  // TODO: add secure route
+// router.route('/journeys/checkphoto')
+//   .post(journeysController.checkPhotoTask);  // TODO: add secure route
 
 router.route('/journeys/:id')
   .get(journeysController.show);
