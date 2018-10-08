@@ -100,8 +100,8 @@ class PaintingsShow extends React.Component {
 
         <Map
           paintings={[this.state.painting]}
-          center={this.mapCenter}
-          zoom={4}
+          // center={this.mapCenter}
+          zoom={10}
         />
 
 

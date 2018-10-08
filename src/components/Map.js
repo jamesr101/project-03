@@ -11,7 +11,10 @@ class Map extends React.Component {
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v10',
-      center: [this.props.center.lng, this.props.center.lat],
+      center: {
+        lat: this.props.paintings[0].location.latitude,
+        lng: this.props.paintings[0].location.longitude
+      },
       zoom: this.props.zoom,
       pitch: 30
     });
@@ -93,8 +96,10 @@ class Map extends React.Component {
     this.deleteMarkers();
     this.createMarkers();
     this.map.setZoom(this.props.zoom);
-    this.map.setCenter([this.props.center.lng, this.props.center.lat]);
-
+    this.map.setCenter({
+      lat: this.props.paintings[0].location.latitude,
+      lng: this.props.paintings[0].location.longitude
+    });
   }
 
   render() {
