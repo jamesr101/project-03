@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import Auth from '../lib/Auth';
 
 class PaintingsShow extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.mapCenter = { lat: 55, lng: -5 };
     this.state = {
       painting: null,
@@ -19,10 +19,20 @@ class PaintingsShow extends React.Component {
     this.showMore = this.showMore.bind(this);
   }
 
-  componentDidMount() {
+  getPainting() {
     axios.get(`/api/paintings/${this.props.match.params.id}`)
       .then(res => this.setState({ painting: res.data }));
-    console.log();
+  }
+
+  componentDidMount() {
+    this.getPainting();
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.location.pathname !== this.props.location.pathname) {
+      this.getPainting();
+      window.scrollTo(0,0);
+    }
   }
 
   handleDelete(e) {
@@ -85,6 +95,8 @@ class PaintingsShow extends React.Component {
               <h1 className="title is-4">{ this.state.painting.title}, {this.state.painting.date}</h1>
 
               <Link to={`/artists/${this.state.painting.artist.id}`} className="subtitle is-4">{ this.state.painting.artist.name}</Link>
+
+              {this.state.painting.info && <p>{this.state.painting.info}</p>}
 
               <br/>
               {this.state.painting.wikiLink && <a href={this.state.painting.wikiLink}>Wikipedia</a>}
