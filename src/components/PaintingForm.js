@@ -11,9 +11,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
   return (
     <form onSubmit={handleSubmit}>
 
-      <div className="section">
-        <img src={ painting.image || 'https://i0.wp.com/hifadhiafrica.org/wp-content/uploads/2017/01/default-placeholder.png' } alt='upload a photo' height="200" />
-      </div>
+      <img src={ painting.image || 'https://i0.wp.com/hifadhiafrica.org/wp-content/uploads/2017/01/default-placeholder.png' } alt='upload a photo' height="200" />
 
       <div className="field">
         <div className="control">
@@ -69,13 +67,13 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         <label className="label">Title</label>
         <div className="control">
           <input
-            className={`input ${errors.name ? 'is-danger' : ''}`}
+            className={`input ${errors.title ? 'is-danger' : ''}`}
             name="title"
             placeholder="Title"
             onChange={handleChange}
             value={painting.title || ''}
           />
-          {errors.name && <small className="help is-danger">{errors.name}</small>}
+          {errors.title && <small className="help is-danger">{errors.title}</small>}
         </div>
       </div>
 
@@ -83,13 +81,13 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         <label className="label">Year</label>
         <div className="control">
           <input
-            className={`input ${errors.name ? 'is-danger' : ''}`}
+            className={`input ${errors.date ? 'is-danger' : ''}`}
             name="date"
             placeholder="Year"
             onChange={handleChange}
             value={painting.date || ''}
           />
-          {errors.name && <small className="help is-danger">{errors.name}</small>}
+          {errors.date && <small className="help is-danger">{errors.date}</small>}
         </div>
       </div>
 
@@ -97,13 +95,13 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         <label className="label">Information</label>
         <div className="control">
           <input
-            className={`input ${errors.name ? 'is-danger' : ''}`}
+            className={`input ${errors.info ? 'is-danger' : ''}`}
             name="info"
             placeholder="Information about artwork"
             onChange={handleChange}
             value={painting.info || ''}
           />
-          {errors.name && <small className="help is-danger">{errors.name}</small>}
+          {errors.info && <small className="help is-danger">{errors.info}</small>}
         </div>
       </div>
 
@@ -111,13 +109,13 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         <label className="label">Wikipedia Link</label>
         <div className="control">
           <input
-            className={`input ${errors.name ? 'is-danger' : ''}`}
+            className={`input ${errors.wikiLink ? 'is-danger' : ''}`}
             name="wikiLink"
             placeholder="If available, please add a Wikipedia Link"
             onChange={handleChange}
             value={painting.wikiLink || ''}
           />
-          {errors.name && <small className="help is-danger">{errors.name}</small>}
+          {errors.wikiLink && <small className="help is-danger">{errors.wikiLink}</small>}
         </div>
       </div>
 
@@ -132,13 +130,13 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
 
           <div className="control level-item">
             <input
-              className={`input ${errors.name ? 'is-danger' : ''}`}
+              className={`input ${errors.location ? 'is-danger' : ''}`}
               name="address"
               placeholder="Enter location"
               onChange={handleChange}
               value={painting.address || ''}
             />
-            {errors.name && <small className="help is-danger">{errors.name}</small>}
+            {errors.location && <small className="help is-danger">{errors.location}</small>}
             <div className="button" onClick={findAddress}>Find address</div>
           </div>
         </div>
@@ -146,7 +144,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
 
       <div className="level control">
         <div className="level-item">
-          <button className="button is-primary is-rounded">Submit</button>
+          <button className="button is-primary is-rounded is-medium">Submit</button>
         </div>
       </div>
 

@@ -16,40 +16,12 @@ class Map extends React.Component {
     });
 
     this.map.on('load', () => {
-      // when the map loads add 3d buildings layer
-      // lifted directly from documentation
-      const layers = this.map.getStyle().layers;
-      const labelLayerId = layers.find(layer => layer.type === 'symbol' && layer.layout['text-field']).id;
-
       this.map.addControl(new mapboxgl.GeolocateControl({
         positionOptions: {
           enableHighAccuracy: true
         },
         trackUserLocation: true
       }));
-
-      this.map.addLayer({
-        'id': '3d-buildings',
-        'source': 'composite',
-        'source-layer': 'building',
-        'filter': ['==', 'extrude', 'true'],
-        'type': 'fill-extrusion',
-        'minzoom': 15,
-        'paint': {
-          // 'fill-extrusion-color': '#f00',
-          'fill-extrusion-height': [
-            'interpolate', ['linear'], ['zoom'],
-            15, 0,
-            15.05, ['get', 'height']
-          ],
-          'fill-extrusion-base': [
-            'interpolate', ['linear'], ['zoom'],
-            15, 0,
-            15.05, ['get', 'min_height']
-          ],
-          'fill-extrusion-opacity': .6
-        }
-      }, labelLayerId);
     });
 
     this.markers = this.props.paintings.map(painting => {
@@ -73,6 +45,14 @@ class Map extends React.Component {
         .setLngLat([painting.location.longitude, painting.location.latitude])
         .addTo(this.map);
     });
+  }
+
+  componentDidUpdate() {
+    // remove the existing markers
+    // add the new markers
+    // update the center point and zoom too...
+
+    this.map.setCenter([this.props.center.lng, this.props.center.lat]);
   }
 
   render() {

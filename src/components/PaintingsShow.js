@@ -1,14 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import Map from './Map';
+import ShowMap from './ShowMap';
+import Map from './Map';
 
 import Auth from '../lib/Auth';
 
 class PaintingsShow extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { artist: null};
+
     this.mapCenter = { lat: 55, lng: -5 };
+
     this.state = {
       painting: null,
       artist: null,
@@ -95,12 +99,14 @@ class PaintingsShow extends React.Component {
 
         </div>
 
-        {/* <Map
+        <ShowMap
+          painting={this.state.painting}
+        />
+        <Map
+          paintings={[this.state.painting]}
           center={this.mapCenter}
-          zoom={5}
-          paintings={this.state.painting}
-        /> */}
-
+          zoom={4}
+        />
 
 
         <div className="section">
