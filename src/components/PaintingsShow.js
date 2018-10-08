@@ -64,57 +64,46 @@ class PaintingsShow extends React.Component {
   render() {
     if(!this.state.painting) return null;
     return (
-      <section className="section">
-        <div className="container">
-          <div className="level">
-            <h1 className="title is-3">{ this.state.painting.title }</h1>
 
-            <div>
-              <div className="row">
-                <div className="page-banner col-md-12">
-                  {Auth.isAuthenticated() && <Link to={`/paintings/${this.state.painting._id}/edit`} className="button">
-                    Edit
-                  </Link>}
-                  {Auth.isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">
-                    Delete
-                  </button>}
-                </div>
+      <div>
+        <div className="level">
+          <h1 className="title is-3">{ this.state.painting.title }</h1>
 
-              </div>
-            </div>
-
+          <div className="page-banner col-md-12">
+            {Auth.isAuthenticated() && <Link to={`/paintings/${this.state.painting._id}/edit`} className="button">
+              Edit
+            </Link>}
+            {Auth.isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">
+              Delete
+            </button>}
           </div>
 
-          <hr />
-          <div className="container">
+        </div>
 
 
-            <div className="section">
-              <img src={ this.state.painting.image } alt={ this.state.painting.title } height="200" />
+        <img src={ this.state.painting.image } alt={ this.state.painting.title } height="200" />
 
-              <h1 className="title is-4">{ this.state.painting.title}, {this.state.painting.date}</h1>
+        <div className="section">
+          <h1 className="title is-4">{ this.state.painting.title}, {this.state.painting.date}</h1>
 
-              <Link to={`/artists/${this.state.painting.artist.id}`} className="subtitle is-4">{ this.state.painting.artist.name}</Link>
+          <Link to={`/artists/${this.state.painting.artist.id}`} className="subtitle is-4">{ this.state.painting.artist.name}</Link>
 
-              {this.state.painting.info && <p>{this.state.painting.info}</p>}
+          {this.state.painting.info && <p>{this.state.painting.info}</p>}
 
-              <br/>
-              {this.state.painting.wikiLink && <a href={this.state.painting.wikiLink}>Wikipedia</a>}
+          <br/>
+          {this.state.painting.wikiLink && <a href={this.state.painting.wikiLink}>Wikipedia</a>}
 
+        </div>
 
-
-            </div>
-          </div>
-
-          {/* <Map
-            center={this.mapCenter}
-            zoom={5}
-            paintings={this.state.painting}
-          /> */}
+        {/* <Map
+          center={this.mapCenter}
+          zoom={5}
+          paintings={this.state.painting}
+        /> */}
 
 
 
-
+        <div className="section">
           <div className="level">
             <button className="button" id="more" onClick={this.showMore}>
               More paintings by
@@ -127,20 +116,20 @@ class PaintingsShow extends React.Component {
               </button>
             }
           </div>
-
-          <div className="columns is-multiline">
-            {this.state.artist && this.state.artist.paintings.slice(0,this.state.limit).map(painting =>
-              <li className="column is-one-third" key={painting._id} >
-
-                <Link to={`/paintings/${painting._id}`}>
-                  <img src={ painting.image } alt={ painting.title } height="200" />
-                </Link>
-
-              </li>
-            )}
-          </div>
         </div>
-      </section>
+
+        <div className="columns is-multiline">
+          {this.state.artist && this.state.artist.paintings.slice(0,this.state.limit).map(painting =>
+            <li className="column is-one-third" key={painting._id} >
+
+              <Link to={`/paintings/${painting._id}`}>
+                <img src={ painting.image } alt={ painting.title } height="200" />
+              </Link>
+
+            </li>
+          )}
+        </div>
+      </div>
 
     );
   }
