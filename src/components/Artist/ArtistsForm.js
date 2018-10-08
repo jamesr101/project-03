@@ -3,7 +3,18 @@ import ReactFilestack from 'react-filestack';
 
 const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
 
-const ArtistsForm = ({ handleSubmit, handleChange, artist, errors }) => {
+const ArtistsForm = ({
+  handleSubmit,
+  handleChange,
+  getArtistData,
+  artist,
+  errors,
+  wikiLink,
+  wikiImg,
+  wikiPar,
+  wikiBorn,
+  wikiDeath
+}) => {
   return(
     <form onSubmit={handleSubmit}>
       <div className="field">
@@ -14,6 +25,7 @@ const ArtistsForm = ({ handleSubmit, handleChange, artist, errors }) => {
             name="name"
             placeholder="Name"
             onChange={handleChange}
+            onBlur={getArtistData}
             value={artist.name  || ''}
           />
           {errors.name && <small className="help is-danger"> {errors.name} </small>}
@@ -48,18 +60,22 @@ const ArtistsForm = ({ handleSubmit, handleChange, artist, errors }) => {
         </div>
       </div>
       <div className="section">
-        <img src={ artist.image } alt='upload a photo' height="200" />
+        <img src={ wikiImg } alt='upload a photo' height="200" />
       </div>
 
       <div className="field">
         <label className="label">info</label>
+        <p>
+          {wikiPar}
+        </p>
         <div className="control">
           <input
             className={`input ${errors.name ? 'is-danger' : ''}`}
             name="info"
             placeholder="info"
             onChange={handleChange}
-            value={artist.info || ''}
+            value={wikiPar || ''}
+            type="hidden"
           />
           {errors.info && <small className="help is-danger"> {errors.info} </small>}
         </div>
@@ -73,7 +89,7 @@ const ArtistsForm = ({ handleSubmit, handleChange, artist, errors }) => {
             name="wikiLink"
             placeholder="wikiLink"
             onChange={handleChange}
-            value={artist.wikiLink || ''}
+            value={wikiLink || ''}
           />
           {errors.wikiLink && <small className="help is-danger"> {errors.wikiLink} </small>}
         </div>
@@ -87,7 +103,7 @@ const ArtistsForm = ({ handleSubmit, handleChange, artist, errors }) => {
             name="dateBorn"
             placeholder="Date Born"
             onChange={handleChange}
-            value={artist.dateBorn || ''}
+            value={wikiBorn || ''}
           />
           {errors.wikiLink && <small className="help is-danger"> {errors.wikiLink} </small>}
         </div>
@@ -101,7 +117,7 @@ const ArtistsForm = ({ handleSubmit, handleChange, artist, errors }) => {
             name="dateDeath"
             placeholder="Date Death"
             onChange={handleChange}
-            value={artist.dateDeath || ''}
+            value={wikiDeath || ''}
           />
           {errors.wikiLink && <small className="help is-danger"> {errors.wikiLink} </small>}
         </div>

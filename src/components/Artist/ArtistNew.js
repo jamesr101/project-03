@@ -10,18 +10,41 @@ import Auth from '../../lib/Auth';
 class ArtistsNew extends React.Component {
   constructor() {
     super();
-    this.state = { artist: {}, errors: {} };
+    this.state = { artist: {}, errors: {}, wikiLink: '', wikiImg: '', wikiPar: '', wikiBorn: '', wikiDeath: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getArtistData = this.getArtistData.bind(this);
   }
 
   handleChange(e) {
-    console.log(e);
-    console.log(e.target.name);
-    console.log(e.target.value);
     const artist = { ...this.state.artist, [e.target.name]: e.target.value };
     const errors = { ...this.state.errors, [e.target.name]: '' };
-    this.setState({ artist, errors });
+    const capital = artist.name.replace(/ /g, '_');
+    const wikiLink = artist.name ? `https://en.wikipedia.org/wiki/${capital}` : '';
+
+    this.setState({
+      artist,
+      errors,
+      wikiLink
+    });
+
+  }
+
+  getArtistData() {
+    axios
+      .get('/api/artsy/artists', {
+        params: {
+          search: this.state.artist.name
+        }
+      })
+      .then((res)=> {
+        this.setState({
+          wikiImg: res.data._links.thumbnail.href,
+          wikiPar: res.data.biography,
+          wikiBorn: res.data.birthday,
+          wikiDeath: res.data.deathday
+        });
+      });
   }
 
 
@@ -48,8 +71,14 @@ class ArtistsNew extends React.Component {
         <ArtistsForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
+          getArtistData={this.getArtistData}
           artist={this.state.artist}
           errors={this.state.errors}
+          wikiLink={this.state.wikiLink}
+          wikiImg={this.state.wikiImg}
+          wikiPar={this.state.wikiPar}
+          wikiBorn={this.state.wikiBorn}
+          wikiDeath={this.state.wikiDeath}
         />
       </div>
     );
