@@ -58,7 +58,9 @@ class Map extends React.Component {
 
     this.markers = this.props.paintings.map(painting => {
       // create a marker for each location
-      const el = document.createElement('div');
+      const el = document.createElement('img');
+      el.setAttribute('src', painting.image);
+      el.setAttribute('alt', 'none');
       el.className = 'marker';
 
       el.addEventListener('click', () => {

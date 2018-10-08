@@ -3,6 +3,7 @@ const paintingsController = require('../controllers/paintings');
 const authController = require('../controllers/auth');
 const artistsController = require('../controllers/artists');
 const usersController = require('../controllers/users');
+const artsyController = require('../controllers/artsy');
 const secureRoute = require('../lib/secureRoute');
 
 router.route('/paintings')
@@ -32,6 +33,8 @@ router.route('/artists/:id')
   .get(artistsController.show)
   .put(secureRoute, artistsController.update)
   .delete(secureRoute, artistsController.delete);
+
+router.get('/artsy/artists', artsyController.artistsIndex);
 
 
 router.route('/*')
