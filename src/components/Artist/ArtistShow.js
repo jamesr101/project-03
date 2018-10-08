@@ -12,7 +12,7 @@ class ArtistsShow extends React.Component {
     super();
     this.state = { artist: null};
 
-    this.mapCenter = { lat: 30, lng: 0 };
+    this.mapCenter = { lat: 55, lng: -5 };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleTime = this.handleTime.bind(this);
@@ -21,6 +21,7 @@ class ArtistsShow extends React.Component {
   componentDidMount() {
     console.log('componentDidMount');
 
+
     axios.get(`/api/artists/${this.props.match.params.id}`)
       .then(res => this.setState({ artist: res.data, search: '' }))
       .then(() => {
@@ -28,6 +29,9 @@ class ArtistsShow extends React.Component {
         const dead = parseFloat(this.state.artist.dateDeath.toString().split('').slice(0,4).join(''));
         this.setState({born: born, dead: dead});
       });
+
+
+
 
   }
 
@@ -103,7 +107,7 @@ class ArtistsShow extends React.Component {
           <FilterBar handleChange={this.handleChange} />
         </div>
 
-        <Map center={this.mapCenter} zoom={1.5} paintings={this.state.artist.paintings} />
+        <Map center={this.mapCenter} zoom={4} paintings={this.state.artist.paintings} />
 
 
         <form action="/action_page.php" method="get">

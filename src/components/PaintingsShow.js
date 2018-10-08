@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+// import Map from './Map';
 
 import Auth from '../lib/Auth';
 
 class PaintingsShow extends React.Component {
   constructor() {
     super();
+    this.mapCenter = { lat: 55, lng: -5 };
     this.state = {
       painting: null,
       artist: null,
@@ -14,12 +16,13 @@ class PaintingsShow extends React.Component {
       wikil: null
     };
     this.handleDelete = this.handleDelete.bind(this);
-    this.addMore = this.addMore.bind(this);
+    this.showMore = this.showMore.bind(this);
   }
 
   componentDidMount() {
     axios.get(`/api/paintings/${this.props.match.params.id}`)
       .then(res => this.setState({ painting: res.data }));
+    console.log();
   }
 
   handleDelete(e) {
@@ -32,19 +35,20 @@ class PaintingsShow extends React.Component {
       .then(() => this.props.history.push('/paintings'));
   }
 
-  addMore(e){
+  showMore(e){
     e.preventDefault();
-    let c;
-    if(e.target.textContent === 'Show more'){
-      c = this.state.limit + 3;
-    } else if(this.state.limit < 3){
-      c = 0;
+    let numberOfPaintingsDisplayed;
+    if(e.target.id === 'more'){
+      numberOfPaintingsDisplayed = this.state.limit + 4;
+    } else if(this.state.limit < 4){
+      numberOfPaintingsDisplayed = 0;
     } else {
-      c = this.state.limit - 3;
+      numberOfPaintingsDisplayed = this.state.limit - 4;
     }
     axios.get(`/api/artists/${this.state.painting.artist._id}`)
-      .then(res => this.setState({ artist: res.data, limit: c }));
+      .then(res => this.setState({ artist: res.data, limit: numberOfPaintingsDisplayed }));
   }
+
 
 
   render() {
@@ -53,52 +57,72 @@ class PaintingsShow extends React.Component {
       <section className="section">
         <div className="container">
           <div className="level">
-            <h1 className="title">{ this.state.painting.title }</h1>
+            <h1 className="title is-3">{ this.state.painting.title }</h1>
+
             <div>
-              <Link className="button" to={`/paintings/${this.state.painting._id}/edit`}> Edit </Link>
-              <button
-                className="button is-danger"
-                onClick={this.handleDelete}
-              >Delete</button>
+              <div className="row">
+                <div className="page-banner col-md-12">
+                  {Auth.isAuthenticated() && <Link to={`/paintings/${this.state.painting._id}/edit`} className="button">
+                    Edit
+                  </Link>}
+                  {Auth.isAuthenticated() && <button onClick={this.handleDelete} className="button is-danger">
+                    Delete
+                  </button>}
+                </div>
+
+              </div>
             </div>
 
           </div>
+
           <hr />
           <div className="container">
 
 
             <div className="section">
               <img src={ this.state.painting.image } alt={ this.state.painting.title } height="200" />
-            </div>
-            <div className="section">
-              <p>{ this.state.painting.artist.name}</p>
-            </div>
-            <div className="section">
-              <p>{ this.state.painting.title}</p>
-            </div>
-            <div className="section">
-              <p>{ this.state.painting.wikiLink}</p>
+
+              <h1 className="title is-4">{ this.state.painting.title}, {this.state.painting.date}</h1>
+
+              <Link to={`/artists/${this.state.painting.artist.id}`} className="subtitle is-4">{ this.state.painting.artist.name}</Link>
+
+              <br/>
+              {this.state.painting.wikiLink && <a href={this.state.painting.wikiLink}>Wikipedia</a>}
+
+
+
             </div>
           </div>
-          <div className="columns">
-            <button
-              className="column button is-danger"
-              onClick={this.addMore}
-            >Show more</button>
+
+          {/* <Map
+            center={this.mapCenter}
+            zoom={5}
+            paintings={this.state.painting}
+          /> */}
+
+
+
+          <div className="level">
+            <button className="button" id="more" onClick={this.showMore}>
+              More paintings by
+              {' ' + this.state.painting.artist.name || ' this artist'}
+            </button>
+
             {this.state.limit > 0 &&
-            <button
-              className="column button is-danger"
-              onClick={this.addMore}
-            >Show less</button>
+              <button className="button" id="less" onClick={this.showMore}>
+                Show less
+              </button>
             }
           </div>
+
           <div className="columns is-multiline">
             {this.state.artist && this.state.artist.paintings.slice(0,this.state.limit).map(painting =>
-              <li
-                className="column is-one-third"
-                key={painting._id}
-              >
-                <img src={ painting.image } alt={ painting.title } height="200" />
+              <li className="column is-one-third" key={painting._id} >
+
+                <Link to={`/paintings/${painting._id}`}>
+                  <img src={ painting.image } alt={ painting.title } height="200" />
+                </Link>
+
               </li>
             )}
           </div>
