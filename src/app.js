@@ -36,8 +36,8 @@ class App extends React.Component {
                 <SecureRoute path="/artists/new" component={ArtistNew} />
                 <Route path="/artists/:id" component={ArtistShow} />
                 <Route path="/artists" component={ArtistIndex} />
-                <Route path="/journeys/:id" component={JourneyShow} />
-                <Route path="/journeys" component={JourneysIndex} />
+                <SecureRoute path="/journeys/:id" component={JourneyShow} />
+                <SecureRoute path="/journeys" component={JourneysIndex} />
                 <Route path="/login" component={Login} />
                 <Route path="/profile/:id/edit" component={UserEdit} />
                 <Route path="/profile" component={UserShow} />
