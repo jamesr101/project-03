@@ -1,5 +1,6 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
+import _ from 'lodash';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJ0bWFwcGVyIiwiYSI6ImNqbXVnMDhvOTJ3b2YzdmpwZjZmbTBjcnUifQ.AioO-9ZHdyYXk_ssF13CLQ';
 
@@ -76,14 +77,20 @@ class Map extends React.Component {
     });
   }
 
+  deleteMarkers(){
+    this.markers.forEach(marker => marker.remove());
+    this.markers = [];
+  }
+
   componentDidUpdate(prevProps) {
-    // if(prevProps.location.pathname !== this.props.location.pathname){
-    //   console.log('new location pathname');
-    // }
+    const prevIds = prevProps.paintings.map(p => p._id);
+    const currentIds = this.props.paintings.map(p => p._id);
+    if(_.intersection(prevIds, currentIds).length === currentIds.length) return false;
 
     // remove the existing markers
     // add the new markers
     // update the center point and zoom too...
+    this.deleteMarkers();
     this.createMarkers();
     this.map.setZoom(this.props.zoom);
     this.map.setCenter([this.props.center.lng, this.props.center.lat]);
