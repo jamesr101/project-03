@@ -28,6 +28,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
               }})}
             onError={(e) => console.log(e)}
             buttonText={'Add Picture'}
+            buttonClass={'button is-rounded'}
           />
 
           {errors.image && <small className="help is-danger">{errors.image}</small>}

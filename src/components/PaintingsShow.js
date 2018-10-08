@@ -114,6 +114,7 @@ class PaintingsShow extends React.Component {
 
 
 
+
           <div className="level">
             <button className="button" id="more" onClick={this.showMore}>
               More paintings by
