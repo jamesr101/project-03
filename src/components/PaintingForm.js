@@ -33,12 +33,8 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
             //onChange={ handleImage } //aviv
             onChange={ handleChange }
             value={painting.image || ''}
-<<<<<<< HEAD
-            type="hidden"
-          />
-=======
+
           /> */}
->>>>>>> 9560704f318ac0a004078e425844f1907cf8def8
           {errors.image && <small className="help is-danger">{errors.image}</small>}
         </div>
       </div>
@@ -53,14 +49,10 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
           <div className="select">
             <select onChange={handleChange} name="artist">
               <option>
-<<<<<<< HEAD
+
                 Select an artist
               </option>
 
-=======
-                Please select artist
-              </option>
->>>>>>> 9560704f318ac0a004078e425844f1907cf8def8
               {artists && artists.map(artist =>
                 <option
                   key={artist._id}

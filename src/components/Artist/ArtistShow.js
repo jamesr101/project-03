@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import Map from '../Map';
 import FilterBar from '../FilterBar';
-import _ from 'lodash';
 
 // import { Link } from 'react-router-dom';
 // import Auth from '../../lib/Auth';
