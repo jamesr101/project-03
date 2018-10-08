@@ -24,6 +24,33 @@ class Map extends React.Component {
       }));
     });
 
+    this.createMarkers();
+    // this.markers = this.props.paintings.map(painting => {
+    //   // create a marker for each location
+    //   const el = document.createElement('img');
+    //   el.setAttribute('src', painting.image);
+    //   el.setAttribute('alt', 'none');
+    //   el.className = 'marker';
+    //
+    //   el.addEventListener('click', () => {
+    //     // when marker is clicked 'fly' to that location
+    //     this.map.isFlying = true; // this is to handle custom zoom functionality
+    //     this.map.flyTo({
+    //       center: [painting.location.longitude, painting.location.latitude],
+    //       pitch: 65,
+    //       zoom: 16
+    //     });
+    //
+    //   });
+    //
+    //   // create add the marker to the map
+    //   return new mapboxgl.Marker(el)
+    //     .setLngLat([painting.location.longitude, painting.location.latitude])
+    //     .addTo(this.map);
+    // });
+  }
+
+  createMarkers(){
     this.markers = this.props.paintings.map(painting => {
       // create a marker for each location
       const el = document.createElement('img');
@@ -49,12 +76,18 @@ class Map extends React.Component {
     });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    // if(prevProps.location.pathname !== this.props.location.pathname){
+    //   console.log('new location pathname');
+    // }
+
     // remove the existing markers
     // add the new markers
     // update the center point and zoom too...
-
+    this.createMarkers();
+    this.map.setZoom(this.props.zoom);
     this.map.setCenter([this.props.center.lng, this.props.center.lat]);
+
   }
 
   render() {

@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import ShowMap from './ShowMap';
 import Map from './Map';
 
 import Auth from '../lib/Auth';
@@ -99,9 +98,6 @@ class PaintingsShow extends React.Component {
 
         </div>
 
-        <ShowMap
-          painting={this.state.painting}
-        />
         <Map
           paintings={[this.state.painting]}
           center={this.mapCenter}
