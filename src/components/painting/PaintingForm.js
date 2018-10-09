@@ -11,7 +11,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
   return (
     <form onSubmit={handleSubmit}>
 
-      <img src={ painting.image || 'https://i0.wp.com/hifadhiafrica.org/wp-content/uploads/2017/01/default-placeholder.png' } alt='upload a photo' height="200" />
+      <img src={ painting.image || '../../assets/images/image-placeholder.png' } alt='upload a photo' height="200" />
 
       <div className="field">
         <div className="control">

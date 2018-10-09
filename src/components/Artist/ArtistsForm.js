@@ -24,7 +24,7 @@ const ArtistsForm = ({
             name="name"
             placeholder="Name"
             onChange={handleChange}
-            onBlur={getArtistData}
+            onBlur={getArtistData, console.log('yo')}
             value={artist.name  || ''}
           />
           {errors.name && <small className="help is-danger"> {errors.name} </small>}
