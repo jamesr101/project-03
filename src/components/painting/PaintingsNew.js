@@ -92,17 +92,20 @@ class PaintingsNew extends React.Component {
 
   render() {
     return (
-      <PaintingForm
-        handleSubmit={this.handleSubmit}
-        handleChange={this.handleChange}
-        painting={this.state.painting}
-        errors={this.state.errors}
-        //photo={this.state.photo}
-        //handleImage={this.handleImage}
-        artists={this.state.artists}
-        getLocation={this.getLocation}
-        findAddress={this.findAddress}
-      />
+      <div>
+        <h1 className="title">New Painting</h1>
+        <PaintingForm
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          painting={this.state.painting}
+          errors={this.state.errors}
+          //photo={this.state.photo}
+          //handleImage={this.handleImage}
+          artists={this.state.artists}
+          getLocation={this.getLocation}
+          findAddress={this.findAddress}
+        />
+      </div>
     );
   }
 }
