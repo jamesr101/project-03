@@ -38,8 +38,6 @@ class ArtistsNew extends React.Component {
         }
       })
       .then((res)=> {
-        console.log('yo2-------->');
-        console.log(res);
         this.setState( ...this.state.artist,{artist: {
           name: this.state.artist.name,
           info: res.data.biography,
@@ -53,8 +51,6 @@ class ArtistsNew extends React.Component {
           wikiDeath: res.data.deathday,
           wikiImg: res.data._links.thumbnail.href
         });
-        console.log('getArtistData--------->');
-        console.log(this.state);
       });
 
     // .then(() => {
@@ -80,7 +76,7 @@ class ArtistsNew extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="title is-h1">Create Artist</h1>
+        <h1 className="title is-h1">Add Artist</h1>
         <ArtistsForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}

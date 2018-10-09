@@ -93,7 +93,7 @@ class PaintingsNew extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="title">New Painting</h1>
+        <h1 className="title">Add Painting</h1>
         <PaintingForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
