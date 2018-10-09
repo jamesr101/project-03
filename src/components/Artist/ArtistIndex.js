@@ -18,26 +18,28 @@ class ArtistIndex extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1 className="title"> Artist </h1>
-        <ul className="columns is-multiline">
-          {this.state.artists.map(artist =>
-            <li
-              className="column is-one-quarter-desktop is-one-third-tablet"
-              key={artist._id}
-            >
-              <Link to={`/artists/${artist._id}`}>
-                <ArtistCard {...artist} />
+      <main className="section">
+        <div className="container">
+          <h1 className="title"> Artist </h1>
+          <ul className="columns is-multiline">
+            {this.state.artists.map(artist =>
+              <li
+                className="column is-one-quarter-desktop is-one-third-tablet"
+                key={artist._id}
+              >
+                <Link to={`/artists/${artist._id}`}>
+                  <ArtistCard {...artist} />
+                </Link>
+              </li>
+            )}
+            <li className="column is-one-quarter-desktop is-one-third-tablet">
+              <Link to={'/artists/new'}>
+                <ArtistCard {...{name: '+ Add new artist', image: '../../assets/images/add-icon.png'}}/>
               </Link>
             </li>
-          )}
-          <li className="column is-one-quarter-desktop is-one-third-tablet">
-            <Link to={'/artists/new'}>
-              <ArtistCard {...{name: '+ Add new artist', image: '../../assets/images/add-icon.png'}}/>
-            </Link>
-          </li>
-        </ul>
-      </div>
+          </ul>
+        </div>
+      </main>
     );
   }
 }
