@@ -67,6 +67,7 @@ class ArtistsShow extends React.Component {
   render() {
     if(!this.state.artist) return null;
     return (
+
       <section className="section">
         <div className="sticky">
 
@@ -100,60 +101,66 @@ class ArtistsShow extends React.Component {
                 </div>
               </div>
             </div>
-          </div>    
-
-
-
-
-          <Map center={this.mapCenter} zoom={4} paintings={this.state.artist.paintings} />
-
-          <div className="section split-half">
-            <div className="artist-filter-bar">
-              <FilterBar handleChange={this.handleChange} />
-            </div>
-            <div className="artist-date-div">
-              <form  className="artist-date-form" action="/action_page.php" method="get">
-                {!this.state.actualDate && <p className="artist-date-text">Select time range</p>}
-                {this.state.actualDate && <p className="artist-date-text">{this.state.actualDate - 10} - {this.state.actualDate + 10} </p>}
-                <input className="artist-date-input" type="range" step="1" min={this.state.born} max={this.state.dead} onChange={this.handleTime}   ></input>
-              </form>
-            </div>
-
           </div>
+          {this.state.artist.paintings.length > 0 && <div>
+            <Map center={this.mapCenter} zoom={4} paintings={this.state.artist.paintings} />
+            <div>
+              <div className="section split-half">
+                <div className="artist-filter-bar">
+                  <FilterBar handleChange={this.handleChange} />
+                  <form  className="artist-date-form" action="/action_page.php" method="get">
+                    {!this.state.actualDate && <p className="artist-date-text">Select time range</p>}
+                    {this.state.actualDate && <p className="artist-date-text">{this.state.actualDate - 10} - {this.state.actualDate + 10} </p>}
+                    <input className="artist-date-input" type="range" step="1" min={this.state.born} max={this.state.dead} onChange={this.handleTime}   ></input>
+                  </form>
+                </div>
+                <div className="artist-date-div">
+                  <Link to="/paintings/new">
+                    Add a new painting for this artist
+                  </Link>
+                </div>
+                <div className="add-painting-link">
+
+                </div>
+
+              </div>
+            </div>
+
+            <ul>
+              {!this.state.actualDate && !this.state.search && this.state.artist.paintings.map(painting =>
+
+
+
+                <li key={painting._id}>
+                  <Link to={`/paintings/${painting._id}`}>
+                    <p> { painting.title } </p>
+                    <figure> <img src={ painting.image }/> </figure>
+                    <p>location:</p>
+                    <p> latitude -{ painting.location.latitude }</p>
+                    <p>latitude - {painting.location.longitude}</p>
+                  </Link>
+                </li>
+
+              )}
+              {this.filterArtistsPaintings().map(painting =>
+                <li key={painting._id}>
+                  <p> { painting.title } </p>
+                  <figure> <img src={ painting.image }/> </figure>
+                  <p>location:</p>
+                  <p> latitude -{ painting.location.latitude } </p>
+                  <p>latitude - {painting.location.longitude}</p>
+
+                </li>
+              )}
+
+            </ul>
+          </div>}
         </div>
-
-        <ul>
-          {!this.state.actualDate && !this.state.search && this.state.artist.paintings.map(painting =>
-
-
-
-            <li key={painting._id}>
-              <Link to={`/paintings/${painting._id}`}>
-                <p> { painting.title } </p>
-                <figure> <img src={ painting.image }/> </figure>
-                <p>location:</p>
-                <p> latitude -{ painting.location.latitude } </p>
-                <p>latitude - {painting.location.longitude}</p>
-              </Link>
-            </li>
-
-          )}
-          {this.filterArtistsPaintings().map(painting =>
-            <li key={painting._id}>
-              <p> { painting.title } </p>
-              <figure> <img src={ painting.image }/> </figure>
-              <p>location:</p>
-              <p> latitude -{ painting.location.latitude } </p>
-              <p>latitude - {painting.location.longitude}</p>
-
-            </li>
-          )}
-        </ul>
-
       </section>
 
     );
   }
+
 }
 
 export default ArtistsShow;
