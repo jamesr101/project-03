@@ -2,11 +2,11 @@ import React from 'react';
 import axios from 'axios';
 
 import PaintingForm from './PaintingForm';
-import Auth from '../lib/Auth';
+import Auth from '../../lib/Auth';
 
 class PaintingsNew extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { painting: {}, errors: {}, photo: '', artists: [], address: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,14 +51,26 @@ class PaintingsNew extends React.Component {
     } else {
       this.setState({ message: 'Cannot esablish your location' });
     }
+    // if location = {lat: 39.78373, lng: -100.445882}, error "address not found"
   }
 
   findAddress() {
     const KEY = 'UylkKlLKXG8WP4fG0IlsUewrzpdpkfPp';
 
     axios
-      .get(`http://open.mapquestapi.com/geocoding/v1/address?key=${KEY}&location=${this.state.painting.address}`)
-      .then(res => console.log( res.data.results[0].locations[0].latLng));
+      .get('http://open.mapquestapi.com/geocoding/v1/address', {
+        params: {
+          key: KEY,
+          location: this.state.painting.address
+        }
+      })
+      .then(res => {
+        console.log( res);
+        const { lat: latitude, lng: longitude } = res.data.results[0].locations[0].latLng;
+        const location = { latitude, longitude };
+        const painting = { ...this.state.painting, location };
+        this.setState({ painting }, () => console.log(this.state.painting));
+      });
 
     console.log('request made to open map');
 

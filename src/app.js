@@ -15,11 +15,10 @@ import ArtistShow from './components/Artist/ArtistShow';
 import Login from './components/Login';
 import UserShow from './components/users/UserShow';
 import UserEdit from './components/users/UserEdit';
-import PaintingsShow from './components/PaintingsShow';
-import PaintingsNew from './components/PaintingsNew';
+import PaintingsShow from './components/Painting/PaintingsShow';
+import PaintingsNew from './components/Painting/PaintingsNew';
 import JourneysIndex from './components/Journey/JourneyIndex';
 import JourneyShow from './components/Journey/JourneyShow';
-
 
 class App extends React.Component {
 

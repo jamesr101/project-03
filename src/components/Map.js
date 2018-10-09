@@ -1,5 +1,6 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
+import _ from 'lodash';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJ0bWFwcGVyIiwiYSI6ImNqbXVnMDhvOTJ3b2YzdmpwZjZmbTBjcnUifQ.AioO-9ZHdyYXk_ssF13CLQ';
 
@@ -10,48 +11,50 @@ class Map extends React.Component {
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v10',
-      center: [this.props.center.lng, this.props.center.lat],
+      center: {
+        lat: this.props.paintings[0].location.latitude,
+        lng: this.props.paintings[0].location.longitude
+      },
       zoom: this.props.zoom,
       pitch: 30
     });
 
     this.map.on('load', () => {
-      // when the map loads add 3d buildings layer
-      // lifted directly from documentation
-      const layers = this.map.getStyle().layers;
-      const labelLayerId = layers.find(layer => layer.type === 'symbol' && layer.layout['text-field']).id;
-
       this.map.addControl(new mapboxgl.GeolocateControl({
         positionOptions: {
           enableHighAccuracy: true
         },
         trackUserLocation: true
       }));
-
-      this.map.addLayer({
-        'id': '3d-buildings',
-        'source': 'composite',
-        'source-layer': 'building',
-        'filter': ['==', 'extrude', 'true'],
-        'type': 'fill-extrusion',
-        'minzoom': 15,
-        'paint': {
-          // 'fill-extrusion-color': '#f00',
-          'fill-extrusion-height': [
-            'interpolate', ['linear'], ['zoom'],
-            15, 0,
-            15.05, ['get', 'height']
-          ],
-          'fill-extrusion-base': [
-            'interpolate', ['linear'], ['zoom'],
-            15, 0,
-            15.05, ['get', 'min_height']
-          ],
-          'fill-extrusion-opacity': .6
-        }
-      }, labelLayerId);
     });
 
+    this.createMarkers();
+    // this.markers = this.props.paintings.map(painting => {
+    //   // create a marker for each location
+    //   const el = document.createElement('img');
+    //   el.setAttribute('src', painting.image);
+    //   el.setAttribute('alt', 'none');
+    //   el.className = 'marker';
+    //
+    //   el.addEventListener('click', () => {
+    //     // when marker is clicked 'fly' to that location
+    //     this.map.isFlying = true; // this is to handle custom zoom functionality
+    //     this.map.flyTo({
+    //       center: [painting.location.longitude, painting.location.latitude],
+    //       pitch: 65,
+    //       zoom: 16
+    //     });
+    //
+    //   });
+    //
+    //   // create add the marker to the map
+    //   return new mapboxgl.Marker(el)
+    //     .setLngLat([painting.location.longitude, painting.location.latitude])
+    //     .addTo(this.map);
+    // });
+  }
+
+  createMarkers(){
     this.markers = this.props.paintings.map(painting => {
       // create a marker for each location
       const el = document.createElement('img');
@@ -74,6 +77,28 @@ class Map extends React.Component {
       return new mapboxgl.Marker(el)
         .setLngLat([painting.location.longitude, painting.location.latitude])
         .addTo(this.map);
+    });
+  }
+
+  deleteMarkers(){
+    this.markers.forEach(marker => marker.remove());
+    this.markers = [];
+  }
+
+  componentDidUpdate(prevProps) {
+    const prevIds = prevProps.paintings.map(p => p._id);
+    const currentIds = this.props.paintings.map(p => p._id);
+    if(_.intersection(prevIds, currentIds).length === currentIds.length) return false;
+
+    // remove the existing markers
+    // add the new markers
+    // update the center point and zoom too...
+    this.deleteMarkers();
+    this.createMarkers();
+    this.map.setZoom(this.props.zoom);
+    this.map.setCenter({
+      lat: this.props.paintings[0].location.latitude,
+      lng: this.props.paintings[0].location.longitude
     });
   }
 
