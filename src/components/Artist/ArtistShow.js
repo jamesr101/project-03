@@ -107,9 +107,9 @@ class ArtistsShow extends React.Component {
         </div>
 
         <Map
-          center={this.mapCenter} 
-          zoom={4} 
-          paintings={this.state.artist.paintings} 
+          center={this.mapCenter}
+          zoom={4}
+          paintings={this.state.artist.paintings}
         />
 
 
