@@ -19,7 +19,6 @@ class ArtistIndex extends React.Component {
   render() {
     return (
       <div>
-        <h1> Artist </h1>
         <ul className="columns is-multiline">
           {this.state.artists.map(artist =>
             <li
@@ -31,6 +30,11 @@ class ArtistIndex extends React.Component {
               </Link>
             </li>
           )}
+          <li className="column is-one-quarter-desktop is-one-third-tablet">
+            <Link to={'/artists/new'}>
+              <ArtistCard {...{name: '+ Add new artist', image: '../../assets/images/add-icon.png'}}/>
+            </Link>
+          </li>
         </ul>
       </div>
     );
