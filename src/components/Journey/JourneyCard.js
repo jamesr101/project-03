@@ -11,7 +11,7 @@ const JourneyCard = ({title, image, info}) => {
             </figure>
           </div>
           <div className="media-content">
-            <p className="title is-3">{ title }</p>
+            <p className="subtitle is-4">{ title }</p>
             <p className="subtitle is-6">{ info }</p>
           </div>
         </div>

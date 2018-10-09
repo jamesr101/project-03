@@ -16,16 +16,18 @@ class JourneyIndex extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1 className="title"> Journey </h1>
+      <main className="section">
         <div className="container">
-          {this.state.journeys.map(journey =>
-            <Link key={journey._id} to={`/journeys/${journey._id}`}>
-              <JourneyCard {...journey} />
-            </Link>
-          )}
+          <h2 className="title"> Journey </h2>
+          <div className="container">
+            {this.state.journeys.map(journey =>
+              <Link key={journey._id} to={`/journeys/${journey._id}`}>
+                <JourneyCard {...journey} />
+              </Link>
+            )}
+          </div>
         </div>
-      </div>
+      </main>
     );
   }
 }

@@ -93,4 +93,13 @@ body {
     box-shadow: none;
   }
 
+  a figure img {
+    opacity: 1;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+  }
+  a figure:hover img {
+    opacity: .5;
+  }
+
 }
