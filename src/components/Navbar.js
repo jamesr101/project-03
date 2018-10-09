@@ -13,7 +13,7 @@ const Navbar = (props) => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="container">
-        <div className="navbar-brand">
+        <div className="navbar-brand logo">
           <Link className="navbar-item" to="/">
             ArtMapper
           </Link>
