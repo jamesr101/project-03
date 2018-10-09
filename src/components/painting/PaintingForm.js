@@ -54,7 +54,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
 
                 </div>
               </div>
-              <p className="level-item">or</p>
+              <p className="level-item form-or">or</p>
               <div className="level-item">
                 <Link className="button is-rounded" to="/artists/new">Add new artist</Link>
               </div>
@@ -126,7 +126,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
 
           <div className="button level-item is-rounded" onClick={getLocation}>Use my Location</div>
 
-          <p className="level-item">or</p>
+          <p className="level-item form-or">or</p>
 
           <div className="control level-item">
             <input
