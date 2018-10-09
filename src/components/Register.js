@@ -29,37 +29,40 @@ class Register extends React.Component {
 
   render() {
     return (
+      <main className="section">
+        <div className="container">
+          <form onSubmit={this.handleSubmit}>
+            <p>Register page</p>
+            <div className="field">
+              <label className="label">User Name</label>
+              <div className="control">
+                <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="username" placeholder="User Name" onChange={this.handleChange} />
+              </div>
+            </div>
+            <div className="field">
+              <label className="label">Email</label>
+              <div className="control">
+                <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="email" placeholder="Email" onChange={this.handleChange} />
+              </div>
+            </div>
+            <div className="field">
+              <label className="label">Password</label>
+              <div className="control">
+                <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="password" type="password" placeholder="Password" onChange={this.handleChange} />
+              </div>
+            </div>
+            <div className="field">
+              <label className="label">Password Confirmation</label>
+              <div className="control">
+                <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="passwordConfirmation" type="password" placeholder="Password" onChange={this.handleChange} />
+              </div>
+            </div>
+            {this.state.error && <small className="help is-danger">{this.state.error}</small>}
 
-      <form onSubmit={this.handleSubmit}>
-        <p>Register page</p>
-        <div className="field">
-          <label className="label">User Name</label>
-          <div className="control">
-            <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="username" placeholder="User Name" onChange={this.handleChange} />
-          </div>
+            <button className="button is-primary">Submit</button>
+          </form>
         </div>
-        <div className="field">
-          <label className="label">Email</label>
-          <div className="control">
-            <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="email" placeholder="Email" onChange={this.handleChange} />
-          </div>
-        </div>
-        <div className="field">
-          <label className="label">Password</label>
-          <div className="control">
-            <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="password" type="password" placeholder="Password" onChange={this.handleChange} />
-          </div>
-        </div>
-        <div className="field">
-          <label className="label">Password Confirmation</label>
-          <div className="control">
-            <input className={`input ${this.state.error ? 'is-danger' : ''} `} name="passwordConfirmation" type="password" placeholder="Password" onChange={this.handleChange} />
-          </div>
-        </div>
-        {this.state.error && <small className="help is-danger">{this.state.error}</small>}
-
-        <button className="button is-primary">Submit</button>
-      </form>
+      </main>
     );
   }
 }
