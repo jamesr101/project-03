@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import PaintingForm from './PaintingForm';
-import Auth from '../lib/Auth';
+import Auth from '../../lib/Auth';
 
 class PaintingsNew extends React.Component {
   constructor(props) {

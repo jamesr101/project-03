@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Map from './Map';
+import Map from '../Map';
 
-import Auth from '../lib/Auth';
+import Auth from '../../lib/Auth';
 
 class PaintingsShow extends React.Component {
   constructor(props) {
