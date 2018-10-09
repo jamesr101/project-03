@@ -4,27 +4,61 @@
 @import 'navbar.scss';
 @import 'map.scss';
 
-// * {
-//   box-sizing: border-box;
-//
-// }
-//
-// .map {
-//   height: 70vh;
-//   width: 100%;
-//
-// }
-//
-// .mapboxgl-popup-content {
-//   padding: 5px 5px 2px;
-//
-// }
-//
-// .marker {
-//   width: 100px;
-//   height: 100px;
-//   background-color: gray;
-//   //border-radius: 50%;
-//   //background-image: url(/assets/images/ga-logo.jpg);
-//   background-size: cover;
-// }
+* {
+  box-sizing: border-box;
+
+}
+
+.map {
+  height: 70vh;
+  width: 100%;
+
+}
+
+.mapboxgl-popup-content {
+  padding: 5px 5px 2px;
+
+}
+
+.marker {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  //border-radius: 50%;
+  //background-image: url(/assets/images/ga-logo.jpg);
+  background-size: cover;
+}
+
+nav .navbar{
+position: relative;
+width: 100%;
+}
+.navbar-menu{
+  position: absolute;
+  width: 100%;
+}
+
+.split-half{
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+}
+.artist-filter-bar{
+  width: 60%;
+}
+.artist-date-div{
+  width: 30%;
+  position: relative;
+  justify-content: center;
+}
+.artist-date-input{
+  width: 100%;
+}
+
+.sticky{
+  position: sticky;
+}
+
+.artist-date-text{
+  text-align: center;
+}

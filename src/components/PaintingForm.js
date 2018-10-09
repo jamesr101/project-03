@@ -49,7 +49,6 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
               <option>
                 Select an artist
               </option>
-
               {artists && artists.map(artist =>
                 <option
                   key={artist._id}

@@ -2,26 +2,42 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Auth from '../lib/Auth';
 
-const Navbar = (props) => {
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { navbarActive: false };
+    this.logout = this.logout.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+  }
 
-  const logout = () => {
+  componentDidUpdate(prevProps) {
+    if(prevProps.location.pathname !== this.props.location.pathname)
+      this.setState({ navbarActive: false});
+  }
+
+  logout = () => {
     Auth.logout();
-    props.history.push('/');
+    this.props.history.push('/');
   };
 
-  return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
-      <div className="container">
-        <div className="navbar-brand logo">
-          <Link className="navbar-item" to="/">
+  toggleNavbar() {
+    this.setState({ navbarActive: !this.state.navbarActive });
+  }
+  render() {
+    return (
+      <nav className="navbar" role="navigation" aria-label="main navigation">
+        <div className="container">
+          <div className="navbar-brand">
+            <Link className="navbar-item" to="/">
             ArtMapper
-          </Link>
+            </Link>
 
-          <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+            <a role="button" className={`navbar-burger ${this.state.navbarActive ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false" onClick={this.toggleNavbar}>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
         </div>
 
         <div className="navbar-menu">
@@ -33,13 +49,14 @@ const Navbar = (props) => {
             {Auth.isAuthenticated() && <Link className="navbar-item" to="/paintings/new">Add Painting</Link>}
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/login">Login</Link>}
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/register">Register</Link>}
-            {Auth.isAuthenticated() && <a className="navbar-item" onClick={logout}>Logout</a>}
+            {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
           </div>
         </div>
-      </div>
-    </nav>
-  );
-};
+      </nav>
+    );
+  }
+}
+
 
 // use withRouter here to add history to 'props'
 // so we can redirect programmatically

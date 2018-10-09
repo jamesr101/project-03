@@ -27,7 +27,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <Navbar />
+          <Navbar/>
           <FlashMessages />
           <main className="section">
             <div className="container">
@@ -53,6 +53,7 @@ class App extends React.Component {
 
     );
   }
+
 }
 
 ReactDOM.render(
