@@ -13,7 +13,7 @@ router.route('/paintings')
 
 
 router.route('/paintings/checkmatching')
-  // .post(secureRoute, paintingsController.create);
+  //.post(secureRoute, paintingsController.create);
   .post(paintingsController.checkMatching);
 
 router.route('/paintings/:id')

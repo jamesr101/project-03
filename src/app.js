@@ -20,6 +20,7 @@ import PaintingsNew from './components/Painting/PaintingsNew';
 import JourneysIndex from './components/Journey/JourneyIndex';
 import JourneyShow from './components/Journey/JourneyShow';
 
+
 class App extends React.Component {
 
   render() {
@@ -35,7 +36,7 @@ class App extends React.Component {
                 <SecureRoute path="/artists/new" component={ArtistNew} />
                 <Route path="/artists/:id" component={ArtistShow} />
                 <Route path="/artists" component={ArtistIndex} />
-                <Route path="/journeys/:id" component={JourneyShow} />
+                <SecureRoute path="/journeys/:id" component={JourneyShow} />
                 <Route path="/journeys" component={JourneysIndex} />
                 <Route path="/login" component={Login} />
                 <Route path="/profile/:id/edit" component={UserEdit} />
@@ -45,8 +46,10 @@ class App extends React.Component {
               </Switch>
             </div>
           </main>
+
         </div>
       </BrowserRouter>
+
 
     );
   }

@@ -12,24 +12,40 @@ class JourneyTaskCard extends React.Component {
     console.log('constructor this.state');
     console.log(this.state);
     this.handleChange = this.handleChange.bind(this);
+    this.handleStatus = this.handleStatus.bind(this);
   }
 
   handleChange(data) {
     console.log(data);
-    this.setState({ status: 1});
+    this.handleStatus(1);
     const token = Auth.getToken();
     axios
       .post('/api/paintings/checkmatching', data, {
         headers: {Authorization: `Bearer ${token}`}
       })
-      .then(el => el.data.isMatch ? this.setState({ status: 2}) : this.setState({ status: -1}))
-      .then( () => {
-        console.log('handleChange 3  this.state');
-        console.log(this.state);
-      })
+      .then(el => el.data.isMatch ? this.handleStatus(2) : this.handleStatus(-1))
       .catch((err) => this.setState({ errors: err.response.data.errors }));
 
   }
+
+  handleStatus(status) {
+    switch(status){
+      case 1: // Loading - sended request and wait to answer
+        this.setState({ status: 1});
+        break;
+      case 2: // Done - the photo match to painting
+        this.setState({ status: 2});
+        this.state.taskDone();
+        break;
+      case -1: // not match photo
+        this.setState({ status: -1});
+        break;
+
+
+    }
+
+  }
+
 
   componentDidUpdate() {
     console.log('componentDidUpdate');
@@ -81,7 +97,7 @@ class JourneyTaskCard extends React.Component {
                       buttonText={'Take Photo'}
                     />
                     {(this.state.status === -1) &&
-                      <p> Please upload mutch photo </p>}
+                      <p> Please upload match photo </p>}
                   </div>:
                   (this.state.status === 1) ?
                     <a className="button is-loading">Loading</a>:
