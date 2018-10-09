@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import axios from 'axios';
-import JourneyCard from './Journey/JourneyCard';
-import ArtistCard from './Artist/ArtistCard';
+import JourneyCard from './journeys/JourneyCard';
+import ArtistCard from './artists/ArtistCard';
 
 
 class Main extends React.Component {
