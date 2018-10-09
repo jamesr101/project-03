@@ -30,8 +30,7 @@ class App extends React.Component {
         <div>
           <Navbar/>
           <FlashMessages />
-          {/* <main className="section">
-            <div className="container"> */}
+
           <Switch>
             <Route path="/register" component={Register} />
             <SecureRoute path="/artists/new" component={ArtistNew} />
@@ -47,8 +46,7 @@ class App extends React.Component {
             <Route path="/" component={main} />
 
           </Switch>
-            {/* </div>
-          </main> */}
+
           <Switch>
 
           </Switch>
