@@ -4,8 +4,6 @@ import ReactFilestack from 'react-filestack';
 
 const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
 
-
-
 const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, getLocation, findAddress}) => {
 
   return (
@@ -49,7 +47,6 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
           <div className="select">
             <select onChange={handleChange} name="artist">
               <option>
-
                 Select an artist
               </option>
 
