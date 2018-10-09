@@ -3,9 +3,6 @@ import axios from 'axios';
 import Map from '../Map';
 import FilterBar from '../FilterBar';
 
-// import { Link } from 'react-router-dom';
-// import Auth from '../../lib/Auth';
-
 class ArtistsShow extends React.Component {
   constructor() {
     super();
@@ -18,9 +15,6 @@ class ArtistsShow extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
-
-
     axios.get(`/api/artists/${this.props.match.params.id}`)
       .then(res => this.setState({ artist: res.data, search: '' }))
       .then(() => {
@@ -28,10 +22,6 @@ class ArtistsShow extends React.Component {
         const dead = parseFloat(this.state.artist.dateDeath.toString().split('').slice(0,4).join(''));
         this.setState({born: born, dead: dead});
       });
-
-
-
-
   }
 
   handleDelete() {
@@ -46,22 +36,18 @@ class ArtistsShow extends React.Component {
   handleTime(e) {
     const actualDate = parseFloat(e.target.value);
     this.setState({ actualDate });
-
   }
 
   handleChange(e) {
-    console.log('handleChange');
     this.setState({ [e.target.name]: e.target.value });
   }
 
   filterArtistsPaintings() {
     const re = new RegExp(this.state.search, 'i');
-
     return this.state.artist.paintings.filter(painting => {
       const date = parseFloat(painting.date);
       return (date > this.state.actualDate - 10 && date < this.state.actualDate + 10) && re.test(painting.title);
     });
-
   }
 
   render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactFilestack from 'react-filestack';
 
-const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
+const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz'; //// FIXME: aggregate keys
 
 const ArtistsForm = ({
   handleSubmit,
@@ -47,15 +47,9 @@ const ArtistsForm = ({
               }})}
             onError={(e) => console.log(e)}
             buttonText={'Add Picture'}
+            buttonClass={'button is-rounded'}
           />
 
-          {/* <input
-            className={`input ${errors.name ? 'is-danger' : ''}`}
-            name="image"
-            placeholder="Image"
-            onChange={handleChange}
-            value={ artist.image || ''}
-          /> */}
           {errors.image && <small className="help is-danger"> {errors.image} </small>}
         </div>
       </div>
@@ -123,7 +117,7 @@ const ArtistsForm = ({
         </div>
       </div>
 
-      <button className="button is-primary">Submit</button>
+      <button className="button is-primary is-rounded">Submit</button>
     </form>
   );
 };

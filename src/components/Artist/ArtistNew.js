@@ -1,9 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
-// import ReactFilestack, { client } from 'filestack-react';
 import ArtistsForm from './ArtistsForm';
-
 import Auth from '../../lib/Auth';
 
 
@@ -47,8 +44,6 @@ class ArtistsNew extends React.Component {
       });
   }
 
-
-
   handleSubmit(e) {
     e.preventDefault();
     const token = Auth.getToken();
@@ -58,16 +53,13 @@ class ArtistsNew extends React.Component {
         headers: {Authorization: `Bearer ${token}`}
       })
       .then(() => this.props.history.push('/artists'))
-      //.then((err) => console.log(err))
       .catch((err) => this.setState({ errors: err.response.data.errors }));
   }
 
   render() {
     return (
       <div>
-        <h1>New Artist</h1>
-
-
+        <h1 className="title">New Artist</h1>
         <ArtistsForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
