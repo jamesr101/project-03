@@ -2,9 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import Map from '../Map';
 import FilterBar from '../FilterBar';
-
 import { Link } from 'react-router-dom';
-// import Auth from '../../lib/Auth';
+
+
 
 class ArtistsShow extends React.Component {
   constructor() {
@@ -18,20 +18,13 @@ class ArtistsShow extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
-
-
     axios.get(`/api/artists/${this.props.match.params.id}`)
       .then(res => this.setState({ artist: res.data, search: '' }))
       .then(() => {
-        const born = parseFloat(this.state.artist.dateBorn.toString().split('').slice(0,4).join(''));
-        const dead = parseFloat(this.state.artist.dateDeath.toString().split('').slice(0,4).join(''));
+        const born = parseFloat(this.state.artist.dateBorn);
+        const dead = parseFloat(this.state.artist.dateDeath);
         this.setState({born: born, dead: dead});
       });
-
-
-
-
   }
 
   handleDelete() {
@@ -46,22 +39,18 @@ class ArtistsShow extends React.Component {
   handleTime(e) {
     const actualDate = parseFloat(e.target.value);
     this.setState({ actualDate });
-
   }
 
   handleChange(e) {
-    console.log('handleChange');
     this.setState({ [e.target.name]: e.target.value });
   }
 
   filterArtistsPaintings() {
     const re = new RegExp(this.state.search, 'i');
-
     return this.state.artist.paintings.filter(painting => {
       const date = parseFloat(painting.date);
       return (date > this.state.actualDate - 10 && date < this.state.actualDate + 10) && re.test(painting.title);
     });
-
   }
 
   render() {
@@ -119,19 +108,15 @@ class ArtistsShow extends React.Component {
                     Add a new painting for this artist
                   </Link>
                 </div>
-                <div className="add-painting-link">
 
-                </div>
 
               </div>
             </div>
 
-            <ul>
+            <ul className="columns is-multiline">
               {!this.state.actualDate && !this.state.search && this.state.artist.paintings.map(painting =>
 
-
-
-                <li key={painting._id}>
+                <li className="column is-one-third is-mobile" key={painting._id}>
                   <Link to={`/paintings/${painting._id}`}>
                     <p> { painting.title } </p>
                     <figure> <img src={ painting.image }/> </figure>

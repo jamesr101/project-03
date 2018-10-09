@@ -15,10 +15,11 @@ import ArtistShow from './components/Artist/ArtistShow';
 import Login from './components/Login';
 import UserShow from './components/users/UserShow';
 import UserEdit from './components/users/UserEdit';
-import PaintingsShow from './components/Painting/PaintingsShow';
-import PaintingsNew from './components/Painting/PaintingsNew';
+import PaintingsShow from './components/painting/PaintingsShow';
+import PaintingsNew from './components/painting/PaintingsNew';
 import JourneysIndex from './components/Journey/JourneyIndex';
 import JourneyShow from './components/Journey/JourneyShow';
+import main from './components/main';
 
 
 class App extends React.Component {
@@ -32,6 +33,7 @@ class App extends React.Component {
           <main className="section">
             <div className="container">
               <Switch>
+
                 <Route path="/register" component={Register} />
                 <SecureRoute path="/artists/new" component={ArtistNew} />
                 <Route path="/artists/:id" component={ArtistShow} />
@@ -39,10 +41,11 @@ class App extends React.Component {
                 <SecureRoute path="/journeys/:id" component={JourneyShow} />
                 <Route path="/journeys" component={JourneysIndex} />
                 <Route path="/login" component={Login} />
-                <Route path="/profile/:id/edit" component={UserEdit} />
-                <Route path="/profile" component={UserShow} />
+                <SecureRoute path="/profile/:id/edit" component={UserEdit} />
+                <SecureRoute path="/profile" component={UserShow} />
                 <Route path="/paintings/new" component={PaintingsNew} />
                 <Route path="/paintings/:id" component={PaintingsShow} />
+                <Route path="/" component={main} />
               </Switch>
             </div>
           </main>

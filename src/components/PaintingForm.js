@@ -47,14 +47,8 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
           <div className="select">
             <select onChange={handleChange} name="artist">
               <option>
-<<<<<<< HEAD
                 Please select artist
               </option>
-=======
-                Select an artist
-              </option>
-
->>>>>>> 2e80dd5b995e9cca341e2337326e436820171295
               {artists && artists.map(artist =>
                 <option
                   key={artist._id}

@@ -26,7 +26,7 @@ const ArtistsForm = ({
             onBlur={getArtistData}
             value={artist.name  || ''}
           />
-          {errors.name && <small className="help is-danger"> {errors.name} </small>}
+          {errors.name &&   <small className="help is-danger"> {errors.name} </small>}
         </div>
       </div>
 

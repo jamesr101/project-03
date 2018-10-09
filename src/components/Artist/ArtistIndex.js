@@ -19,6 +19,7 @@ class ArtistIndex extends React.Component {
   render() {
     return (
       <div>
+        <h1 className="title"> Artist </h1>
         <ul className="columns is-multiline">
           {this.state.artists.map(artist =>
             <li

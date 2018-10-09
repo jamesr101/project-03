@@ -6,7 +6,6 @@ const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
 
 import Auth from '../../lib/Auth';
 
-
 class UserEdit extends React.Component {
   constructor() {
     super();
@@ -42,7 +41,7 @@ class UserEdit extends React.Component {
   render() {
     return (
       <div>
-        <h1>Edit Profile</h1>
+        <h1 ClassName="title">Edit Profile</h1>
 
         <form onSubmit={this.handleSubmit}>
           <div className="field">

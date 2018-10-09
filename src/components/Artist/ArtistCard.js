@@ -13,7 +13,6 @@ const ArtistCard = ({name, image, dateBorn, dateDeath}) => {
   }
 
   return (
-
     <div className="card">
       <header className="card-header">
         <h2 className="card-header-title">{name}</h2>
