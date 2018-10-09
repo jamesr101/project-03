@@ -30,6 +30,7 @@ class ArtistsNew extends React.Component {
   }
 
   getArtistData() {
+    console.log('yo1-------->');
     axios
       .get('/api/artsy/artists', {
         params: {
@@ -37,6 +38,8 @@ class ArtistsNew extends React.Component {
         }
       })
       .then((res)=> {
+        console.log('yo2-------->');
+        console.log(res);
         this.setState( ...this.state.artist,{artist: {
           name: this.state.artist.name,
           info: res.data.biography,
@@ -77,7 +80,7 @@ class ArtistsNew extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="title">New Artist</h1>
+        <h1 className="title is-h1">Create Artist</h1>
         <ArtistsForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}

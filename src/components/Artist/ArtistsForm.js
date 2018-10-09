@@ -24,7 +24,7 @@ const ArtistsForm = ({
             name="name"
             placeholder="Name"
             onChange={handleChange}
-            onBlur={getArtistData, console.log('yo')}
+            onBlur={getArtistData}
             value={artist.name  || ''}
           />
           {errors.name && <small className="help is-danger"> {errors.name} </small>}
@@ -49,7 +49,7 @@ const ArtistsForm = ({
           /> */}
 
           <input
-            className={`input ${errors.name ? 'is-danger' : ''}`}
+            className={`input ${errors.image ? 'is-danger' : ''}`}
             name="image"
             type="hidden"
             placeholder="Image"
@@ -60,35 +60,40 @@ const ArtistsForm = ({
           {errors.image && <small className="help is-danger"> {errors.image} </small>}
         </div>
       </div>
-      <div className="section">
-        <img src={ wikiImg } alt='upload a photo' height="200" />
-      </div>
 
-      <div className="field">
-        <label className="label">info</label>
-        <p>
-          {wikiPar}
-        </p>
-        <div className="control">
-          <input
-            className={`input ${errors.name ? 'is-danger' : ''}`}
-            name="info"
-            placeholder="info"
-            onChange={handleChange}
-            value={wikiPar || ''}
-            type="hidden"
-          />
-          {errors.info && <small className="help is-danger"> {errors.info} </small>}
+      { wikiImg &&
+        <div className="section">
+          <img src={ wikiImg || '../../assets/images/image-placeholder.png' } alt='upload a photo' height="200" />
         </div>
-      </div>
+      }
+
+      {wikiPar &&
+        <div className="field">
+          <label className="label">Biography</label>
+          <p>
+            {wikiPar}
+          </p>
+          <div className="control">
+            <input
+              className={`input ${errors.info ? 'is-danger' : ''}`}
+              name="info"
+              placeholder="info"
+              onChange={handleChange}
+              value={wikiPar || ''}
+              type="hidden"
+            />
+            {errors.info && <small className="help is-danger"> {errors.info} </small>}
+          </div>
+        </div>
+      }
 
       <div className="field">
-        <label className="label">wikiLink</label>
+        <label className="label">Wikipedia Link</label>
         <div className="control">
           <input
-            className={`input ${errors.name ? 'is-danger' : ''}`}
+            className={`input ${errors.wikiLink ? 'is-danger' : ''}`}
             name="wikiLink"
-            placeholder="wikiLink"
+            placeholder="Add a wikipedia link"
             onChange={handleChange}
             value={wikiLink || ''}
           />
@@ -97,34 +102,38 @@ const ArtistsForm = ({
       </div>
 
       <div className="field">
-        <label className="label">dateBorn</label>
+        <label className="label">Born</label>
         <div className="control">
           <input
-            className={`input ${errors.name ? 'is-danger' : ''}`}
+            className={`input ${errors.dateBorn ? 'is-danger' : ''}`}
             name="dateBorn"
-            placeholder="Date Born"
+            placeholder="Date of Birth"
             onChange={handleChange}
             value={wikiBorn || ''}
           />
-          {errors.wikiLink && <small className="help is-danger"> {errors.wikiLink} </small>}
+          {errors.dateBorn && <small className="help is-danger"> {errors.dateBorn} </small>}
         </div>
       </div>
 
       <div className="field">
-        <label className="label">dateDeath</label>
+        <label className="label">Died</label>
         <div className="control">
           <input
-            className={`input ${errors.name ? 'is-danger' : ''}`}
+            className={`input ${errors.dateDeath ? 'is-danger' : ''}`}
             name="dateDeath"
-            placeholder="Date Death"
+            placeholder="Date of Death"
             onChange={handleChange}
             value={wikiDeath || ''}
           />
-          {errors.wikiLink && <small className="help is-danger"> {errors.wikiLink} </small>}
+          {errors.dateDeath && <small className="help is-danger"> {errors.dateDeath} </small>}
         </div>
       </div>
 
-      <button className="button is-primary is-rounded">Submit</button>
+      <div className="level control">
+        <div className="level-item">
+          <button className="button is-primary is-rounded is-medium">Submit</button>
+        </div>
+      </div>
     </form>
   );
 };
