@@ -24,3 +24,37 @@
   //background-image: url(/assets/images/ga-logo.jpg);
   background-size: cover;
 }
+
+nav .navbar{
+position: relative;
+width: 100%;
+}
+.navbar-menu{
+  position: absolute;
+  width: 100%;
+}
+
+.split-half{
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+}
+.artist-filter-bar{
+  width: 60%;
+}
+.artist-date-div{
+  width: 30%;
+  position: relative;
+  justify-content: center;
+}
+.artist-date-input{
+  width: 100%;
+}
+
+.sticky{
+  position: sticky;
+}
+
+.artist-date-text{
+  text-align: center;
+}

@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactFilestack from 'react-filestack';
 
-const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
 
 const ArtistsForm = ({
   handleSubmit,
@@ -33,29 +31,17 @@ const ArtistsForm = ({
       </div>
 
       <div className="field">
-        <label className="label">Image</label>
-
         <div className="control">
 
-          <ReactFilestack
-            apikey={ FILESTACK_API_KEY }
-            mode={'pick'}
-            onSuccess={(response) => handleChange({
-              target: {
-                name: 'image',
-                value: response.filesUploaded[0].url
-              }})}
-            onError={(e) => console.log(e)}
-            buttonText={'Add Picture'}
-          />
 
-          {/* <input
+          <input
             className={`input ${errors.name ? 'is-danger' : ''}`}
             name="image"
+            type="hidden"
             placeholder="Image"
             onChange={handleChange}
-            value={ artist.image || ''}
-          /> */}
+            value={ wikiImg || ''}
+          />
           {errors.image && <small className="help is-danger"> {errors.image} </small>}
         </div>
       </div>

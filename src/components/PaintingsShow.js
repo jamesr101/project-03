@@ -46,7 +46,14 @@ class PaintingsShow extends React.Component {
       numberOfPaintingsDisplayed = this.state.limit - 4;
     }
     axios.get(`/api/artists/${this.state.painting.artist._id}`)
-      .then(res => this.setState({ artist: res.data, limit: numberOfPaintingsDisplayed }));
+      .then(res => {
+        this.setState({
+          artist: res.data, limit: numberOfPaintingsDisplayed
+        });
+        if(this.state.artist.paintings.length <= this.state.limit){
+          this.setState({ limit: this.state.artist.paintings.length});
+        }
+      });
   }
 
 
@@ -107,6 +114,7 @@ class PaintingsShow extends React.Component {
               More paintings by
               {' ' + this.state.painting.artist.name || ' this artist'}
             </button>
+
 
             {this.state.limit > 0 &&
               <button className="button" id="less" onClick={this.showMore}>

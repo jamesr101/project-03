@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Map from '../Map';
 import FilterBar from '../FilterBar';
-import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 // import { Link } from 'react-router-dom';
 // import Auth from '../../lib/Auth';
@@ -69,66 +69,74 @@ class ArtistsShow extends React.Component {
     if(!this.state.artist) return null;
     return (
       <section className="section">
-        <div className="container">
-          <div className="level">
-            <h1 className="title">{ this.state.artist.name }</h1>
-          </div>
+        <div className="sticky">
 
-          <hr />
-          <div className="columns">
-
-            <div className="column is-one-quarter">
-              <img src={ this.state.artist.image } alt={ this.state.artist.name } height="200" />
+          <div className="container">
+            <div className="level">
+              <h1 className="title">{ this.state.artist.name }</h1>
             </div>
 
-            <div className="column is-three-quarters">
-              <p>
-                { this.state.artist.info }
-              </p>
-              <br />
-              <div className="columns">
-                <div className="column is-half">
-                  <strong> Born </strong><br />
-                  { this.state.artist.dateBorn.toString() }
-                </div>
-                <div className="column is-half">
-                  <strong> Death </strong><br />
-                  { this.state.artist.dateDeath.toString() }
-                </div>
+            <hr />
+            <div className="columns">
 
+              <div className="column is-one-quarter">
+                <img src={ this.state.artist.image } alt={ this.state.artist.name } height="200" />
               </div>
-            </div>
 
+              <div className="column is-three-quarters">
+                <p>
+                  { this.state.artist.info }
+                </p>
+                <br />
+                <div className="columns">
+                  <div className="column is-half">
+                    <strong> Born </strong><br />
+                    { this.state.artist.dateBorn.toString() }
+                  </div>
+                  <div className="column is-half">
+                    <strong> Death </strong><br />
+                    { this.state.artist.dateDeath.toString() }
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          <Map center={this.mapCenter} zoom={4} paintings={this.state.artist.paintings} />
+
+          <div className="section split-half">
+            <div className="artist-filter-bar">
+              <FilterBar handleChange={this.handleChange} />
+            </div>
+            <div className="artist-date-div">
+              <form  className="artist-date-form" action="/action_page.php" method="get">
+                {!this.state.actualDate && <p className="artist-date-text">Select time range</p>}
+                {this.state.actualDate && <p className="artist-date-text">{this.state.actualDate - 10} - {this.state.actualDate + 10} </p>}
+                <input className="artist-date-input" type="range" step="1" min={this.state.born} max={this.state.dead} onChange={this.handleTime}   ></input>
+              </form>
+            </div>
 
           </div>
         </div>
-
-        <div className="section">
-          <FilterBar handleChange={this.handleChange} />
-        </div>
-
-        <Map center={this.mapCenter} zoom={4} paintings={this.state.artist.paintings} />
-
-
-        <form action="/action_page.php" method="get">
-          From
-          <br></br>
-          {!this.state.actualDate && <p>Select time range</p>}
-          {this.state.actualDate && <p>{this.state.actualDate}</p>}
-          <input type="range" step="1" min={this.state.born} max={this.state.dead} onChange={this.handleTime} ></input>
-          <input type="submit"></input>
-        </form>
 
         <ul>
           {!this.state.actualDate && !this.state.search && this.state.artist.paintings.map(painting =>
-            <li key={painting._id}>
-              <p> { painting.title } </p>
-              <figure> <img src={ painting.image }/> </figure>
-              <p>location:</p>
-              <p> latitude -{ painting.location.latitude } </p>
-              <p>latitude - {painting.location.longitude}</p>
 
+
+
+            <li key={painting._id}>
+              <Link to={`/paintings/${painting._id}`}>
+                <p> { painting.title } </p>
+                <figure> <img src={ painting.image }/> </figure>
+                <p>location:</p>
+                <p> latitude -{ painting.location.latitude } </p>
+                <p>latitude - {painting.location.longitude}</p>
+              </Link>
             </li>
+
           )}
           {this.filterArtistsPaintings().map(painting =>
             <li key={painting._id}>

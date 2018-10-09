@@ -18,11 +18,15 @@ import PaintingsShow from './components/PaintingsShow';
 import PaintingsNew from './components/PaintingsNew';
 
 class App extends React.Component {
+  constructor() {
+    super();
+  }
+
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Navbar />
+          <Navbar/>
           <FlashMessages />
 
 
@@ -45,6 +49,7 @@ class App extends React.Component {
 
     );
   }
+
 }
 
 ReactDOM.render(
