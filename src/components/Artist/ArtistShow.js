@@ -106,7 +106,11 @@ class ArtistsShow extends React.Component {
           <FilterBar handleChange={this.handleChange} />
         </div>
 
-        <Map center={this.mapCenter} zoom={4} paintings={this.state.artist.paintings} />
+        <Map
+          center={this.mapCenter} 
+          zoom={4} 
+          paintings={this.state.artist.paintings} 
+        />
 
 
         <form action="/action_page.php" method="get">

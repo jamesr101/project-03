@@ -27,9 +27,12 @@ const Navbar = (props) => {
 
         <div className="navbar-menu">
           <div className="navbar-end">
+
             <Link className="navbar-item" to="/artists">Artists</Link>
             <Link className="navbar-item" to="/journeys">Journeys</Link>
-            {Auth.isAuthenticated() && <Link className="navbar-item" to="/artists/new">Add a artist</Link>}
+            {Auth.isAuthenticated() && <Link className="navbar-item" to="/artists/new">Add artist</Link>}
+            {Auth.isAuthenticated() && <Link className="navbar-item" to="/paintings/new">Add painting</Link>}
+
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/login">Login</Link>}
             {!Auth.isAuthenticated() && <Link className="navbar-item" to="/register">Register</Link>}
             {Auth.isAuthenticated() && <a className="navbar-item" onClick={logout}>Logout</a>}
