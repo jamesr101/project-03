@@ -39,7 +39,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         <div className="control">
           <div className="level">
             <div className="level-left">
-              <div className="level-item">
+              <div className="level-item form-or">
                 <div className="select">
                   <select onChange={handleChange} name="artist">
                     <option>
@@ -132,7 +132,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
             <input
               className={`input ${errors.location ? 'is-danger' : ''}`}
               name="address"
-              placeholder="Enter location"
+              placeholder="Enter address"
               onChange={handleChange}
               value={painting.address || ''}
             />

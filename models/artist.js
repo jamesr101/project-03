@@ -10,8 +10,8 @@ const artistSchema = new mongoose.Schema({
     type: String,
     required: [true, 'This field is required']
   },
-  dateBorn: Date,
-  dateDeath: Date,
+  dateBorn: String,
+  dateDeath: String,
   info: String,
   wikiLink: {
     type: String,

@@ -8,7 +8,6 @@ class PaintingsNew extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log('WTF!!!!');
     this.state = { painting: {}, errors: {}, photo: '', artists: [], address: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -96,7 +95,7 @@ class PaintingsNew extends React.Component {
     return (
       <main className="section">
         <div className="container">
-          <h1 className="title"> Painting</h1>
+          <h1 className="title">Add Painting</h1>
           <PaintingForm
             handleSubmit={this.handleSubmit}
             handleChange={this.handleChange}
