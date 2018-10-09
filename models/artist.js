@@ -17,7 +17,6 @@ const artistSchema = new mongoose.Schema({
     type: String,
     match: [/^https?:\/\/.+/, 'Imaage link must start with \'http\'']
   }
-
 });
 
 artistSchema.virtual('paintings', {

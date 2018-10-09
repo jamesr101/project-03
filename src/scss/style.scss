@@ -1,4 +1,8 @@
-@import '~mapbox-gl/dist/mapbox-gl.css';
+@import 'variables.scss';
+@import 'fonts.scss';
+@import 'base.scss';
+@import 'navbar.scss';
+@import 'map.scss';
 
 * {
   box-sizing: border-box;

@@ -3,12 +3,18 @@ const paintingsController = require('../controllers/paintings');
 const authController = require('../controllers/auth');
 const artistsController = require('../controllers/artists');
 const usersController = require('../controllers/users');
+const journeysController = require('../controllers/journeys');
 const artsyController = require('../controllers/artsy');
 const secureRoute = require('../lib/secureRoute');
 
 router.route('/paintings')
   .get(paintingsController.index)
   .post(secureRoute, paintingsController.create);
+
+
+router.route('/paintings/checkmatching')
+  //.post(secureRoute, paintingsController.create);
+  .post(paintingsController.checkMatching);
 
 router.route('/paintings/:id')
   .get(paintingsController.show)
@@ -33,6 +39,13 @@ router.route('/artists/:id')
   .get(artistsController.show)
   .put(secureRoute, artistsController.update)
   .delete(secureRoute, artistsController.delete);
+
+
+router.route('/journeys')
+  .get(journeysController.index);
+
+router.route('/journeys/:id')
+  .get(journeysController.show);
 
 router.get('/artsy/artists', artsyController.artistsIndex);
 

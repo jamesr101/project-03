@@ -4,8 +4,6 @@ import ReactFilestack from 'react-filestack';
 
 const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
 
-
-
 const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, getLocation, findAddress}) => {
 
   return (
@@ -33,10 +31,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
             //onChange={ handleImage } //aviv
             onChange={ handleChange }
             value={painting.image || ''}
-<<<<<<< HEAD
-            type="hidden"
-          />
-=======
+
           /> */}
           {errors.image && <small className="help is-danger">{errors.image}</small>}
         </div>
@@ -52,8 +47,14 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
           <div className="select">
             <select onChange={handleChange} name="artist">
               <option>
+<<<<<<< HEAD
                 Please select artist
               </option>
+=======
+                Select an artist
+              </option>
+
+>>>>>>> 2e80dd5b995e9cca341e2337326e436820171295
               {artists && artists.map(artist =>
                 <option
                   key={artist._id}

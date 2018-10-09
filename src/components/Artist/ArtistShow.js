@@ -2,9 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Map from '../Map';
 import FilterBar from '../FilterBar';
-import { Link } from 'react-router-dom';
 
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import Auth from '../../lib/Auth';
 
 class ArtistsShow extends React.Component {
@@ -100,10 +99,11 @@ class ArtistsShow extends React.Component {
 
                 </div>
               </div>
-
-
             </div>
-          </div>
+          </div>    
+
+
+
 
           <Map center={this.mapCenter} zoom={4} paintings={this.state.artist.paintings} />
 

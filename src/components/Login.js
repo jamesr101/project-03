@@ -30,7 +30,6 @@ class Login extends React.Component {
 
   render() {
     return (
-
       <form onSubmit={this.handleSubmit}>
         <p>Login page</p>
         <div className="field">
