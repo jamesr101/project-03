@@ -27,7 +27,7 @@ class Navbar extends React.Component {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="container">
-          <div className="navbar-brand">
+          <div className="navbar-brand logo">
             <Link className="navbar-item" to="/">
             ArtMapper
             </Link>
@@ -49,6 +49,7 @@ class Navbar extends React.Component {
               {Auth.isAuthenticated() && <Link className="navbar-item" to="/paintings/new">Add Painting</Link>}
               {!Auth.isAuthenticated() && <Link className="navbar-item" to="/login">Login</Link>}
               {!Auth.isAuthenticated() && <Link className="navbar-item" to="/register">Register</Link>}
+              {!Auth.isAuthenticated() && <Link className="navbar-item" to="/profile">Profile</Link>}
               {Auth.isAuthenticated() && <a className="navbar-item" onClick={this.logout}>Logout</a>}
             </div>
           </div>
