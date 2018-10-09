@@ -39,43 +39,44 @@ class JourneysShow extends React.Component {
     console.log('render Journeyshow');
     if(!this.state.journey) return null;
     return (
-      <div>
-        <header className="hero is-medium">
-          <div className="hero-body">
+      <main className="section">
+        <div className="container">
+          <header className="hero is-medium">
+            <div className="hero-body">
+              <figure>
+                <img className="cover-image" src={ this.state.journey.image } alt={ this.state.journey.title } height="200" />
+              </figure>
+              <h1 className="title">{ this.state.journey.title }</h1>
+
+              <p>
+                { this.state.journey.info }
+              </p>
+            </div>
+          </header>
+
+          <section className="section">
+            {this.state.journey.tasks.map(task =>
+              <JourneyTaskCard key={task._id} taskDone={this.taskDone} {...task} />
+            )}
+          </section>
+
+          { this.state.journey.trophyWin && this.state.isComleted === false &&
+          <section className="section has-text-centered	">
             <figure>
-              <img className="cover-image" src={ this.state.journey.image } alt={ this.state.journey.title } height="200" />
+              <img className="cover-image" src={ this.state.journey.trophyWin.image } alt={ this.state.journey.trophyWin.name } height="200" />
             </figure>
-            <h1 className="title">{ this.state.journey.title }</h1>
+            <p> <strong> { this.state.journey.trophyWin.name } </strong> </p>
+          </section>
+          }
 
-            <p>
-              { this.state.journey.info }
-            </p>
-          </div>
-        </header>
+          { this.state.journey.trophyWin && this.state.isComleted === true &&
+          <section className="section has-text-centered	">
 
-        <section className="section">
-          {this.state.journey.tasks.map(task =>
-            <JourneyTaskCard key={task._id} taskDone={this.taskDone} {...task} />
-          )}
-        </section>
-
-        { this.state.journey.trophyWin && this.state.isComleted === false &&
-        <section className="section has-text-centered	">
-          <figure>
-            <img className="cover-image" src={ this.state.journey.trophyWin.image } alt={ this.state.journey.trophyWin.name } height="200" />
-          </figure>
-          <p> <strong> { this.state.journey.trophyWin.name } </strong> </p>
-        </section>
-        }
-
-        { this.state.journey.trophyWin && this.state.isComleted === true &&
-        <section className="section has-text-centered	">
-
-          <p> <strong> pa paw!!! </strong> </p>
-        </section>
-        }
-
-      </div>
+            <p> <strong> pa paw!!! </strong> </p>
+          </section>
+          }
+        </div>
+      </main>
     );
   }
 }

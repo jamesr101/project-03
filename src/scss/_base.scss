@@ -10,8 +10,11 @@ body {
     font-family: 'Satisfy', cursive;
     &.navbar-brand {
       font-size: 26px;
-      padding: 10px;
+
     }
+  }
+  .navbar-item {
+    padding: 12px;
   }
 
   .button.is-primary{
