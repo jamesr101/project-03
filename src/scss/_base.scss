@@ -102,4 +102,25 @@ body {
     opacity: .5;
   }
 
+  .button.is-primary.is-rounded.is-medium{
+    margin: 20px;
+  }
+
+  p.form-or.level-item {
+    color: $HanBlue;
+    margin-bottom: 2px;
+
+  }
+  div.level-item.button {
+    margin-bottom: 2px;
+  }
+  div.level-item.form-or {
+    margin-bottom: 2px;
+  }
+
+  button.button.is-rounded, select {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+  }
+
 }

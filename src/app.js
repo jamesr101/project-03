@@ -9,17 +9,17 @@ import Navbar from './components/Navbar';
 import SecureRoute from './components/SecureRoute';
 import FlashMessages from './components/FlashMessages';
 import Register from './components/Register';
-import ArtistIndex from './components/Artist/ArtistIndex';
-import ArtistNew from './components/Artist/ArtistNew';
-import ArtistShow from './components/Artist/ArtistShow';
+import ArtistIndex from './components/artists/ArtistIndex';
+import ArtistNew from './components/artists/ArtistNew';
+import ArtistShow from './components/artists/ArtistShow';
 import Login from './components/Login';
 import UserShow from './components/users/UserShow';
 import UserEdit from './components/users/UserEdit';
-import PaintingsShow from './components/Painting/PaintingsShow';
-import PaintingsNew from './components/Painting/PaintingsNew';
-import JourneysIndex from './components/Journey/JourneyIndex';
-import JourneyShow from './components/Journey/JourneyShow';
-import main from './components/main';
+import PaintingsShow from './components/paintings/PaintingsShow';
+import PaintingsNew from './components/paintings/PaintingsNew';
+import JourneysIndex from './components/journeys/JourneyIndex';
+import JourneyShow from './components/journeys/JourneyShow';
+import Main from './components/Main';
 
 
 class App extends React.Component {
@@ -30,7 +30,6 @@ class App extends React.Component {
         <div>
           <Navbar/>
           <FlashMessages />
-
           <Switch>
             <Route path="/register" component={Register} />
             <SecureRoute path="/artists/new" component={ArtistNew} />
@@ -43,10 +42,8 @@ class App extends React.Component {
             <SecureRoute path="/profile" component={UserShow} />
             <Route path="/paintings/new" component={PaintingsNew} />
             <Route path="/paintings/:id" component={PaintingsShow} />
-            <Route path="/" component={main} />
-
+            <Route path="/" component={Main} />
           </Switch>
-
           <Switch>
 
           </Switch>

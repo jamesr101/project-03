@@ -10,12 +10,12 @@ const artistSchema = new mongoose.Schema({
     type: String,
     required: [true, 'This field is required']
   },
-  dateBorn: Date,
-  dateDeath: Date,
+  dateBorn: String,
+  dateDeath: String,
   info: String,
   wikiLink: {
     type: String,
-    match: [/^https?:\/\/.+/, 'Imaage link must start with \'http\'']
+    match: [/^https?:\/\/.+/, 'Image link must start with \'http\'']
   }
 });
 
