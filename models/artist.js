@@ -15,7 +15,7 @@ const artistSchema = new mongoose.Schema({
   info: String,
   wikiLink: {
     type: String,
-    match: [/^https?:\/\/.+/, 'Imaage link must start with \'http\'']
+    match: [/^https?:\/\/.+/, 'Image link must start with \'http\'']
   }
 });
 

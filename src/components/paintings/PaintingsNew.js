@@ -43,6 +43,7 @@ class PaintingsNew extends React.Component {
 
 
   getLocation() {
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const location = { latitude: position.coords.latitude, longitude: position.coords.longitude };
@@ -50,7 +51,7 @@ class PaintingsNew extends React.Component {
         this.setState({ painting }, () => console.log(this.state.painting));
       });
     } else {
-      this.setState({ message: 'Cannot esablish your location' });
+      this.setState({ message: 'Cannot establish your location' });
     }
     // if location = {lat: 39.78373, lng: -100.445882}, error "address not found"
   }
@@ -70,7 +71,24 @@ class PaintingsNew extends React.Component {
         const { lat: latitude, lng: longitude } = res.data.results[0].locations[0].latLng;
         const location = { latitude, longitude };
         const painting = { ...this.state.painting, location };
+
+        console.log(
+          location.latitude
+        );
+        if(location.latitude ===  39.78373 && location.longitude === -100.445882){
+          console.log('cannot find address');
+          this.setState({ });
+
+          const errors = { ...this.state.errors, address: 'error'};
+          this.setState({ errors });
+
+          console.log(this.state.errors);
+
+        }
+
         this.setState({ painting }, () => console.log(this.state.painting));
+
+
       });
 
     console.log('request made to open map');

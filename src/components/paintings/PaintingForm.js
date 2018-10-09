@@ -124,7 +124,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
 
         <div className="level">
 
-          <div className="button level-item is-rounded" onClick={getLocation}>Use my Location</div>
+          <div className={`button level-item is-rounded ${!painting ? 'is-loading' : ''}`} onClick={getLocation}>Use my Location</div>
 
           <p className="level-item form-or">or</p>
 
