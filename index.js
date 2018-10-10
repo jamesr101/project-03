@@ -25,6 +25,7 @@ app.use(bodyParser.json()); // set up to handle JSON
 // routes
 app.use('/api', routes);
 
+
 // add custom error handler AFTER routes
 app.use(errorHandler);
 

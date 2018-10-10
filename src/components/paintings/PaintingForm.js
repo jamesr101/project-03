@@ -6,7 +6,7 @@ const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
 
 
 
-const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, getLocation, findAddress, findingAddress }) => {
+const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, getLocation, findAddress, findingAddress, selectedArtist }) => {
 
   return (
     <form onSubmit={handleSubmit}>
@@ -41,12 +41,12 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
             <div className="level-left">
               <div className="level-item form-or">
                 <div className="select">
-                  <select onChange={handleChange} name="artist">
+                  <select onChange={handleChange} name="artist" value={selectedArtist}>
                     <option>
                       Please select artist
                     </option>
                     {artists && artists.map(artist =>
-                      <option key={artist._id} value={artist._id} >
+                      <option key={artist._id} value={selectedArtist || artist._id} >
                         {artist.name}
                       </option>
                     )}

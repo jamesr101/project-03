@@ -66,7 +66,7 @@ class ArtistsShow extends React.Component {
     else if (entrance % 2 === 0 && entrance % 3 !== 0) return ('column is-half');
     else return('column is-one-third');
   }
-  bigCondition(){
+  noPaintingsToDisplay(){
     if (!this.state.actualDate && !this.state.search){
       return true;
     } else if(this.filterArtistsPaintings().length > 0){
@@ -153,7 +153,7 @@ class ArtistsShow extends React.Component {
                     </li>
                   )
                   }
-                  {this.bigCondition() ? this.filterArtistsPaintings().map(painting =>
+                  {this.noPaintingsToDisplay() ? this.filterArtistsPaintings().map(painting =>
 
                     <li className={this.defineClass()} key={painting._id}>
                       <Link to={`/paintings/${painting._id}`}>
@@ -162,11 +162,14 @@ class ArtistsShow extends React.Component {
                     </li>
                   )
                     :
-                    <div>
+                    <div className="recipient margin-top-15">
                       <p>
-                        There are no paintings related to {this.state.artist.name} 
+                        There are no paintings related to {this.state.artist.name}
                       </p>
-                      <Link to={'/paintings/new'}>
+                      <Link className="margin-left-20" to={{
+                        pathname: '/paintings/new',
+                        state: { artist: this.props.match.params.id}
+                      }}>
                          Add a {this.state.artist.name} painting
                       </Link>
                     </div>
@@ -176,15 +179,14 @@ class ArtistsShow extends React.Component {
               </div>
             </section>
             :
-            <div>
+            <div className="recipient margin-top-15">
               <p>
-               There are no paintings related to {this.state.artist.name} for the time fraction you  selected. You can add one clicking
+                There are no paintings related to {this.state.artist.name}
               </p>
-              <Link to={'/paintings/new'}>
-                <p> here</p>
+              <Link className="margin-left-20" to={'/paintings/new'}>
+                 Add a {this.state.artist.name} painting
               </Link>
             </div>
-
           }
 
         </div>

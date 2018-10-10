@@ -7,7 +7,6 @@ import Auth from '../../lib/Auth';
 class PaintingsNew extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = { painting: {}, errors: {}, photo: '', artists: [], address: '', findingAddress: false };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -117,6 +116,7 @@ class PaintingsNew extends React.Component {
             getLocation={this.getLocation}
             findAddress={this.findAddress}
             findingAddress={this.state.findingAddress}
+            selectedArtist={this.props.location.state && this.props.location.state.artist}
           />
         </div>
       </main>
