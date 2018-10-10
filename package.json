@@ -7,7 +7,9 @@
     "start:server": "nodemon",
     "start:client": "webpack-dev-server",
     "seed": "node db/seeds",
-    "test": "nyc mocha test/**/*_spec.js --require test/spec_helper --recursive --exit"
+    "test": "nyc mocha test/**/*_spec.js --require test/spec_helper --recursive --exit",
+    "build": "webpack -p",
+    "start": "yarn build && node index"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
