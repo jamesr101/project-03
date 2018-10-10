@@ -5,19 +5,19 @@ const ArtistCard = ({name, image, dateBorn, dateDeath}) => {
   let dead;
 
   if (dateBorn) {
-    born = parseFloat(dateBorn.toString().split('').slice(0,4).join(''));
+    born = parseFloat(dateBorn);
   }
 
   if (dateDeath) {
-    dead = parseFloat(dateDeath.toString().split('').slice(0,4).join(''));
+    dead = parseFloat(dateDeath);
   }
 
   return (
-    <div className="card">
+    <div className="card ">
       <header className="card-header">
         <h2 className="card-header-title">{name}</h2>
       </header>
-      <div className="card-image">
+      <div className="card-image ">
         <figure className="image">
           <img src={image} alt={name} />
         </figure>

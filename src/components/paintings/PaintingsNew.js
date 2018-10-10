@@ -7,6 +7,8 @@ import Auth from '../../lib/Auth';
 class PaintingsNew extends React.Component {
   constructor(props) {
     super(props);
+
+    console.log('WTF!!!!');
     this.state = { painting: {}, errors: {}, photo: '', artists: [], address: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -92,20 +94,22 @@ class PaintingsNew extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1 className="title">New Painting</h1>
-        <PaintingForm
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
-          painting={this.state.painting}
-          errors={this.state.errors}
-          //photo={this.state.photo}
-          //handleImage={this.handleImage}
-          artists={this.state.artists}
-          getLocation={this.getLocation}
-          findAddress={this.findAddress}
-        />
-      </div>
+      <main className="section">
+        <div className="container">
+          <h1 className="title"> Painting</h1>
+          <PaintingForm
+            handleSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
+            painting={this.state.painting}
+            errors={this.state.errors}
+            //photo={this.state.photo}
+            //handleImage={this.handleImage}
+            artists={this.state.artists}
+            getLocation={this.getLocation}
+            findAddress={this.findAddress}
+          />
+        </div>
+      </main>
     );
   }
 }

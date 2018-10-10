@@ -40,51 +40,53 @@ class UserEdit extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1 ClassName="title">Edit Profile</h1>
+      <main className="section">
+        <div className="container">
+          <h1 ClassName="title">Edit Profile</h1>
 
-        <form onSubmit={this.handleSubmit}>
-          <div className="field">
-            <label className="label">username</label>
-            <div className="control">
-              <input
-                className={`input ${this.state.errors.name ? 'is-danger' : ''}`}
-                name="username"
-                placeholder="Name"
-                onChange={this.handleChange}
-                value={this.state.user.username  || ''}
-              />
-              {this.state.errors.name && <small className="help is-danger"> {this.state.errors.name} </small>}
+          <form onSubmit={this.handleSubmit}>
+            <div className="field">
+              <label className="label">username</label>
+              <div className="control">
+                <input
+                  className={`input ${this.state.errors.name ? 'is-danger' : ''}`}
+                  name="username"
+                  placeholder="Name"
+                  onChange={this.handleChange}
+                  value={this.state.user.username  || ''}
+                />
+                {this.state.errors.name && <small className="help is-danger"> {this.state.errors.name} </small>}
+              </div>
             </div>
-          </div>
 
-          <div className="field">
-            <label className="label">Image</label>
+            <div className="field">
+              <label className="label">Image</label>
 
-            <div className="control">
+              <div className="control">
 
-              <ReactFilestack
-                apikey={ FILESTACK_API_KEY }
-                mode={'pick'}
-                onSuccess={(response) => this.state.handleChange({
-                  target: {
-                    name: 'image',
-                    value: response.filesUploaded[0].url
-                  }})}
-                onError={(e) => console.log(e)}
-                buttonText={'Add Picture'}
-              />
+                <ReactFilestack
+                  apikey={ FILESTACK_API_KEY }
+                  mode={'pick'}
+                  onSuccess={(response) => this.state.handleChange({
+                    target: {
+                      name: 'image',
+                      value: response.filesUploaded[0].url
+                    }})}
+                  onError={(e) => console.log(e)}
+                  buttonText={'Add Picture'}
+                />
 
-              {this.state.errors.image && <small className="help is-danger"> {this.state.errors.image} </small>}
+                {this.state.errors.image && <small className="help is-danger"> {this.state.errors.image} </small>}
+              </div>
             </div>
-          </div>
-          <div className="section">
-            <img src={ this.state.user.image } alt='upload a photo' height="200" />
-          </div>
+            <div className="section">
+              <img src={ this.state.user.image } alt='upload a photo' height="200" />
+            </div>
 
-          <button className="button is-primary">Submit</button>
-        </form>
-      </div>
+            <button className="button is-primary">Submit</button>
+          </form>
+        </div>
+      </main>
     );
   }
 }

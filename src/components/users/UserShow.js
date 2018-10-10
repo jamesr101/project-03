@@ -23,88 +23,91 @@ class UserShow extends React.Component {
   render() {
     if(!this.state.user) return null;
     return (
-      <section className="section">
-        <div className="container is-fluid columns">
+      <main className="section">
+        <div className="container">
 
-          <div className="column is-one-third has-text-centered">
-            <figure className="image is-128x128">
-              <img className="is-rounded" src={ this.state.user.image } />
-            </figure>
+          <div className="container is-fluid columns">
 
-            <h1 className="title">{ this.state.user.username }</h1>
+            <div className="column is-one-third has-text-centered">
+              <figure className="image is-128x128">
+                <img className="is-rounded" src={ this.state.user.image } />
+              </figure>
 
-            <p>{ this.state.user.email }</p>
+              <h1 className="title">{ this.state.user.username }</h1>
 
-            <br/>
+              <p>{ this.state.user.email }</p>
+
+              <br/>
 
 
-            <progress className="progress is-info" value={ this.state.user.paintingsUploaded.length } max="10"></progress>
-            <p>You uploaded <strong> { this.state.user.paintingsUploaded.length } </strong> painting </p>
+              <progress className="progress is-info" value={ this.state.user.paintingsUploaded.length } max="10"></progress>
+              <p>You uploaded <strong> { this.state.user.paintingsUploaded.length } </strong> painting </p>
 
-            <span className="icon is-medium	">
-              <i className="far fa-edit"></i>
-            </span>
+              <span className="icon is-medium	">
+                <i className="far fa-edit"></i>
+              </span>
 
-            <a href={'/profile/' + this.state.user._id + '/edit'} className="button is-text">
-              Edit
-            </a>
-          </div>
+              <a href={'/profile/' + this.state.user._id + '/edit'} className="button is-text">
+                Edit
+              </a>
+            </div>
 
-          <div className="column is-two-thirds">
+            <div className="column is-two-thirds">
 
-            <h5 className="title is-5">Friends</h5>
-            <ul>
-              { this.state.user.friends ? this.state.user.friends.map(friend =>
-                <li key={friend._id}>Trophy: { friend }</li>
-              ) : <p>Connect with friends</p>}
-            </ul>
+              <h5 className="title is-5">Friends</h5>
+              <ul>
+                { this.state.user.friends ? this.state.user.friends.map(friend =>
+                  <li key={friend._id}>Trophy: { friend }</li>
+                ) : <p>Connect with friends</p>}
+              </ul>
 
-            <hr />
+              <hr />
 
-            <h5 className="title is-5">Trophies</h5>
-            <ul>
-              { this.state.user.trophies.length > 1 ? this.state.user.trophies.map(trophy =>
-                <li key={trophy._id}>Trophy: { trophy }</li>
-              ) : <p>Upload some pictures to earn trophies</p>}
-            </ul>
+              <h5 className="title is-5">Trophies</h5>
+              <ul>
+                { this.state.user.trophies.length > 1 ? this.state.user.trophies.map(trophy =>
+                  <li key={trophy._id}>Trophy: { trophy }</li>
+                ) : <p>Upload some pictures to earn trophies</p>}
+              </ul>
 
-            <hr />
+              <hr />
 
-            <h5 className="title is-5">Paintings loaded</h5>
+              <h5 className="title is-5">Paintings loaded</h5>
 
-            { this.state.user.paintingsUploaded ? this.state.user.paintingsUploaded.map(paintings =>
-              <div className="card" key={paintings._id}>
-                <div className="card-content">
-                  <div className="media">
-                    <div className="media-left">
-                      <figure className="image is-48x48">
-                        <img src={ paintings.image } alt={ paintings.title } />
-                      </figure>
-                    </div>
-                    <div className="media-content">
-                      <p className="title is-6">{ paintings.title }</p>
-                      <p className="subtitle is-7">{ paintings.info }</p>
+              { this.state.user.paintingsUploaded ? this.state.user.paintingsUploaded.map(paintings =>
+                <div className="card" key={paintings._id}>
+                  <div className="card-content">
+                    <div className="media">
+                      <div className="media-left">
+                        <figure className="image is-48x48">
+                          <img src={ paintings.image } alt={ paintings.title } />
+                        </figure>
+                      </div>
+                      <div className="media-content">
+                        <p className="title is-6">{ paintings.title }</p>
+                        <p className="subtitle is-7">{ paintings.info }</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ) : <p>Upload paintings (link to paintings new page)</p>}
+              ) : <p>Upload paintings (link to paintings new page)</p>}
 
 
-            <hr />
+              <hr />
 
-            <h5 className="title is-5">Followed Artists</h5>
-            <ul>
-              { this.state.user.artistFollowed.lenth>1 ? this.state.user.artistFollowed.map(artist =>
-                <li key={artist._id}>Trophy: { artist }</li>
-              ) : <p>Follow artists (link to artists index page)</p>}
-            </ul>
+              <h5 className="title is-5">Followed Artists</h5>
+              <ul>
+                { this.state.user.artistFollowed.lenth>1 ? this.state.user.artistFollowed.map(artist =>
+                  <li key={artist._id}>Trophy: { artist }</li>
+                ) : <p>Follow artists (link to artists index page)</p>}
+              </ul>
 
-            <hr />
+              <hr />
 
+            </div>
           </div>
         </div>
-      </section>
+      </main>
     );
   }
 }

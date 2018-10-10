@@ -10,8 +10,11 @@ body {
     font-family: 'Satisfy', cursive;
     &.navbar-brand {
       font-size: 26px;
-      padding: 10px;
+
     }
+  }
+  .navbar-item {
+    padding: 12px;
   }
 
   .button.is-primary{
@@ -29,4 +32,12 @@ body {
 
   }
 
+  .button.is-primary.is-rounded.is-medium{
+    margin: 20px;
+  }
+
+  p.form-or{
+    // margin-top: 0px;
+    // margin-bottom: 100px;
+  }
 }

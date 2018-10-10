@@ -9,16 +9,16 @@ import Navbar from './components/Navbar';
 import SecureRoute from './components/SecureRoute';
 import FlashMessages from './components/FlashMessages';
 import Register from './components/Register';
-import ArtistIndex from './components/Artist/ArtistIndex';
-import ArtistNew from './components/Artist/ArtistNew';
-import ArtistShow from './components/Artist/ArtistShow';
+import ArtistIndex from './components/artists/ArtistIndex';
+import ArtistNew from './components/artists/ArtistNew';
+import ArtistShow from './components/artists/ArtistShow';
 import Login from './components/Login';
 import UserShow from './components/users/UserShow';
 import UserEdit from './components/users/UserEdit';
-import PaintingsShow from './components/painting/PaintingsShow';
-import PaintingsNew from './components/painting/PaintingsNew';
-import JourneysIndex from './components/Journey/JourneyIndex';
-import JourneyShow from './components/Journey/JourneyShow';
+import PaintingsShow from './components/paintings/PaintingsShow';
+import PaintingsNew from './components/paintings/PaintingsNew';
+import JourneysIndex from './components/journeys/JourneyIndex';
+import JourneyShow from './components/journeys/JourneyShow';
 import main from './components/main';
 
 
@@ -30,26 +30,28 @@ class App extends React.Component {
         <div>
           <Navbar/>
           <FlashMessages />
-          <main className="section">
-            <div className="container">
-              <Switch>
+          {/* <main className="section">
+            <div className="container"> */}
+          <Switch>
+            <Route path="/register" component={Register} />
+            <SecureRoute path="/artists/new" component={ArtistNew} />
+            <Route path="/artists/:id" component={ArtistShow} />
+            <Route path="/artists" component={ArtistIndex} />
+            <SecureRoute path="/journeys/:id" component={JourneyShow} />
+            <Route path="/journeys" component={JourneysIndex} />
+            <Route path="/login" component={Login} />
+            <SecureRoute path="/profile/:id/edit" component={UserEdit} />
+            <SecureRoute path="/profile" component={UserShow} />
+            <Route path="/paintings/new" component={PaintingsNew} />
+            <Route path="/paintings/:id" component={PaintingsShow} />
+            <Route path="/" component={main} />
 
-                <Route path="/register" component={Register} />
-                <SecureRoute path="/artists/new" component={ArtistNew} />
-                <Route path="/artists/:id" component={ArtistShow} />
-                <Route path="/artists" component={ArtistIndex} />
-                <SecureRoute path="/journeys/:id" component={JourneyShow} />
-                <Route path="/journeys" component={JourneysIndex} />
-                <Route path="/login" component={Login} />
-                <SecureRoute path="/profile/:id/edit" component={UserEdit} />
-                <SecureRoute path="/profile" component={UserShow} />
-                <Route path="/paintings/new" component={PaintingsNew} />
-                <Route path="/paintings/:id" component={PaintingsShow} />
-                <Route path="/" component={main} />
-              </Switch>
-            </div>
-          </main>
+          </Switch>
+          {/* </div>
+          </main> */}
+          <Switch>
 
+          </Switch>
         </div>
       </BrowserRouter>
 
