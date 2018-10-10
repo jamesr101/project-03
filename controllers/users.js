@@ -13,6 +13,7 @@ function showRoute(req, res, next) {
 }
 
 function updateRoute(req, res, next) {
+  console.log('updateRoute user --->');
   User
     .findById(req.params.id)
     .exec()

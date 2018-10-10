@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Auth from '../../lib/Auth';
+import { Link } from 'react-router-dom';
 
 class UserShow extends React.Component {
   constructor() {
@@ -29,7 +30,7 @@ class UserShow extends React.Component {
           <div className="container is-fluid columns">
 
             <div className="column is-one-third has-text-centered">
-              <figure className="image is-128x128">
+              <figure className="image profile-picture is-128x128">
                 <img className="is-rounded" src={ this.state.user.image } />
               </figure>
 
@@ -72,24 +73,26 @@ class UserShow extends React.Component {
 
               <hr />
 
-              <h5 className="title is-5">Paintings loaded</h5>
+              <h5 className="title is-5">Paintings Uploaded</h5>
 
               { this.state.user.paintingsUploaded ? this.state.user.paintingsUploaded.map(paintings =>
-                <div className="card" key={paintings._id}>
-                  <div className="card-content">
-                    <div className="media">
-                      <div className="media-left">
-                        <figure className="image is-48x48">
-                          <img src={ paintings.image } alt={ paintings.title } />
-                        </figure>
-                      </div>
-                      <div className="media-content">
-                        <p className="title is-6">{ paintings.title }</p>
-                        <p className="subtitle is-7">{ paintings.info }</p>
+                <Link key={paintings._id} to={`/paintings/${paintings._id}`}>
+                  <div className="card">
+                    <div className="card-content">
+                      <div className="media">
+                        <div className="media-left">
+                          <figure className="image is-48x48">
+                            <img src={ paintings.image } alt={ paintings.title } />
+                          </figure>
+                        </div>
+                        <div className="media-content">
+                          <p className="title is-6">{ paintings.title }</p>
+                          <p className="subtitle is-7">{ paintings.info }</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ) : <p>Upload paintings (link to paintings new page)</p>}
 
 
