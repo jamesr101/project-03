@@ -96,7 +96,7 @@ class PaintingsShow extends React.Component {
           <img src={ this.state.painting.image } alt={ this.state.painting.title } height="200" />
 
           <div className="section">
-            <h1 className="title is-4">{ this.state.painting.title}, {this.state.painting.date}</h1>
+            <h1 className="title is-4">{ this.state.painting.title}, {parseFloat(this.state.painting.date)}</h1>
 
             <Link to={`/artists/${this.state.painting.artist.id}`} className="subtitle is-4">{ this.state.painting.artist.name}</Link>
 
@@ -114,34 +114,46 @@ class PaintingsShow extends React.Component {
           />
 
 
-          <div className="section">
-            <div className="level">
-
-              <button className="button" id="more" onClick={this.showMore}>
-                 More paintings by
-                {' ' + this.state.painting.artist.name || ' this artist'}
-              </button>
-
-
-              {this.state.limit > 0 &&
-                <button className="button" id="less" onClick={this.showMore}>
-                  Show less
-                </button>
-              }
-            </div>
-          </div>
-
-          <div className="columns is-multiline">
+          <div className="section columns is-multiline">
             {this.state.artist && this.state.artist.paintings.slice(0,this.state.limit).map(painting =>
               <li className="column is-one-third" key={painting._id} >
 
                 <Link to={`/paintings/${painting._id}`}>
-                  <img src={ painting.image } alt={ painting.title } height="200" />
+                  {/* <img src={ painting.image } alt={ painting.title } height="200" /> */}
+
+                  <div className="card ">
+                    <header className="card-header">
+                      <h2 className="card-header-title">{painting.title}</h2>
+                    </header>
+                    <div className="card-image ">
+                      <figure className="image">
+                        <img src={painting.image} alt={painting.title} height="200"/>
+                      </figure>
+                    </div>
+
+                  </div>
                 </Link>
+
 
               </li>
             )}
           </div>
+
+          <div className="level">
+
+            <button className="button" id="more" onClick={this.showMore}>
+               More paintings by
+              {' ' + this.state.painting.artist.name || ' this artist'}
+            </button>
+
+
+            {this.state.limit > 0 &&
+              <button className="button" id="less" onClick={this.showMore}>
+                Show less
+              </button>
+            }
+          </div>
+
         </div>
       </main>
 
