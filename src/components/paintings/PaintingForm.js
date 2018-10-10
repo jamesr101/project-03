@@ -120,7 +120,10 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
       </div>
 
       <div className="field ">
-        <label className="label">Location{painting.location && ': ' + painting.location.latitude + ', ' + painting.location.longitude } </label>
+        <label className="label">
+          Location{painting.location && ': ' + painting.location.latitude + ', ' + painting.location.longitude}
+        </label>
+        {errors.address && <small className="help is-danger">{errors.address}</small>}
 
         <div className="level">
 
@@ -128,16 +131,19 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
 
           <p className="level-item form-or">or</p>
 
-          <div className="control level-item">
-            <input
-              className={`input ${errors.address ? 'is-danger' : ''}`}
-              name="address"
-              placeholder="Enter address"
-              onChange={handleChange}
-              value={painting.address || ''}
-            />
-            {errors.address && <small className="help is-danger">{errors.address}</small>}
-            <div className="button" onClick={findAddress}>Find address</div>
+          <div className="field has-addons level-item">
+            <div className="control is-expanded">
+              <input
+                className={`input ${errors.address ? 'is-danger' : ''}`}
+                name="address"
+                placeholder="Enter address"
+                onChange={handleChange}
+                value={painting.address || ''}
+              />
+            </div>
+            <div className="control">
+              <div className="button" onClick={findAddress}>Find address</div>
+            </div>
           </div>
         </div>
       </div>

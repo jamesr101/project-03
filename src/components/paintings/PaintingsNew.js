@@ -73,7 +73,7 @@ class PaintingsNew extends React.Component {
         const location = { latitude, longitude };
 
         if(location.latitude ===  39.78373 && location.longitude === -100.445882){
-          const errors = { ...this.state.errors, address: 'error'};
+          const errors = { ...this.state.errors, address: 'Cannot find address'};
           return this.setState({ errors });
         }
 
