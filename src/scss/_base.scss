@@ -5,6 +5,12 @@ body {
   color: $grey;
   background-color: $GhostWhite;
 
+  nav.navbar {
+    position: -webkit-sticky;
+    position: sticky;
+    display: block;
+    top: 0;
+  }
 
   .logo {
     font-family: 'Satisfy', cursive;
@@ -12,22 +18,6 @@ body {
       font-size: 26px;
 
     }
-
-    // /* effect-shine */
-    // .effect-shine:hover {
-    //   -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
-    //   -webkit-mask-size: 200%;
-    //   animation: shine 2s infinite;
-    // }
-    //
-    // @-webkit-keyframes shine {
-    //   from {
-    //     -webkit-mask-position: 150%;
-    //   }
-    //   to {
-    //     -webkit-mask-position: -50%;
-    //   }
-    // }
   }
   .navbar-item {
     padding: 12px;
@@ -123,4 +113,63 @@ body {
     font-weight: 300;
   }
 
+  // journey
+  .journey-show {
+
+    .card {
+    margin-top: 30px;
+    }
+
+    header {
+      height: 55vw;
+      z-index: auto;
+      img {
+        width: 100%;
+        position: fixed;
+        object-fit: fill;
+      }
+
+
+      h1 {
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 4vw;
+        color:white;
+      }
+    }
+
+    .container {
+      background-color: $GhostWhite;
+    }
+    section.journey-tasks {
+      background-color: $GhostWhite;
+
+      .task-stat {
+        margin-top: 40px;
+        margin-left: 10px;
+      }
+
+      .trophy{
+        margin:auto;
+      }
+
+    }
+
+    .vl {
+      border-left: 3px solid $grey;
+      height: 90%;
+      position: absolute;
+      left: 50%;
+      margin-left: -3px;
+      top: 0;
+    }
+  }
+
+  // profile padding
+  .profile-picture {
+    margin: auto;
+    margin-bottom: 20px;
+  }
 }
