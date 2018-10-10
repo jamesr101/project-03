@@ -10,7 +10,7 @@ class PaintingsShow extends React.Component {
     super(props);
     this.state = { artist: null};
 
-    this.mapCenter = { lat: 55, lng: -5 };
+    this.mapCenter = { latitude: 55, longitude: -5 };
 
     this.state = {
       painting: null,
@@ -109,7 +109,7 @@ class PaintingsShow extends React.Component {
 
           <Map
             paintings={[this.state.painting]}
-            // center={this.mapCenter}
+            center={this.mapCenter}
             zoom={10}
           />
 
