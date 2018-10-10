@@ -66,6 +66,13 @@ class ArtistsShow extends React.Component {
     else if (entrance % 2 === 0 && entrance % 3 !== 0) return ('column is-half');
     else return('column is-one-third');
   }
+  bigCondition(){
+    if (!this.state.actualDate && !this.state.search){
+      return true;
+    } else if(this.filterArtistsPaintings().length > 0){
+      return true;
+    } else return false;
+  }
 
 
 
@@ -111,7 +118,7 @@ class ArtistsShow extends React.Component {
             </div>
           </section>
 
-          {this.state.artist.paintings.length > 0 &&
+          {this.state.artist.paintings.length > 0 ?
             <section>
               <div>
 
@@ -144,19 +151,42 @@ class ArtistsShow extends React.Component {
                         <PaintingCard {...painting} />
                       </Link>
                     </li>
-                  )}
-                  {this.filterArtistsPaintings().map(painting =>
+                  )
+                  }
+                  {this.bigCondition() ? this.filterArtistsPaintings().map(painting =>
 
                     <li className={this.defineClass()} key={painting._id}>
                       <Link to={`/paintings/${painting._id}`}>
                         <PaintingCard {...painting} />
                       </Link>
                     </li>
-                  )}
+                  )
+                    :
+                    <div>
+                      <p>
+                        There are no paintings related to {this.state.artist.name} 
+                      </p>
+                      <Link to={'/paintings/new'}>
+                         Add a {this.state.artist.name} painting
+                      </Link>
+                    </div>
+
+                  }
                 </ul>
               </div>
             </section>
+            :
+            <div>
+              <p>
+               There are no paintings related to {this.state.artist.name} for the time fraction you  selected. You can add one clicking
+              </p>
+              <Link to={'/paintings/new'}>
+                <p> here</p>
+              </Link>
+            </div>
+
           }
+
         </div>
       </main>
     );

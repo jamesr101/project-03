@@ -76,11 +76,12 @@ const ArtistsForm = ({
         <label className="label">Wikipedia Link</label>
         <div className="control">
           <input
-            className={`input ${errors.wikiLink ? 'is-danger' : ''}`}
+            className={`input  ${errors.wikiLink ? 'is-danger' : ''}`}
             name="wikiLink"
             placeholder="Add a wikipedia link"
             onChange={handleChange}
             value={wikiLink || ''}
+            disabled
           />
           {errors.wikiLink && <small className="help is-danger"> {errors.wikiLink} </small>}
         </div>
@@ -90,11 +91,12 @@ const ArtistsForm = ({
         <label className="label">Born</label>
         <div className="control">
           <input
-            className={`input ${errors.dateBorn ? 'is-danger' : ''}`}
+            className={`input  ${errors.dateBorn ? 'is-danger' : ''}`}
             name="dateBorn"
             placeholder="Date of Birth"
             onChange={handleChange}
             value={wikiBorn || ''}
+            disabled
           />
           {errors.dateBorn && <small className="help is-danger"> {errors.dateBorn} </small>}
         </div>
@@ -104,11 +106,12 @@ const ArtistsForm = ({
         <label className="label">Died</label>
         <div className="control">
           <input
-            className={`input ${errors.dateDeath ? 'is-danger' : ''}`}
+            className={`input  ${errors.dateDeath ? 'is-danger' : ''}`}
             name="dateDeath"
             placeholder="Date of Death"
             onChange={handleChange}
             value={wikiDeath || ''}
+            disabled
           />
           {errors.dateDeath && <small className="help is-danger"> {errors.dateDeath} </small>}
         </div>
