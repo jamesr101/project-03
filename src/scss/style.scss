@@ -3,6 +3,7 @@
 @import 'base.scss';
 @import 'navbar.scss';
 @import 'map.scss';
+@import 'artisShow.scss';
 
 * {
   box-sizing: border-box;
@@ -60,5 +61,8 @@ width: 100%;
 }
 
 .artist-date-text{
+  text-align: center;
+}
+.input{
   text-align: center;
 }

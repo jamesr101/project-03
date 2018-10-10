@@ -35,8 +35,8 @@ mongoose.connectAsync(dbURI)
   .then(() => Artist.create({
     name: 'Pablo Picasso',
     image: 'https://upload.wikimedia.org/wikipedia/commons/e/e3/Pablo_picasso.jpg',
-    dateBorn: 'October 25, 1881',
-    dateDeath: 'April 8, 1973',
+    dateBorn: '1881',
+    dateDeath: '1973',
     info: 'Pablo Ruiz Picasso (/pɪˈkɑːsoʊ, -ˈkæsoʊ/;[2] Spanish: [ˈpaβlo piˈkaso]; 25 October 1881 – 8 April 1973) was a Spanish painter, sculptor, printmaker, ceramicist, stage designer, poet and playwright who spent most of his adult life in France. Regarded as one of the most influential artists of the 20th century, he is known for co-founding the Cubist movement, the invention of constructed sculpture,[3][4] the co-invention of collage, and for the wide variety of styles that he helped develop and explore. Among his most famous works are the proto-Cubist Les Demoiselles d\'Avignon (1907), and Guernica (1937), a dramatic portrayal of the bombing of Guernica by the German and Italian airforces during the Spanish Civil War.',
     wikiLink: 'https://en.wikipedia.org/wiki/Pablo_Picasso'
   }))

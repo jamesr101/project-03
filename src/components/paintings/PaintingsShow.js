@@ -10,7 +10,7 @@ class PaintingsShow extends React.Component {
     super(props);
     this.state = { artist: null};
 
-    this.mapCenter = { lat: 55, lng: -5 };
+    this.mapCenter = { latitude: 55, longitude: -5 };
 
     this.state = {
       painting: null,
@@ -52,14 +52,22 @@ class PaintingsShow extends React.Component {
     e.preventDefault();
     let numberOfPaintingsDisplayed;
     if(e.target.id === 'more'){
-      numberOfPaintingsDisplayed = this.state.limit + 4;
-    } else if(this.state.limit < 4){
+      numberOfPaintingsDisplayed = this.state.limit + 3;
+    } else if(this.state.limit < 3){
       numberOfPaintingsDisplayed = 0;
     } else {
-      numberOfPaintingsDisplayed = this.state.limit - 4;
+      numberOfPaintingsDisplayed = this.state.limit - 3;
     }
     axios.get(`/api/artists/${this.state.painting.artist._id}`)
-      .then(res => this.setState({ artist: res.data, limit: numberOfPaintingsDisplayed }));
+      .then(res => this.setState({ artist: res.data }))
+      .then(() => {
+        if(this.state.artist.paintings.length < numberOfPaintingsDisplayed){
+          this.setState({ limit: this.state.artist.paintings.length});
+        } else {
+          this.setState({ limit: numberOfPaintingsDisplayed});
+        }
+      })  ;
+
   }
 
 
@@ -88,7 +96,7 @@ class PaintingsShow extends React.Component {
           <img src={ this.state.painting.image } alt={ this.state.painting.title } height="200" />
 
           <div className="section">
-            <h1 className="title is-4">{ this.state.painting.title}, {this.state.painting.date}</h1>
+            <h1 className="title is-4">{ this.state.painting.title}, {parseFloat(this.state.painting.date)}</h1>
 
             <Link to={`/artists/${this.state.painting.artist.id}`} className="subtitle is-4">{ this.state.painting.artist.name}</Link>
 
@@ -101,37 +109,51 @@ class PaintingsShow extends React.Component {
 
           <Map
             paintings={[this.state.painting]}
-            // center={this.mapCenter}
-            zoom={10}
+            center={this.state.painting.location || this.mapCenter}
+            zoom={4}
           />
 
 
-          <div className="section">
-            <div className="level">
-              <button className="button" id="more" onClick={this.showMore}>
-                More paintings by
-                {' ' + this.state.painting.artist.name || ' this artist'}
-              </button>
-
-              {this.state.limit > 0 &&
-                <button className="button" id="less" onClick={this.showMore}>
-                  Show less
-                </button>
-              }
-            </div>
-          </div>
-
-          <div className="columns is-multiline">
+          <div className="section columns is-multiline">
             {this.state.artist && this.state.artist.paintings.slice(0,this.state.limit).map(painting =>
               <li className="column is-one-third" key={painting._id} >
 
                 <Link to={`/paintings/${painting._id}`}>
-                  <img src={ painting.image } alt={ painting.title } height="200" />
+                  {/* <img src={ painting.image } alt={ painting.title } height="200" /> */}
+
+                  <div className="card ">
+                    <header className="card-header">
+                      <h2 className="card-header-title">{painting.title}</h2>
+                    </header>
+                    <div className="card-image ">
+                      <figure className="image">
+                        <img src={painting.image} alt={painting.title} height="200"/>
+                      </figure>
+                    </div>
+
+                  </div>
                 </Link>
+
 
               </li>
             )}
           </div>
+
+          <div className="level">
+
+            <button className="button" id="more" onClick={this.showMore}>
+               More paintings by
+              {' ' + this.state.painting.artist.name || ' this artist'}
+            </button>
+
+
+            {this.state.limit > 0 &&
+              <button className="button" id="less" onClick={this.showMore}>
+                Show less
+              </button>
+            }
+          </div>
+
         </div>
       </main>
 

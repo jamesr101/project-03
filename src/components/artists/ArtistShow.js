@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Map from '../Map';
 import FilterBar from '../FilterBar';
+import PaintingCard from '../paintings/PaintingCard';
 import { Link } from 'react-router-dom';
 
 
@@ -11,18 +12,19 @@ class ArtistsShow extends React.Component {
     super();
     this.state = { artist: null};
 
-    this.mapCenter = { lat: 55, lng: -5 };
+    this.mapCenter = { latitude: 55, longitude: -5 };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleTime = this.handleTime.bind(this);
   }
 
   componentDidMount() {
-    axios.get(`/api/artists/${this.props.match.params.id}`)
+    axios
+      .get(`/api/artists/${this.props.match.params.id}`)
       .then(res => this.setState({ artist: res.data, search: '' }))
       .then(() => {
-        const born = parseFloat(this.state.artist.dateBorn.toString().split('').slice(0,4).join(''));
-        const dead = parseFloat(this.state.artist.dateDeath.toString().split('').slice(0,4).join(''));
+        const born = parseFloat(this.state.artist.dateBorn);
+        const dead = parseFloat(this.state.artist.dateDeath);
         this.setState({born: born, dead: dead});
       });
   }
@@ -52,6 +54,27 @@ class ArtistsShow extends React.Component {
       return (date > this.state.actualDate - 10 && date < this.state.actualDate + 10) && re.test(painting.title);
     });
   }
+
+  defineClass() {
+    let entrance;
+    if(!this.state.actualDate && !this.state.search){
+      entrance = this.state.artist.paintings.length;
+    } else {
+      entrance = this.filterArtistsPaintings().length;
+    }
+    if(entrance === 1) return ('column');
+    else if (entrance % 2 === 0 && entrance % 3 !== 0) return ('column is-half');
+    else return('column is-one-third');
+  }
+  bigCondition(){
+    if (!this.state.actualDate && !this.state.search){
+      return true;
+    } else if(this.filterArtistsPaintings().length > 0){
+      return true;
+    } else return false;
+  }
+
+
 
   render() {
     if(!this.state.artist) return null;
@@ -92,59 +115,80 @@ class ArtistsShow extends React.Component {
                   </div>
                 </div>
               </div>
+            </div>
+          </section>
+
+          {this.state.artist.paintings.length > 0 ?
+            <section>
+              <div>
+
+                <Map center={this.mapCenter} zoom={4} paintings={this.state.artist.paintings} />
+
+                <div className="columns is-multiline">
+                  <div className="margin-top-15  column is-one-third">
+                    <FilterBar handleChange={this.handleChange} />
+                  </div>
+                  <div className="margin-top-15  column is-one-third">
+                    <form  className="artist-date-form" action="/action_page.php" method="get">
+                      {!this.state.actualDate && <p className="artist-date-text">Select time range</p>}
+                      {this.state.actualDate && <p className="artist-date-text">{this.state.actualDate - 10} - {this.state.actualDate + 10} </p>}
+                      <input className="artist-date-input" type="range" step="1" min={this.state.born} max={this.state.dead} onChange={this.handleTime}   ></input>
+                    </form>
+                  </div>
+
+                  <Link className="margin-top-15 centralizer column is-one-third" to={'/paintings/new'}>
+                    <button className="button is-primary"> Add a new painting</button>
+                  </Link>
 
 
-
-
-              <Map center={this.mapCenter} zoom={4} paintings={this.state.artist.paintings} />
-
-              <div className="section split-half">
-                <div className="artist-filter-bar">
-                  <FilterBar handleChange={this.handleChange} />
                 </div>
-                <div className="artist-date-div">
-                  <form  className="artist-date-form" action="/action_page.php" method="get">
-                    {!this.state.actualDate && <p className="artist-date-text">Select time range</p>}
-                    {this.state.actualDate && <p className="artist-date-text">{this.state.actualDate - 10} - {this.state.actualDate + 10} </p>}
-                    <input className="artist-date-input" type="range" step="1" min={this.state.born} max={this.state.dead} onChange={this.handleTime}   ></input>
-                  </form>
-                </div>
-
               </div>
+              <div>
+                <ul className="columns is-multiline">
+                  {!this.state.actualDate && !this.state.search && this.state.artist.paintings.map(painting =>
+                    <li className={this.defineClass()} key={painting._id}>
+                      <Link to={`/paintings/${painting._id}`}>
+                        <PaintingCard {...painting} />
+                      </Link>
+                    </li>
+                  )
+                  }
+                  {this.bigCondition() ? this.filterArtistsPaintings().map(painting =>
+
+                    <li className={this.defineClass()} key={painting._id}>
+                      <Link to={`/paintings/${painting._id}`}>
+                        <PaintingCard {...painting} />
+                      </Link>
+                    </li>
+                  )
+                    :
+                    <div>
+                      <p>
+                        There are no paintings related to {this.state.artist.name} 
+                      </p>
+                      <Link to={'/paintings/new'}>
+                         Add a {this.state.artist.name} painting
+                      </Link>
+                    </div>
+
+                  }
+                </ul>
+              </div>
+            </section>
+            :
+            <div>
+              <p>
+               There are no paintings related to {this.state.artist.name} for the time fraction you  selected. You can add one clicking
+              </p>
+              <Link to={'/paintings/new'}>
+                <p> here</p>
+              </Link>
             </div>
 
-            <ul>
-              {!this.state.actualDate && !this.state.search && this.state.artist.paintings.map(painting =>
+          }
 
-
-
-                <li key={painting._id}>
-                  <Link to={`/paintings/${painting._id}`}>
-                    <p> { painting.title } </p>
-                    <figure> <img src={ painting.image }/> </figure>
-                    <p>location:</p>
-                    <p> latitude -{ painting.location.latitude } </p>
-                    <p>latitude - {painting.location.longitude}</p>
-                  </Link>
-                </li>
-
-              )}
-              {this.filterArtistsPaintings().map(painting =>
-                <li key={painting._id}>
-                  <p> { painting.title } </p>
-                  <figure> <img src={ painting.image }/> </figure>
-                  <p>location:</p>
-                  <p> latitude -{ painting.location.latitude } </p>
-                  <p>latitude - {painting.location.longitude}</p>
-
-                </li>
-              )}
-            </ul>
-
-          </section>
         </div>
       </main>
-
     );
   }
 }

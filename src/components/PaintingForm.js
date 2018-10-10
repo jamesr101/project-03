@@ -47,7 +47,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
           <div className="select">
             <select onChange={handleChange} name="artist">
               <option>
-                Select an artist
+                Please select artist
               </option>
               {artists && artists.map(artist =>
                 <option

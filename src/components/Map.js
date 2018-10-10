@@ -12,50 +12,30 @@ class Map extends React.Component {
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v10',
       center: {
-        lat: this.props.paintings[0].location.latitude,
-        lng: this.props.paintings[0].location.longitude
+        lat: this.props.center.latitude,
+        lng: this.props.center.longitude
       },
       zoom: this.props.zoom,
       pitch: 30
     });
 
-    this.map.on('load', () => {
-      this.map.addControl(new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true
-      }));
-    });
+
+    this.map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    }));
+
+    this.map.addControl(new mapboxgl.NavigationControl());
+    this.map.scrollZoom.disable();
 
     this.createMarkers();
-    // this.markers = this.props.paintings.map(painting => {
-    //   // create a marker for each location
-    //   const el = document.createElement('img');
-    //   el.setAttribute('src', painting.image);
-    //   el.setAttribute('alt', 'none');
-    //   el.className = 'marker';
-    //
-    //   el.addEventListener('click', () => {
-    //     // when marker is clicked 'fly' to that location
-    //     this.map.isFlying = true; // this is to handle custom zoom functionality
-    //     this.map.flyTo({
-    //       center: [painting.location.longitude, painting.location.latitude],
-    //       pitch: 65,
-    //       zoom: 16
-    //     });
-    //
-    //   });
-    //
-    //   // create add the marker to the map
-    //   return new mapboxgl.Marker(el)
-    //     .setLngLat([painting.location.longitude, painting.location.latitude])
-    //     .addTo(this.map);
-    // });
   }
 
   createMarkers(){
     this.markers = this.props.paintings.map(painting => {
+      if(!painting.location) return false;
       // create a marker for each location
       const el = document.createElement('img');
       el.setAttribute('src', painting.image);
@@ -63,8 +43,6 @@ class Map extends React.Component {
       el.className = 'marker';
 
       el.addEventListener('click', () => {
-        // when marker is clicked 'fly' to that location
-        this.map.isFlying = true; // this is to handle custom zoom functionality
         this.map.flyTo({
           center: [painting.location.longitude, painting.location.latitude],
           pitch: 65,

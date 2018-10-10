@@ -1,5 +1,4 @@
 import React from 'react';
-// const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz'; //// FIXME: aggregate keys
 
 
 const ArtistsForm = ({
@@ -27,26 +26,13 @@ const ArtistsForm = ({
             onBlur={getArtistData}
             value={artist.name  || ''}
           />
-          {errors.name && <small className="help is-danger"> {errors.name} </small>}
+          {errors.name &&   <small className="help is-danger"> {errors.name} </small>}
         </div>
       </div>
 
       <div className="field">
         <div className="control">
 
-
-          {/* <ReactFilestack
-            apikey={ FILESTACK_API_KEY }
-            mode={'pick'}
-            onSuccess={(response) => handleChange({
-              target: {
-                name: 'image',
-                value: response.filesUploaded[0].url
-              }})}
-            onError={(e) => console.log(e)}
-            buttonText={'Add Picture'}
-            buttonClass={'button is-rounded'}
-          /> */}
 
           <input
             className={`input ${errors.image ? 'is-danger' : ''}`}
@@ -56,7 +42,6 @@ const ArtistsForm = ({
             onChange={handleChange}
             value={ wikiImg || ''}
           />
-
           {errors.image && <small className="help is-danger"> {errors.image} </small>}
         </div>
       </div>
