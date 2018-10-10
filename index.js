@@ -24,6 +24,7 @@ app.use(bodyParser.json()); // set up to handle JSON
 
 // routes
 app.use('/api', routes);
+app.get('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 
 
 // add custom error handler AFTER routes

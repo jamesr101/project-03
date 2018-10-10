@@ -1,5 +1,5 @@
 const Journey = require('../models/journey');
-require('../models/Trophy');
+require('../models/trophy');
 
 function indexRoute(req, res, next) {
   Journey
