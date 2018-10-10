@@ -32,7 +32,7 @@ class Register extends React.Component {
       <main className="section">
         <div className="container">
           <form onSubmit={this.handleSubmit}>
-            <p>Register page</p>
+            <h2 className="title">Register page</h2>
             <div className="field">
               <label className="label">User Name</label>
               <div className="control">
@@ -59,7 +59,11 @@ class Register extends React.Component {
             </div>
             {this.state.error && <small className="help is-danger">{this.state.error}</small>}
 
-            <button className="button is-primary">Submit</button>
+            <div className="level control">
+              <div className="level-item">
+                <button className="button is-primary is-rounded is-medium">Submit</button>
+              </div>
+            </div>
           </form>
         </div>
       </main>
