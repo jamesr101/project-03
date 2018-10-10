@@ -19,7 +19,7 @@ import PaintingsShow from './components/paintings/PaintingsShow';
 import PaintingsNew from './components/paintings/PaintingsNew';
 import JourneysIndex from './components/journeys/JourneyIndex';
 import JourneyShow from './components/journeys/JourneyShow';
-import main from './components/main';
+import Main from './components/Main';
 
 
 class App extends React.Component {
@@ -30,8 +30,6 @@ class App extends React.Component {
         <div>
           <Navbar/>
           <FlashMessages />
-          {/* <main className="section">
-            <div className="container"> */}
           <Switch>
             <Route path="/register" component={Register} />
             <SecureRoute path="/artists/new" component={ArtistNew} />
@@ -44,11 +42,8 @@ class App extends React.Component {
             <SecureRoute path="/profile" component={UserShow} />
             <Route path="/paintings/new" component={PaintingsNew} />
             <Route path="/paintings/:id" component={PaintingsShow} />
-            <Route path="/" component={main} />
-
+            <Route path="/" component={Main} />
           </Switch>
-          {/* </div>
-          </main> */}
           <Switch>
 
           </Switch>
