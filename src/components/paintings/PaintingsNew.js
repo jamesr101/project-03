@@ -8,7 +8,7 @@ class PaintingsNew extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { painting: {}, errors: {}, photo: '', artists: [], address: '' };
+    this.state = { painting: {}, errors: {}, photo: '', artists: [], address: '', findingAddress: false };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getLocation = this.getLocation.bind(this);
@@ -45,10 +45,11 @@ class PaintingsNew extends React.Component {
   getLocation() {
 
     if (navigator.geolocation) {
+      this.setState({ findingAddress: true });
       navigator.geolocation.getCurrentPosition(position => {
         const location = { latitude: position.coords.latitude, longitude: position.coords.longitude };
         const painting = { ...this.state.painting, location };
-        this.setState({ painting }, () => console.log(this.state.painting));
+        this.setState({ painting, findingAddress: false }, () => console.log(this.state.painting));
       });
     } else {
       this.setState({ message: 'Cannot establish your location' });
@@ -70,22 +71,13 @@ class PaintingsNew extends React.Component {
         console.log( res);
         const { lat: latitude, lng: longitude } = res.data.results[0].locations[0].latLng;
         const location = { latitude, longitude };
-        const painting = { ...this.state.painting, location };
 
-        console.log(
-          location.latitude
-        );
         if(location.latitude ===  39.78373 && location.longitude === -100.445882){
-          console.log('cannot find address');
-          this.setState({ });
-
           const errors = { ...this.state.errors, address: 'error'};
-          this.setState({ errors });
-
-          console.log(this.state.errors);
-
+          return this.setState({ errors });
         }
 
+        const painting = { ...this.state.painting, location };
         this.setState({ painting }, () => console.log(this.state.painting));
 
 
@@ -124,6 +116,7 @@ class PaintingsNew extends React.Component {
             artists={this.state.artists}
             getLocation={this.getLocation}
             findAddress={this.findAddress}
+            findingAddress={this.state.findingAddress}
           />
         </div>
       </main>

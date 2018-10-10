@@ -6,7 +6,7 @@ const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
 
 
 
-const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, getLocation, findAddress}) => {
+const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, getLocation, findAddress, findingAddress }) => {
 
   return (
     <form onSubmit={handleSubmit}>
@@ -124,19 +124,19 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
 
         <div className="level">
 
-          <div className={`button level-item is-rounded ${!painting ? 'is-loading' : ''}`} onClick={getLocation}>Use my Location</div>
+          <div className={`button level-item is-rounded ${findingAddress ? 'is-loading' : ''}`} onClick={getLocation}>Use my Location</div>
 
           <p className="level-item form-or">or</p>
 
           <div className="control level-item">
             <input
-              className={`input ${errors.location ? 'is-danger' : ''}`}
+              className={`input ${errors.address ? 'is-danger' : ''}`}
               name="address"
               placeholder="Enter address"
               onChange={handleChange}
               value={painting.address || ''}
             />
-            {errors.location && <small className="help is-danger">{errors.location}</small>}
+            {errors.address && <small className="help is-danger">{errors.address}</small>}
             <div className="button" onClick={findAddress}>Find address</div>
           </div>
         </div>
