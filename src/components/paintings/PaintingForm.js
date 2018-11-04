@@ -4,36 +4,60 @@ import ReactFilestack from 'react-filestack';
 import keys from '../../lib/keys.js';
 
 
-
-
 const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, getLocation, findAddress, findingAddress, selectedArtist }) => {
 
   return (
     <form onSubmit={handleSubmit}>
 
+      {/* Image Field */}
       <img src={ painting.image || '../../assets/images/image-placeholder.png' } alt='upload a photo' height="200" />
 
       <div className="field">
         <div className="control">
+          <label className="label">Image</label>
+          <div className="level">
+            <input
+              className={`input ${errors.image ? 'is-danger' : ''}`}
+              name="image"
+              placeholder="Link to image of the painting"
+              onChange={handleChange}
+              value={ painting.image || '' }
+            />
 
-          <ReactFilestack
-            apikey={ keys.filestack }
-            mode={'pick'}
-            onSuccess={(response) => handleChange({
-              target: {
-                name: 'image',
-                value: response.filesUploaded[0].url
-              }})}
-            onError={(e) => console.log(e)}
-            buttonText={'Add Picture'}
-            buttonClass={'button is-rounded'}
-          />
+            <ReactFilestack
+              apikey={ keys.filestack }
+              mode={'pick'}
+              onSuccess={(response) => handleChange({
+                target: {
+                  name: 'image',
+                  value: response.filesUploaded[0].url
+                }})}
+              onError={(e) => console.log(e)}
+              buttonText={'Add Picture'}
+              buttonClass={'button is-rounded'}
+            />
 
-          {errors.image && <small className="help is-danger">{errors.image}</small>}
+            {errors.image && <small className="help is-danger">{errors.image}</small>}
+          </div>
         </div>
       </div>
 
+      {/* Title Field */}
+      <div className="field">
+        <label className="label">Title</label>
+        <div className="control">
+          <input
+            className={`input ${errors.title ? 'is-danger' : ''}`}
+            name="title"
+            placeholder="Title"
+            onChange={handleChange}
+            value={painting.title || ''}
+          />
+          {errors.title && <small className="help is-danger">{errors.title}</small>}
+        </div>
+      </div>
 
+      {/* Artist Field */}
       <div className="field">
         <label className="label">Artist</label>
         <div className="control">
@@ -63,20 +87,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         </div>
       </div>
 
-      <div className="field">
-        <label className="label">Title</label>
-        <div className="control">
-          <input
-            className={`input ${errors.title ? 'is-danger' : ''}`}
-            name="title"
-            placeholder="Title"
-            onChange={handleChange}
-            value={painting.title || ''}
-          />
-          {errors.title && <small className="help is-danger">{errors.title}</small>}
-        </div>
-      </div>
-
+      {/* Year Field */}
       <div className="field">
         <label className="label">Year</label>
         <div className="control">
@@ -91,6 +102,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         </div>
       </div>
 
+      {/* Information Field */}
       <div className="field">
         <label className="label">Information</label>
         <div className="control">
@@ -105,6 +117,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         </div>
       </div>
 
+      {/* Wikipedia Link Field */}
       <div className="field">
         <label className="label">Wikipedia Link</label>
         <div className="control">
@@ -119,6 +132,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         </div>
       </div>
 
+      {/* Location Link Field */}
       <div className="field ">
         <label className="label">
           Location{painting.location && ': ' + painting.location.latitude + ', ' + painting.location.longitude}

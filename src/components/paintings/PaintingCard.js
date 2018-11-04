@@ -15,8 +15,8 @@ const PaintingCard = ({title, image, date, info}) => {
       </div>
       <div className="card-content">
         <p> {info} </p>
-        <br></br>
-        <p> This painting was made in {year} </p>
+        <br />
+        <p>This painting was made in {year} </p>
       </div>
     </div>
 

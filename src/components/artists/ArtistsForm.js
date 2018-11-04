@@ -88,6 +88,7 @@ const ArtistsForm = ({
         </div>
       </div>
 
+      {/* Artist Born Field  */}
       <div className="field">
         <label className="label">Born</label>
         <div className="control">
@@ -102,6 +103,7 @@ const ArtistsForm = ({
         </div>
       </div>
 
+      {/* Artist Died Field  */}
       <div className="field">
         <label className="label">Died</label>
         <div className="control">
