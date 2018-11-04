@@ -121,7 +121,7 @@ class Main extends React.Component {
           </div>
         </section>
 
-        <footer className="footer">
+        <section className="footer">
           <div className="container">
             <div className="columns">
               <div className="column is-3 is-offset-2">
@@ -157,7 +157,7 @@ class Main extends React.Component {
             </div>
           </div>
           <script src="../js/bulma.js"></script>
-        </footer>
+        </section>
 
       </main>
     );
