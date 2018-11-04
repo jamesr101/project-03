@@ -33,14 +33,6 @@ class PaintingsNew extends React.Component {
     this.setState({ painting, errors });
 
   }
-  // handleImage(e){
-  //   const text = e.target.value;
-  //   const painting = { ...this.state.painting, [e.target.name]: e.target.value };
-  //   const errors = { ...this.state.errors, [e.target.name]: null};
-  //   this.setState({ painting, errors, photo: text });
-  // }
-
-
 
   getLocation() {
 
@@ -54,16 +46,15 @@ class PaintingsNew extends React.Component {
     } else {
       this.setState({ message: 'Cannot establish your location' });
     }
-    // if location = {lat: 39.78373, lng: -100.445882}, error "address not found"
   }
 
   findAddress() {
-    const KEY = 'UylkKlLKXG8WP4fG0IlsUewrzpdpkfPp';
+    const openMapQuestKey = 'UylkKlLKXG8WP4fG0IlsUewrzpdpkfPp';
 
     axios
       .get('http://open.mapquestapi.com/geocoding/v1/address', {
         params: {
-          key: KEY,
+          key: openMapQuestKey,
           location: this.state.painting.address
         }
       })

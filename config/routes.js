@@ -40,7 +40,6 @@ router.route('/artists/:id')
   .put(secureRoute, artistsController.update)
   .delete(secureRoute, artistsController.delete);
 
-
 router.route('/journeys')
   .get(journeysController.index);
 
@@ -48,7 +47,6 @@ router.route('/journeys/:id')
   .get(journeysController.show);
 
 router.get('/artsy/artists', artsyController.artistsIndex);
-
 
 router.route('/*')
   .all((req, res) => res.sendStatus(404));
