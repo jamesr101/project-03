@@ -1,7 +1,8 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
+import keys from '../lib/keys';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYXJ0bWFwcGVyIiwiYSI6ImNqbXVnMDhvOTJ3b2YzdmpwZjZmbTBjcnUifQ.AioO-9ZHdyYXk_ssF13CLQ';
+mapboxgl.accessToken = keys.mapbox;
 
 class ShowMap extends React.Component {
 

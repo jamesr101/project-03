@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ReactFilestack from 'react-filestack';
-
-const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
+import keys from '../lib/keys';
 
 const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, getLocation, findAddress}) => {
 
@@ -13,7 +12,7 @@ const PaintingForm = ({ handleSubmit, handleChange, painting, errors, artists, g
         <div className="control">
 
           <ReactFilestack
-            apikey={ FILESTACK_API_KEY }
+            apikey={ keys.filestack }
             mode={'pick'}
             onSuccess={(response) => handleChange({
               target: {

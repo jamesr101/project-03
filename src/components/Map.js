@@ -1,8 +1,9 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import _ from 'lodash';
+import keys from '../lib/keys';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYXJ0bWFwcGVyIiwiYSI6ImNqbXVnMDhvOTJ3b2YzdmpwZjZmbTBjcnUifQ.AioO-9ZHdyYXk_ssF13CLQ';
+mapboxgl.accessToken = keys.mapbox;
 
 class Map extends React.Component {
 

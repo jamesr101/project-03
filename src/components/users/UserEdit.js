@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ReactFilestack from 'react-filestack';
-
-const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
+import keys from '../../lib/keys';
 
 import Auth from '../../lib/Auth';
 
@@ -61,7 +60,7 @@ class UserEdit extends React.Component {
             <div className="control">
 
               <ReactFilestack
-                apikey={ FILESTACK_API_KEY }
+                apikey={ keys.filestack }
                 mode={'pick'}
                 onSuccess={(response) => this.handleChange({
                   target: {

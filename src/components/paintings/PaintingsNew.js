@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import PaintingForm from './PaintingForm';
 import Auth from '../../lib/Auth';
+import keys from '../../lib/keys';
 
 class PaintingsNew extends React.Component {
   constructor(props) {
@@ -57,12 +58,11 @@ class PaintingsNew extends React.Component {
   }
 
   findAddress() {
-    const KEY = 'UylkKlLKXG8WP4fG0IlsUewrzpdpkfPp';
 
     axios
       .get('http://open.mapquestapi.com/geocoding/v1/address', {
         params: {
-          key: KEY,
+          key: keys.openMap,
           location: this.state.painting.address
         }
       })
