@@ -3,11 +3,11 @@ import axios from 'axios';
 
 import PaintingForm from './PaintingForm';
 import Auth from '../../lib/Auth';
+import keys from '../../lib/keys';
 
 class PaintingsNew extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = { painting: {}, errors: {}, photo: '', artists: [], address: '', findingAddress: false };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,12 +49,11 @@ class PaintingsNew extends React.Component {
   }
 
   findAddress() {
-    const openMapQuestKey = 'UylkKlLKXG8WP4fG0IlsUewrzpdpkfPp';
 
     axios
       .get('http://open.mapquestapi.com/geocoding/v1/address', {
         params: {
-          key: openMapQuestKey,
+          key: keys.openMap,
           location: this.state.painting.address
         }
       })
@@ -108,6 +107,7 @@ class PaintingsNew extends React.Component {
             getLocation={this.getLocation}
             findAddress={this.findAddress}
             findingAddress={this.state.findingAddress}
+            selectedArtist={this.props.location.state && this.props.location.state.artist}
           />
         </div>
       </main>

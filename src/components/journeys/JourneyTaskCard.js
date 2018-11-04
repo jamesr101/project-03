@@ -2,8 +2,8 @@ import React from 'react';
 import ReactFilestack from 'react-filestack';
 import axios from 'axios';
 import Auth from '../../lib/Auth';
+import keys from '../../lib/keys';
 
-const FILESTACK_API_KEY = 'Avqe4wSLLQlWD6gW9ymKgz';
 
 class JourneyTaskCard extends React.Component {
   constructor(props) {
@@ -83,7 +83,7 @@ class JourneyTaskCard extends React.Component {
                   {(this.state.status <= 0) ?
                     <div>
                       <ReactFilestack
-                        apikey={ FILESTACK_API_KEY }
+                        apikey={ keys.filestack }
                         mode={'pick'}
                         onSuccess={(response) => this.handleChange({
                           paintingId: this.state.painting._id,

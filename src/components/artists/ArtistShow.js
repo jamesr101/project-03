@@ -65,10 +65,17 @@ class ArtistsShow extends React.Component {
     else if (entrance % 2 === 0 && entrance % 3 !== 0) return ('column is-half');
     else return('column is-one-third');
   }
+<<<<<<< HEAD
 
   isPaintingToShow(){
     if ((!this.state.actualDate && !this.state.search)
       ||(this.filterArtistsPaintings().length > 0))
+=======
+  noPaintingsToDisplay(){
+    if (!this.state.actualDate && !this.state.search){
+      return true;
+    } else if(this.filterArtistsPaintings().length > 0){
+>>>>>>> 1cc67376a24ef0b71c2265bbbed87988f4f572db
       return true;
     return false;
   }
@@ -151,6 +158,7 @@ class ArtistsShow extends React.Component {
                     </li>
                   )
                   }
+<<<<<<< HEAD
                   {this.isPaintingToShow() ?
                     this.filterArtistsPaintings().map(painting =>
                       <li className={this.defineClass()} key={painting._id}>
@@ -159,12 +167,25 @@ class ArtistsShow extends React.Component {
                         </Link>
                       </li>
                     )
+=======
+                  {this.noPaintingsToDisplay() ? this.filterArtistsPaintings().map(painting =>
+
+                    <li className={this.defineClass()} key={painting._id}>
+                      <Link to={`/paintings/${painting._id}`}>
+                        <PaintingCard {...painting} />
+                      </Link>
+                    </li>
+                  )
+>>>>>>> 1cc67376a24ef0b71c2265bbbed87988f4f572db
                     :
-                    <div>
+                    <div className="recipient margin-top-15">
                       <p>
                         There are no paintings related to {this.state.artist.name}
                       </p>
-                      <Link to={'/paintings/new'}>
+                      <Link className="margin-left-20" to={{
+                        pathname: '/paintings/new',
+                        state: { artist: this.props.match.params.id}
+                      }}>
                          Add a {this.state.artist.name} painting
                       </Link>
                     </div>
@@ -174,15 +195,14 @@ class ArtistsShow extends React.Component {
               </div>
             </section>
             :
-            <div>
+            <div className="recipient margin-top-15">
               <p>
-               There are no paintings related to {this.state.artist.name} for the time fraction you  selected. You can add one clicking
+                There are no paintings related to {this.state.artist.name}
               </p>
-              <Link to={'/paintings/new'}>
-                <p> here</p>
+              <Link className="margin-left-20" to={'/paintings/new'}>
+                 Add a {this.state.artist.name} painting
               </Link>
             </div>
-
           }
 
         </div>
