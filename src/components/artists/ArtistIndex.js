@@ -43,7 +43,7 @@ class ArtistIndex extends React.Component {
             </li>
 
           </ul>
-          
+
         </div>
       </main>
     );
