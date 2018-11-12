@@ -1,7 +1,6 @@
 /* global api, describe, it, expect, beforeEach */
 
 const Journey = require('../../models/journey');
-
 const User = require('../../models/user');
 
 
@@ -19,8 +18,6 @@ const journeyData = [{
     }
   ]
 }];
-
-
 
 
 describe('GET /journeys', () => {
