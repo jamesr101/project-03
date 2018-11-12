@@ -1,6 +1,5 @@
 /* global api, describe, it, expect, beforeEach */
 
-// const Artist = require('../../models/artist');
 const Journey = require('../../models/journey');
 
 const User = require('../../models/user');
@@ -11,22 +10,13 @@ const journeyData = [{
   title: 'journey title',
   image: '/assets/images/seeds/JPablo.jpg',
   info: 'journey info',
-  // user: seededUsers[1],
-  // trophyWin: seededTrophy[3],
   tasks: [
     {
       type: 'Info',
-      title: 'Go to National Gallery',
-      content: 'Our journey begin in National Gallery, firstly arrive to National Gallery',
+      title: 'title info',
+      content: 'content task info',
       order: 0
     }
-    // ,{
-    //   type: 'FindPainting',
-    //   title: 'Find the Weeping Woman',
-    //   content: 'Weeping Woman is ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-    //   painting: seededPaintings[0],
-    //   order: 1
-    // }
   ]
 }];
 
