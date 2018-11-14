@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const ArtistsForm = ({
   handleSubmit,
   handleChange,
@@ -15,13 +14,15 @@ const ArtistsForm = ({
 }) => {
   return(
     <form onSubmit={handleSubmit}>
+
+      {/* Name Field */}
       <div className="field">
         <label className="label">Name</label>
         <div className="control">
           <input
             className={`input ${errors.name ? 'is-danger' : ''}`}
             name="name"
-            placeholder="Name"
+            placeholder="E.g. Pablo Picaso"
             onChange={handleChange}
             onBlur={getArtistData}
             value={artist.name  || ''}
@@ -30,17 +31,16 @@ const ArtistsForm = ({
         </div>
       </div>
 
+      {/* Image Field */}
       <div className="field">
         <div className="control">
-
-
+          <label className="label">image</label>
           <input
             className={`input ${errors.image ? 'is-danger' : ''}`}
             name="image"
-            type="hidden"
-            placeholder="Image"
+            placeholder="Link to image of the artist"
             onChange={handleChange}
-            value={ wikiImg || ''}
+            value={ artist.image || wikiImg }
           />
           {errors.image && <small className="help is-danger"> {errors.image} </small>}
         </div>
@@ -52,9 +52,10 @@ const ArtistsForm = ({
         </div>
       }
 
+      {/* Biography Field  */}
       {wikiPar &&
         <div className="field">
-          <label className="label">Biography</label>
+          <label className="label"></label>
           <p>
             {wikiPar}
           </p>
@@ -65,13 +66,14 @@ const ArtistsForm = ({
               placeholder="info"
               onChange={handleChange}
               value={wikiPar || ''}
-              type="hidden"
+
             />
             {errors.info && <small className="help is-danger"> {errors.info} </small>}
           </div>
         </div>
       }
 
+      {/* Wikipedia Link Field  - option to type manualy or to fill automaticly  */}
       <div className="field">
         <label className="label">Wikipedia Link</label>
         <div className="control">
@@ -80,13 +82,13 @@ const ArtistsForm = ({
             name="wikiLink"
             placeholder="Add a wikipedia link"
             onChange={handleChange}
-            value={wikiLink || ''}
-            disabled
+            value={artist.wikiLink || wikiLink || ''}
           />
           {errors.wikiLink && <small className="help is-danger"> {errors.wikiLink} </small>}
         </div>
       </div>
 
+      {/* Artist Born Field  */}
       <div className="field">
         <label className="label">Born</label>
         <div className="control">
@@ -95,13 +97,13 @@ const ArtistsForm = ({
             name="dateBorn"
             placeholder="Date of Birth"
             onChange={handleChange}
-            value={wikiBorn || ''}
-            disabled
+            value={artist.dateBorn || wikiBorn || ''}
           />
           {errors.dateBorn && <small className="help is-danger"> {errors.dateBorn} </small>}
         </div>
       </div>
 
+      {/* Artist Died Field  */}
       <div className="field">
         <label className="label">Died</label>
         <div className="control">
@@ -110,8 +112,7 @@ const ArtistsForm = ({
             name="dateDeath"
             placeholder="Date of Death"
             onChange={handleChange}
-            value={wikiDeath || ''}
-            disabled
+            value={artist.dateDeath || wikiDeath || ''}
           />
           {errors.dateDeath && <small className="help is-danger"> {errors.dateDeath} </small>}
         </div>

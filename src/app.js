@@ -19,6 +19,7 @@ import PaintingsShow from './components/paintings/PaintingsShow';
 import PaintingsNew from './components/paintings/PaintingsNew';
 import JourneysIndex from './components/journeys/JourneyIndex';
 import JourneyShow from './components/journeys/JourneyShow';
+import Footer from './components/Footer';
 import Main from './components/Main';
 
 
@@ -44,9 +45,8 @@ class App extends React.Component {
             <Route path="/paintings/:id" component={PaintingsShow} />
             <Route path="/" component={Main} />
           </Switch>
-          <Switch>
+          <Footer />
 
-          </Switch>
         </div>
       </BrowserRouter>
 

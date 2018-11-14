@@ -5,14 +5,13 @@ import FilterBar from '../FilterBar';
 import PaintingCard from '../paintings/PaintingCard';
 import { Link } from 'react-router-dom';
 
-
-
 class ArtistsShow extends React.Component {
+
   constructor() {
     super();
     this.state = { artist: null};
 
-    this.mapCenter = { latitude: 55, longitude: -5 };
+    this.mapCenter = { latitude: 55, longitude: -5 }; //Default value (Center of England)
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleTime = this.handleTime.bind(this);
@@ -66,15 +65,13 @@ class ArtistsShow extends React.Component {
     else if (entrance % 2 === 0 && entrance % 3 !== 0) return ('column is-half');
     else return('column is-one-third');
   }
-  noPaintingsToDisplay(){
-    if (!this.state.actualDate && !this.state.search){
+
+  isPaintingToShow(){
+    if ((!this.state.actualDate && !this.state.search)
+      ||(this.filterArtistsPaintings().length > 0))
       return true;
-    } else if(this.filterArtistsPaintings().length > 0){
-      return true;
-    } else return false;
+    return false;
   }
-
-
 
   render() {
     if(!this.state.artist) return null;
@@ -90,6 +87,7 @@ class ArtistsShow extends React.Component {
                 </div>
 
                 <hr />
+
                 <div className="columns">
 
                   <div className="column is-one-quarter">
@@ -153,14 +151,14 @@ class ArtistsShow extends React.Component {
                     </li>
                   )
                   }
-                  {this.noPaintingsToDisplay() ? this.filterArtistsPaintings().map(painting =>
-
-                    <li className={this.defineClass()} key={painting._id}>
-                      <Link to={`/paintings/${painting._id}`}>
-                        <PaintingCard {...painting} />
-                      </Link>
-                    </li>
-                  )
+                  {this.isPaintingToShow() ?
+                    this.filterArtistsPaintings().map(painting =>
+                      <li className={this.defineClass()} key={painting._id}>
+                        <Link to={`/paintings/${painting._id}`}>
+                          <PaintingCard {...painting} />
+                        </Link>
+                      </li>
+                    )
                     :
                     <div className="recipient margin-top-15">
                       <p>

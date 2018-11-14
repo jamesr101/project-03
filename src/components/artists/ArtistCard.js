@@ -1,16 +1,6 @@
 import React from 'react';
 
 const ArtistCard = ({name, image, dateBorn, dateDeath}) => {
-  let born;
-  let dead;
-
-  if (dateBorn) {
-    born = parseFloat(dateBorn);
-  }
-
-  if (dateDeath) {
-    dead = parseFloat(dateDeath);
-  }
 
   return (
     <div className="card ">
@@ -23,7 +13,7 @@ const ArtistCard = ({name, image, dateBorn, dateDeath}) => {
         </figure>
       </div>
       <div className="card-content">
-        {dateBorn && <p> {born} - {dead}</p>}
+        {(dateDeath && dateBorn) ? <p> {parseFloat(dateBorn)} - {parseFloat(dateDeath)}</p> : dateBorn && <p> {parseFloat(dateBorn)} </p>}
       </div>
     </div>
 

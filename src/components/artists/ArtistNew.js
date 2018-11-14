@@ -14,8 +14,6 @@ class ArtistsNew extends React.Component {
   }
 
   handleChange(e) {
-    console.log('handleChange');
-    console.log(e);
     const artist = { ...this.state.artist, [e.target.name]: e.target.value };
     const errors = { ...this.state.errors, [e.target.name]: '' };
     const capital = artist.name.replace(/ /g, '_');
@@ -26,7 +24,7 @@ class ArtistsNew extends React.Component {
       errors,
       wikiLink
     });
-    console.log(this.state);
+
   }
 
   getArtistData() {
@@ -38,7 +36,6 @@ class ArtistsNew extends React.Component {
         }
       })
       .then((res)=> {
-        console.log(res);
         this.setState( ...this.state.artist,{artist: {
           name: this.state.artist.name,
           info: res.data.biography,
@@ -53,12 +50,6 @@ class ArtistsNew extends React.Component {
           wikiImg: res.data._links.thumbnail.href
         });
       });
-
-    // .then(() => {
-    //   const aviv = {target: {name: 'dateBorn', value: this.state.wikiBorn}};
-    //   this.handleChange(aviv);
-    // });
-    console.log(this.state.artist);
   }
 
 

@@ -20,7 +20,6 @@ class PaintingsNew extends React.Component {
       .then(res => this.setState({ artists: res.data }));
   }
   handleChange(e) {
-    console.log(e);
     let painting;
     if(['latitude', 'longitude'].includes(e.target.name)) {
       const location = { ...this.state.painting.location, [e.target.name]: e.target.value };
@@ -33,14 +32,6 @@ class PaintingsNew extends React.Component {
     this.setState({ painting, errors });
 
   }
-  // handleImage(e){
-  //   const text = e.target.value;
-  //   const painting = { ...this.state.painting, [e.target.name]: e.target.value };
-  //   const errors = { ...this.state.errors, [e.target.name]: null};
-  //   this.setState({ painting, errors, photo: text });
-  // }
-
-
 
   getLocation() {
 
@@ -49,12 +40,11 @@ class PaintingsNew extends React.Component {
       navigator.geolocation.getCurrentPosition(position => {
         const location = { latitude: position.coords.latitude, longitude: position.coords.longitude };
         const painting = { ...this.state.painting, location };
-        this.setState({ painting, findingAddress: false }, () => console.log(this.state.painting));
+        this.setState({ painting, findingAddress: false });
       });
     } else {
       this.setState({ message: 'Cannot establish your location' });
     }
-    // if location = {lat: 39.78373, lng: -100.445882}, error "address not found"
   }
 
   findAddress() {
@@ -67,7 +57,6 @@ class PaintingsNew extends React.Component {
         }
       })
       .then(res => {
-        console.log( res);
         const { lat: latitude, lng: longitude } = res.data.results[0].locations[0].latLng;
         const location = { latitude, longitude };
 
@@ -77,19 +66,15 @@ class PaintingsNew extends React.Component {
         }
 
         const painting = { ...this.state.painting, location };
-        this.setState({ painting }, () => console.log(this.state.painting));
+        this.setState({ painting });
 
 
       });
-
-    console.log('request made to open map');
-
-
   }
 
 
   handleSubmit(e) {
-    console.log(this.state.painting);
+
     e.preventDefault();
     const token = Auth.getToken();
     axios
@@ -110,8 +95,6 @@ class PaintingsNew extends React.Component {
             handleChange={this.handleChange}
             painting={this.state.painting}
             errors={this.state.errors}
-            //photo={this.state.photo}
-            //handleImage={this.handleImage}
             artists={this.state.artists}
             getLocation={this.getLocation}
             findAddress={this.findAddress}

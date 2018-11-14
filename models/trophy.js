@@ -8,8 +8,8 @@ const trophySchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: [true, 'This field is required'],
-    match: [/^https?:\/\/.+/, 'Image link must start with \'http\'']},
+    required: [true, 'This field is required']},
+  // match: [/^https?:\/\/.+/, 'Image link must start with \'http\'']},
   description: String,
   requirements: { String }
 });
