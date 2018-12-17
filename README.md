@@ -73,7 +73,7 @@ Once our core frontend functionality was working, pages were taken individually 
 
 Work was carried out on branches of the code depository for each feature. This was merged with the Development branch of the code and any merge conflicts were fixed as a group. Features were tested on the Development branch before being merged with the Master branch.
 
-Tasks were managed and assigned through the task manager Trello and we had daily stand-ups to keep track of progress.
+Tasks were managed and assigned through the task manager Trello. We performed daily stand-ups to keep track of progress.
 
 ![wdi project 03 trello](https://user-images.githubusercontent.com/40343797/48483663-fb1bfd80-e80b-11e8-9309-5ebd2b9f28a2.png)
 
@@ -81,9 +81,19 @@ Tasks were managed and assigned through the task manager Trello and we had daily
 
 The layout of the site was created based on  Mobile-First-Design principles. Initial mock-up wire frames were made during the planning phase to show the basic functionality of each page and general layout. These were then worked on in more detail during the styling aspect of the build. Bulma CSS framework was used to create the structure of the layout and its responsiveness. Further styling was added with SCSS.
 
-### Individual inputs
-### Wins
+### Individual inputs / wins
+Much of the project's basic structure was created as a group effort through pair coding. Once the main structure was in place individual features were built out by each project member. The following items were some features for which I took the lead:
+- Project management and Trello board owner
+- New painting functionality, including the use of the MapQuest API to convert an address input into geo-coordinates or giving the user the option to use their browser's location.
+- Setting up the backend testing with Chai and writing the majority of the tests.
+- Creating the Seeds file.
+- Styling of all the form elements.
+
 ### Challenges
+This was the first project I did using React.js. Although I enjoyed working with React.js, this involved a steep learning curve, particularly in regards to state and props.
+
+This was the first group project I did while at General Assembly. This introduced new challenges such as the potential to create conflicts when merging code and also maintaining a consistent project vision. We minimised merge conflicts by each working on different features and kept track of who was working on each feature through Trello. Any merge conflicts were resolved as a group.
+
 ### Future Features
 
 We were hoping to create an app which would encourage uses to create and maintain the database of paintings. We had initially planned to add a trophies or points system to motivate users to upload new paintings. Users would gain trophies by uploading new paintings. We would also have liked to let users add follow friends so they can compete with other users and see when their friends upload new paintings or complete a journey.
