@@ -3,11 +3,14 @@
 
 ## Goal - to build a full-stack RESTful MERN application. A group project.
 
+### Timeframe
+7 days
+
 ## Technologies used
 
 * React.js
 * Node.js
-* HTML5 / SCSS / JavaScript (ES6)
+* JavaScript (ES6) / HTML5 / SCSS
 * Git / GitHub
 * MongoDB & Mongoose
 * BCrypt & Session Auth
