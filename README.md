@@ -31,6 +31,8 @@ This was a group project with 3 members. The project was managed using Trello an
 ## Our Application - 'ArtMapper'
 ![artmapper logo](https://user-images.githubusercontent.com/40343797/48482269-27357f80-e808-11e8-84de-39bad79fbf73.png)
 
+A hosted version of this app can be found at [art-mapper.herokuapp.com](https://art-mapper.herokuapp.com)
+
 ArtMapper allows users to see where paintings are geographically located. Users can select a specific artist and see where his or her works are on display. Signed-in users can also add new artists to the database, and add new works of art. The 'Journey' element of the application encourages users to visit galleries. To complete a 'Journey', users must find specified paintings and upload photos of each painting.
 
 ##### Users and sessions
@@ -91,6 +93,12 @@ Much of the project's basic structure was created as a group effort through pair
 - Setting up the backend testing with Chai and writing the majority of the tests.
 - Creating the Seeds file.
 - Styling of all the form elements.
+
+<img width="1134" alt="get user's location" src="https://user-images.githubusercontent.com/40343797/50379309-e0c11500-063e-11e9-9b9c-a604c5ce73aa.png">
+The code above 
+
+<img width="1134" alt="find geo-coordinates of given address" src="https://user-images.githubusercontent.com/40343797/50379310-e159ab80-063e-11e9-9eab-6d06fb7365d9.png">
+
 
 ### Challenges
 This was the first project I did using React.js. Although I enjoyed working with React.js, this involved a steep learning curve, particularly in regards to state and props.

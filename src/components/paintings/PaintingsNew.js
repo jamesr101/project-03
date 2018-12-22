@@ -60,6 +60,7 @@ class PaintingsNew extends React.Component {
         const { lat: latitude, lng: longitude } = res.data.results[0].locations[0].latLng;
         const location = { latitude, longitude };
 
+        // MapQuest's default location if address can not be found
         if(location.latitude ===  39.78373 && location.longitude === -100.445882){
           const errors = { ...this.state.errors, address: 'Cannot find address'};
           return this.setState({ errors });
@@ -67,8 +68,6 @@ class PaintingsNew extends React.Component {
 
         const painting = { ...this.state.painting, location };
         this.setState({ painting });
-
-
       });
   }
 
