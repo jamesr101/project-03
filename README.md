@@ -95,10 +95,10 @@ Much of the project's basic structure was created as a group effort through pair
 - Styling of all the form elements.
 
 <img width="1134" alt="get user's location" src="https://user-images.githubusercontent.com/40343797/50379309-e0c11500-063e-11e9-9b9c-a604c5ce73aa.png">
-The code above 
+The code above, from the New Paintings Page, finds the location of the user's browser and sets it as the location of the painting. It sets 'findingAddress' to be true when requesting the location, quick is set to false once the address has been found. This allows the a conditional in the JSX to update the UX.
 
 <img width="1134" alt="find geo-coordinates of given address" src="https://user-images.githubusercontent.com/40343797/50379310-e159ab80-063e-11e9-9eab-6d06fb7365d9.png">
-
+The code above makes an axios request with the inputted address (saved on `this.painting.address`) to the MapQuest API and saves the returned geo-coordinates onto the painting's location. We have to check whether the response is MapQuest's default coordinates which are returned when an address can not found.
 
 ### Challenges
 This was the first project I did using React.js. Although I enjoyed working with React.js, this involved a steep learning curve, particularly in regards to state and props.
